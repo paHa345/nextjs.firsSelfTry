@@ -1,0 +1,25 @@
+.descriptionCommentsLinksSection {
+  display: flex;
+  gap: 2.4rem;
+}
+
+.descriptionLinkSection,
+.commentsLinkSection {
+  padding: 1.6rem;
+  background-color: #eeded3;
+}
+
+.descriptionCommentsLinksSection div a:link,
+.descriptionCommentsLinksSection div a:visited {
+  font-size: 1.6rem;
+  padding: 1.6rem;
+  text-decoration: none;
+  color: #212223;
+}
+
+.descriptionCommentsLinksSection div a:hover,
+.descriptionCommentsLinksSection div a:active {
+  font-size: 1.6rem;
+  text-decoration: underline;
+  color: #212223;
+}

@@ -1,0 +1,40 @@
+.loginButton {
+  display: flex;
+  width: 35rem;
+  margin: 0 auto;
+}
+.loginButton a:link,
+.loginButton a:visited {
+  text-align: center;
+  font-size: 3.2rem;
+  width: 100%;
+  text-decoration: none;
+  color: #555;
+  background-color: #ffa94d;
+  border-radius: 11px;
+  padding: 1.6rem 2.4rem;
+}
+
+.loginButton a:hover,
+.loginButton a:active {
+  background-color: #fd7e14;
+  color: #f8f9fa;
+}
+
+.registrationLink {
+  padding-top: 3.2rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.registrationLink a:link,
+.registrationLink a:visited {
+  font-size: 2.4rem;
+  text-decoration: none;
+  color: #34352e;
+}
+
+.registrationLink a:hover,
+.registrationLink a:active {
+  color: #9e7b06;
+}

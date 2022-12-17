@@ -1,0 +1,9 @@
+.descriptionText,
+.comments {
+  font-size: 1.6rem;
+}
+
+.itemDescriptionTextElement h3,
+.itemCommentsElement h3 {
+  font-size: 2.4rem;
+}

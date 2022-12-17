@@ -1,0 +1,29 @@
+.menuIcons {
+  display: none;
+}
+.menuIcon {
+  height: 3.2rem;
+  width: 3.2rem;
+}
+
+.headerNavLink:link,
+.headerNavLink:visited {
+  text-decoration: none;
+  font-size: 2.4rem;
+  color: #5d2800;
+}
+
+.headerNavLink:hover,
+.headerNavLink:active {
+  color: #212223;
+}
+
+@media (max-width: 33em) {
+  .headerNavList {
+    display: none;
+  }
+  .menuIcons {
+    display: flex;
+    gap: 2.4rem;
+  }
+}

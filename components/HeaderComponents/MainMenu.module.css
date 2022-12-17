@@ -1,0 +1,51 @@
+.headerNavList {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 6.4rem;
+}
+
+.allProducts {
+  transition: all 1s;
+}
+
+.headerNavLink:link,
+.headerNavLink:visited {
+  text-decoration: none;
+  font-size: 2.4rem;
+  color: #5d2800;
+}
+
+.cartMenuElement {
+  position: relative;
+}
+
+.cartElementQuantity {
+  position: absolute;
+  font-size: 2rem;
+  /* width: 3rem;
+  height: 3rem; */
+  bottom: 1rem;
+  border: 1px solid black;
+  padding: 0.5rem;
+  border-radius: 20%;
+  background-color: aliceblue;
+}
+
+.headerNavLink:hover,
+.headerNavLink:active {
+  color: #212223;
+}
+
+.menuIcons {
+  display: none;
+}
+
+@media (max-width: 33em) {
+  .menuText {
+    display: none;
+  }
+  .menuIcons {
+    display: block;
+  }
+}

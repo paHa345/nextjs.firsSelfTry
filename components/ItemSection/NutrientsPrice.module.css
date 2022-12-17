@@ -1,0 +1,114 @@
+.itemInfoElement {
+  display: flex;
+  gap: 3.2rem;
+}
+
+.itemInfoDescription {
+  display: flex;
+
+  gap: 3.2rem;
+  flex-grow: 1;
+}
+.itemDescriptionImages {
+  width: 50rem;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.itemDescriptionImages img {
+  width: 100%;
+  height: auto;
+}
+
+.itemDescriptionComponents {
+  flex: 1;
+  width: auto;
+}
+
+.itemDescriptionHead {
+  font-size: 2.4rem;
+}
+
+.componentsTableElement {
+  display: flex;
+  gap: 1.6rem;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.componentsTable {
+  display: flex;
+  gap: 1.6rem;
+  flex-direction: column;
+  margin: 2.4rem 0;
+  align-self: stretch;
+}
+
+.componentsTableElement {
+  border-bottom: 2px solid #e8590c;
+  padding: 1.4rem;
+}
+
+.componentsTableNutrient {
+  font-size: 1.6rem;
+  align-self: flex-start;
+}
+.componentsTableNutrientValue {
+  font-size: 1.6rem;
+}
+
+.itemInfoPrice {
+  width: 24rem;
+  min-width: 24rem;
+  display: flex;
+  gap: 2.4rem;
+  flex-direction: column;
+}
+
+.itemInfoPrice p {
+  font-size: 2.4rem;
+}
+
+.itemInfoPriceValue {
+  font-size: 3.2rem;
+  font-weight: 700;
+}
+
+.productCardButton a:link,
+.productCardButton a:visited {
+  color: #555;
+  background-color: #ffd8a8;
+  /* border: 2px solid black; */
+  padding: 1.2rem 3.2rem;
+  font-size: 3.2rem;
+  text-decoration: none;
+  border-radius: 11px;
+  transition: all 0.3s;
+}
+
+.productCardButton a:hover,
+.productCardButton a:active {
+  color: #fff5f5;
+  background-color: #e8590c;
+}
+
+@media (max-width: 64em) {
+  .itemInfoElement {
+    flex-direction: column;
+  }
+  .itemInfoPrice {
+    width: auto;
+    align-items: center;
+  }
+}
+
+@media (max-width: 53em) {
+  .itemInfoDescription {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 33em) {
+  .itemDescriptionImages {
+    width: auto;
+  }
+}

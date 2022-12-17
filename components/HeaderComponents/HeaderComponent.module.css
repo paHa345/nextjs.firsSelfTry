@@ -1,0 +1,36 @@
+.header {
+  /* max-width: 130rem; */
+  background-color: #c0eb75;
+  /* display: flex;
+  align-items: center;
+  justify-content: space-around; */
+  /* position: relative; */
+}
+
+/* .headerImg {
+  height: 10rem;
+}
+.headerLogo {
+  height: 10rem;
+  width: 20rem;
+  position: inherit;
+} */
+.menuIcons {
+  display: none;
+}
+.menuIcon {
+  height: 3.2rem;
+  width: 3.2rem;
+}
+
+.container {
+  max-width: 130rem;
+  padding: 9.6rem 0;
+  margin: 0 auto;
+}
+.prodC {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

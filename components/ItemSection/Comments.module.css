@@ -1,0 +1,37 @@
+.descriptionText,
+.comments {
+  font-size: 1.6rem;
+}
+
+.itemDescriptionTextElement h3,
+.itemCommentsElement h3 {
+  font-size: 2.4rem;
+}
+
+.commentMain {
+  display: flex;
+  gap: 5rem;
+}
+
+.comment {
+  padding: 2rem;
+  max-width: 50rem;
+}
+
+.toast {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  border: 1px solid rgb(158, 155, 155);
+  border-radius: 0.3rem;
+  padding: 2rem;
+}
+.toastHeader {
+  display: flex;
+  align-items: center;
+  padding-bottom: 2rem;
+
+  justify-content: space-around;
+}
+.toastBody {
+  border-top: 1px solid rgb(158, 155, 155);
+  padding-top: 2rem;
+}
