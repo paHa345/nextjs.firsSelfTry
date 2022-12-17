@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./FooterLinks.module.css";
 
 function FooterLinks() {
@@ -7,13 +8,13 @@ function FooterLinks() {
         <p className={styles.footerMainText}></p>
         <ul className={styles.footerText}>
           <li>
-            <a href="/">Создать аккаунт</a>
+            <Link href="/">Создать аккаунт</Link>
           </li>
           <li>
-            <a href="/">Войти</a>
+            <Link href="/">Войти</Link>
           </li>
           <li>
-            <a href="/">Корзина</a>
+            <Link href="/">Корзина</Link>
           </li>
         </ul>
       </div>

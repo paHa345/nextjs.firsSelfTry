@@ -1,9 +1,10 @@
+import Link from "next/link";
 import styles from "./ButtonTakeOrder.module.css";
 
 function ButtonTakeOrder() {
   return (
     <div className={styles.cartOrderButton}>
-      <a href="/">Оформить заказ</a>
+      <Link href="/">Оформить заказ</Link>
     </div>
   );
 }

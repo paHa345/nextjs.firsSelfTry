@@ -6,13 +6,14 @@ import {
   faUser,
   faCartShopping,
 } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 function MenuIcon(props) {
   return (
     <div className={styles.menuIcons}>
-      <a href="/" className={styles.headerNavLink}>
+      <Link href="/" className={styles.headerNavLink}>
         <FontAwesomeIcon icon={faBars} size="2x" />
-      </a>
+      </Link>
       <a href="/login.html" className={styles.headerNavLink}>
         <FontAwesomeIcon icon={faCartShopping} size="2x" />
       </a>
