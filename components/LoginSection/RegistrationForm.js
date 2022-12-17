@@ -44,7 +44,7 @@ function RegistrationForm(props) {
       }
     }
 
-    await fetchData().catch((e) => console.log(e.message));
+    await fetchData().catch((e) => alert(e.message));
 
     setEnteredLogin("");
     setEnteredPassword("");

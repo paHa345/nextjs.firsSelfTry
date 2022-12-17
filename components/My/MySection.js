@@ -1,10 +1,11 @@
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import styles from "./MySection.module.css";
 
 function MySection(props) {
   const logoutHandler = (e) => {
     e.preventDefault();
-    console.log(e);
+    signOut();
   };
 
   return (

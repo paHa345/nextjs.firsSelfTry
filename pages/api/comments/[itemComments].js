@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import { getSession } from "next-auth/react";
 
 async function handler(req, res) {
   const itemId = req.query.itemComments;
@@ -30,6 +31,10 @@ async function handler(req, res) {
     }
   }
   if (req.method === "POST") {
+    const session = await getSession({ req, req });
+    if (!session) {
+      res.status(401).json({ message: "Не авторизованные запрос" });
+    }
     console.log(req.body);
     if (req.body.text.length < 1) {
       res.status(422).json({

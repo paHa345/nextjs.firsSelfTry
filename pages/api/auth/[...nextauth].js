@@ -15,6 +15,14 @@ export default NextAuth({
           "mongodb://uerqlzlole9xj0pi0wbk:TfXXkUycEhfDe2lkcePT@n1-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017,n2-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017/bnjpnqkq0agsple?replicaSet=rs0"
         );
         const db = client.db();
+
+        if (
+          credentials.email.trim().length === 0 ||
+          credentials.password.trim().length === 0
+        ) {
+          throw new Error("Введите логин/пароль");
+        }
+
         const user = await db
           .collection("sportNutritionAccounts")
           .findOne({ email: credentials.email });

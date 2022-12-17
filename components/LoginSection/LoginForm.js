@@ -31,9 +31,12 @@ function LoginForm(props) {
       email: enteredEmail,
       password: enteredPassword,
     });
+    if (result.error) {
+      alert(result.error);
+    }
 
     if (!result.error) {
-      router.replace("/");
+      router.replace("/my");
     }
 
     // setEnteredLogin("");

@@ -1,5 +1,4 @@
-import { useSession } from "next-auth/react";
-import Link from "next/link";
+import { getSession, useSession } from "next-auth/react";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import MySection from "../../components/My/MySection";
@@ -34,3 +33,11 @@ function My() {
 }
 
 export default My;
+
+export async function getServerSideProps(context) {
+  const session = await getSession({ req: context.req });
+  if (!session) {
+    return { redirect: { destination: "/", permanent: false } };
+  }
+  return { props: { session } };
+}

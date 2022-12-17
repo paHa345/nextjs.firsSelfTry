@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Modal from "../UI/Modal";
 import ButtonTakeOrder from "./ButtonTakeOrder";
 import CartElement from "./CartElement";
@@ -10,7 +10,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
 
 function BascetSection(props) {
-  const cart = useSelector((state) => state.cart.cartItems);
+  const [cart, setCart] = useState([]);
+  const currentCart = useSelector((state) => state.cart.cartItems);
+  useEffect(() => {
+    if (currentCart) {
+      setCart(currentCart);
+    }
+  }, [currentCart]);
+
   let storage = null;
 
   if (typeof window !== "undefined") {

@@ -89,17 +89,6 @@ function HomePage(props) {
         <h1>Home page!!!!!</h1>;
       </div> */}
 
-      <button onClick={getItemHandler}>get Item</button>
-      <br></br>
-      <br></br>
-
-      <button onClick={getTypeItemsHandler}>get Type Items</button>
-
-      <br></br>
-      <br></br>
-
-      <button onClick={getCommentsHandler}>Item Comments</button>
-
       <ProductsSection typeName={name}></ProductsSection>
     </Fragment>
   );

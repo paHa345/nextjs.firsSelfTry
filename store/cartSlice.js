@@ -10,18 +10,40 @@ export const cartSlice = createSlice({
   initialState: initCartState,
   reducers: {
     addItemToCart(state, action) {
-      const hasItemInCart = state.cartItems.find(
-        (el) => el.item.id === action.payload.item.id
-      )
-        ? true
-        : false;
+      console.log(state.cartItems);
+      console.log(state.cartItemsQuantity);
 
-      const existingCartItemIndex = state.cartItems.findIndex(
-        (item) => item.item.id === action.payload.item.id
-      );
-      const existingCartItem = state.cartItems[existingCartItemIndex];
+      let cartItems = [];
+      if (state.cartItems !== null) {
+        cartItems = state.cartItems;
+      }
+
+      let hasItemInCart;
+      if (state.cartItems === null) {
+        hasItemInCart = false;
+      } else {
+        hasItemInCart = state.cartItems.find(
+          (el) => el.item.id === action.payload.item.id
+        )
+          ? true
+          : false;
+      }
+
+      let existingCartItemIndex = 0;
+
+      if (state.cartItems !== null) {
+        existingCartItemIndex = state.cartItems.findIndex(
+          (item) => item.item.id === action.payload.item.id
+        );
+      }
+
+      let existingCartItem = 0;
+      if (state.cartItems !== null) {
+        existingCartItem = state.cartItems[existingCartItemIndex];
+      }
+
       if (!hasItemInCart) {
-        state.cartItems = state.cartItems.concat({
+        state.cartItems = cartItems.concat({
           item: action.payload.item,
           quantity: action.payload.quantity,
         });

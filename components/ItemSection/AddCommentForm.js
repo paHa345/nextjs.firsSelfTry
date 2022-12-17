@@ -1,12 +1,23 @@
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { itemsActions } from "../../store/itemSlice";
 
 import styles from "./addCommentForm.module.css";
 
 function AddCommentForm(props) {
+  const [login, setLogin] = useState("anonimus");
   const dispatch = useDispatch();
+  const session = useSession();
+  console.log(session);
+
+  useEffect(() => {
+    if (session.data) {
+      setLogin(session.data.user.name);
+    }
+  }, [session.data]);
+
   const currentItem = useSelector((state) => state.item.item);
 
   const [enteredText, setEnteredText] = useState("");
@@ -21,7 +32,7 @@ function AddCommentForm(props) {
     const comment = {
       text: enteredText,
       date: new Date().toISOString(),
-      name: "paHa345",
+      name: login,
     };
     const fetchdata = async (e) => {
       try {
@@ -40,6 +51,7 @@ function AddCommentForm(props) {
         }
       } catch (error) {
         console.log(error);
+        alert(error.message);
       }
 
       async function fetchComments() {
@@ -60,27 +72,34 @@ function AddCommentForm(props) {
     setEnteredText("");
   };
   return (
-    <div className={styles.loginContainer}>
-      <div className={styles.loginForm}>
-        <div className={styles.loginFormElement}>
-          <label htmlFor="login">Ваш комментарий</label>
-          <textarea
-            id="login"
-            cols="40"
-            rows="5"
-            value={enteredText}
-            onChange={changeLoginHandler}
-            required
-            placeholder="Введите текст"
-          />
+    <Fragment>
+      {!session.data && <h1>Зарегистрируйтесь для добавления комментариев</h1>}
+
+      {session.data && (
+        <div className={styles.loginContainer}>
+          <div className={styles.loginForm}>
+            <div className={styles.loginFormElement}>
+              <label htmlFor="login">Ваш комментарий</label>
+              <textarea
+                id="login"
+                cols="40"
+                rows="5"
+                value={enteredText}
+                onChange={changeLoginHandler}
+                required
+                placeholder="Введите текст"
+              />
+            </div>
+          </div>
+
+          <div className={styles.loginButton}>
+            <Link href="/" onClick={addCommentHandler}>
+              Добавить комментарий
+            </Link>
+          </div>
         </div>
-      </div>
-      <div className={styles.loginButton}>
-        <Link href="/" onClick={addCommentHandler}>
-          Добавить комментарий
-        </Link>
-      </div>
-    </div>
+      )}
+    </Fragment>
   );
 }
 export default AddCommentForm;
