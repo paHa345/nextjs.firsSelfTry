@@ -38,6 +38,11 @@ export default My;
 
 export async function getServerSideProps({ req, res }) {
   const session = await unstable_getServerSession(req, res, authOptions);
+  if (session !== null) {
+    session.user.image = "image";
+  }
+
+  console.log(session);
 
   if (!session) {
     return {
@@ -48,5 +53,5 @@ export async function getServerSideProps({ req, res }) {
     };
   }
 
-  return { props: { session } };
+  return { props: { session: session } };
 }

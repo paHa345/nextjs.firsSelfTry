@@ -7,10 +7,16 @@ import { itemsActions } from "../../store/itemSlice";
 import styles from "./addCommentForm.module.css";
 
 function AddCommentForm(props) {
-  const [login, setLogin] = useState("anonimus");
+  const [login, setLogin] = useState("anonimous");
+  const [email, setEmail] = useState("anonimous");
   const dispatch = useDispatch();
   const session = useSession();
-  console.log(session);
+
+  useEffect(() => {
+    if (session.data !== null) {
+      setEmail(session.data.user.email);
+    }
+  }, [session.data]);
 
   useEffect(() => {
     if (session.data) {
@@ -33,6 +39,7 @@ function AddCommentForm(props) {
       text: enteredText,
       date: new Date().toISOString(),
       name: login,
+      email: email,
     };
     const fetchdata = async (e) => {
       try {

@@ -42,7 +42,7 @@ export const authOptions = {
         }
 
         client.close();
-        return { email: user.email, name: user.login };
+        return { email: user.email, name: user.login, image: user.name };
       },
     }),
   ],
