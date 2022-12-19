@@ -48,6 +48,7 @@ function Card(props) {
             alt={props.cardName}
             width={200}
             height={200}
+            priority={true}
           />
         </Link>
 

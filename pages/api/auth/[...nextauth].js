@@ -3,18 +3,23 @@ import { MongoClient } from "mongodb";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export default NextAuth({
-  session: {
-    jwt: true,
+export const authOptions = {
+  pages: {
+    signIn: "/auth",
   },
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.SECRET,
   providers: [
     CredentialsProvider({
       name: "Credentials",
+
       async authorize(credentials) {
         let client = await MongoClient.connect(
-          "mongodb://uerqlzlole9xj0pi0wbk:TfXXkUycEhfDe2lkcePT@n1-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017,n2-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017/bnjpnqkq0agsple?replicaSet=rs0"
+          `mongodb://${process.env.mongodb_username}:${process.env.mongodb_password}@n1-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017,n2-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017/${process.env.mongodb_database}?replicaSet=rs0`
         );
-        const db = client.db();
+        const db = client.db().collection("sportNutritionAccounts");
 
         if (
           credentials.email.trim().length === 0 ||
@@ -23,12 +28,10 @@ export default NextAuth({
           throw new Error("Введите логин/пароль");
         }
 
-        const user = await db
-          .collection("sportNutritionAccounts")
-          .findOne({ email: credentials.email });
+        const user = await db.findOne({ email: credentials.email });
 
         if (!user) {
-          throw new Error("Такого пользователя не найдено");
+          return null;
         }
         const validPassword = await compare(
           credentials.password,
@@ -43,4 +46,6 @@ export default NextAuth({
       },
     }),
   ],
-});
+};
+
+export default NextAuth(authOptions);

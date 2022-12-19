@@ -5,8 +5,10 @@ import MySection from "../../components/My/MySection";
 import LoadSpinner from "../../components/UI/LoadSpinner";
 import { appStateActions } from "../../store/appStateSlice";
 import { cartActions } from "../../store/cartSlice";
+import { authOptions } from "../api/auth/[...nextauth]";
+import { unstable_getServerSession } from "next-auth";
 
-function My() {
+function My(props) {
   const [name, setLogin] = useState("");
   const { data: session } = useSession();
   const dispatch = useDispatch();
@@ -34,10 +36,17 @@ function My() {
 
 export default My;
 
-export async function getServerSideProps(context) {
-  const session = await getSession({ req: context.req });
+export async function getServerSideProps({ req, res }) {
+  const session = await unstable_getServerSession(req, res, authOptions);
+
   if (!session) {
-    return { redirect: { destination: "/", permanent: false } };
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
   }
+
   return { props: { session } };
 }

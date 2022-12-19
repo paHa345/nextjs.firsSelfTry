@@ -11,6 +11,7 @@ import { itemsActions } from "../store/itemSlice";
 function HomePage(props) {
   const dispatch = useDispatch();
   const name = useSelector((state) => state.appState.currentType);
+  console.log(process.env.SECRET);
 
   useEffect(() => {
     const storage = localStorage.getItem("cartItems");
@@ -63,7 +64,6 @@ function HomePage(props) {
           method: "GET",
         });
         const res = await req.json();
-        console.log(res);
       } catch (error) {
         throw new Error({ message: "Что-то пошло не так" });
       }
@@ -99,7 +99,7 @@ export async function getStaticProps(context) {
   let db;
   try {
     client = await MongoClient.connect(
-      "mongodb://uerqlzlole9xj0pi0wbk:TfXXkUycEhfDe2lkcePT@n1-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017,n2-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017/bnjpnqkq0agsple?replicaSet=rs0"
+      `mongodb://${process.env.mongodb_username}:${process.env.mongodb_password}@n1-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017,n2-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017/${process.env.mongodb_database}?replicaSet=rs0`
     );
     db = client.db();
   } catch (error) {
