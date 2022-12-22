@@ -5,11 +5,8 @@ import { authOptions } from "../auth/[...nextauth]";
 
 async function handler(req, res) {
   const session = await unstable_getServerSession(req, res, authOptions);
-
-  if (session.user.email !== req.body.email) {
-    res.status(401).json({ message: "Не авторизованный пользователь" });
-    return;
-  }
+  console.log(req.query.userOrders);
+  console.log(session);
 
   let client;
   let db;
@@ -25,7 +22,40 @@ async function handler(req, res) {
     return;
   }
 
+  if (req.method === "GET") {
+    if (session?.user.email !== req?.query?.userOrders) {
+      res.status(401).json({ message: "Не авторизованный пользователь" });
+      return;
+    }
+
+    try {
+      const orders = await db
+        .collection("sportNutritionOrders")
+        .find({ email: session.user.email })
+        .toArray();
+      console.log(orders);
+
+      res.status(200).json({ message: "success", result: orders });
+      return;
+    } catch (error) {
+      res.status(500).json({ message: "Не удалось получить заказ" });
+      return;
+    }
+  }
+
   if (req.method === "POST") {
+    if (session.user.email !== req.body.email) {
+      res.status(401).json({ message: "Не авторизованный пользователь" });
+      return;
+    }
+
+    if (req.body.length === 0) {
+      res
+        .status(401)
+        .json({ message: "Корзина пуста. Добавьте товары в корзину" });
+      return;
+    }
+
     const ids = req.body.order.map((el) => el.item.id);
 
     const items = await db
@@ -48,6 +78,7 @@ async function handler(req, res) {
         items: [...deepCheck],
         email: req.body.email,
         totalCost: totalCost,
+        date: new Date(),
         paymentStatus: req.body.paymentStatus,
       });
 

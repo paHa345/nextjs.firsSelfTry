@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const initCartState = {
   cartItems: [],
   cartItemsQuantity: 0,
+  orders: [],
 };
 
 export const cartSlice = createSlice({
@@ -87,6 +88,9 @@ export const cartSlice = createSlice({
         }, 0);
         state.cartItemsQuantity = quantity;
       }
+    },
+    setOrders(state, action) {
+      state.orders = action.payload;
     },
   },
 });

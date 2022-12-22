@@ -6,6 +6,10 @@ function ButtonTakeOrder() {
   const { data: session, status } = useSession();
   const takeOrderHandler = async (e) => {
     e.preventDefault();
+    if (JSON.parse(localStorage.getItem("cartItems")) === null) {
+      alert("Добавьте продукты в корзину");
+      return;
+    }
     const data = JSON.parse(localStorage.getItem("cartItems")).map((el) => {
       return {
         item: {
@@ -17,7 +21,10 @@ function ButtonTakeOrder() {
         quantity: el.quantity,
       };
     });
-    console.log(data);
+    if (data.length === 0) {
+      alert("Добавьте продукты в корзину");
+      return;
+    }
 
     // console.log(session.user.email);
 

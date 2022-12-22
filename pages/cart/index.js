@@ -12,10 +12,10 @@ function Cart(props) {
   useEffect(() => {
     const storage = localStorage.getItem("cartItems");
     // console.log(JSON.parse(storage)[0]);
-    console.log(JSON.parse(storage).length);
+    // console.log(JSON.parse(storage).length);
 
     dispatch(cartActions.setCartItemsAmount(localStorage.getItem("cartItems")));
-    if (storage && JSON.parse(storage).length !== 0) {
+    if (storage && JSON.parse(storage)?.length !== 0) {
       const storageIds = JSON.parse(storage).map((el) => el.item.id);
       const fetchItems = async (e) => {
         const req = await fetch(`/api/items/${storageIds}`);

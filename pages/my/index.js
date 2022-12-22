@@ -12,6 +12,7 @@ function My(props) {
   const [name, setLogin] = useState("");
   const { data: session } = useSession();
   const dispatch = useDispatch();
+  console.log(session);
 
   useEffect(() => {
     const storage = localStorage.getItem("cartItems");
@@ -22,6 +23,19 @@ function My(props) {
       setLogin(session.user.name);
     }
   }, [session, dispatch]);
+
+  useEffect(() => {
+    async function fetchOrders() {
+      dispatch(cartActions.setOrders({ status: "Загрузка" }));
+      // alert("Загрузка");
+      const req = await fetch(`/api/orders/${session.user.email}`);
+      const res = await req.json();
+      return res;
+    }
+    fetchOrders().then((data) => {
+      dispatch(cartActions.setOrders(data.result));
+    });
+  }, [session.user.email, dispatch]);
 
   if (!session) {
     return <LoadSpinner></LoadSpinner>;
