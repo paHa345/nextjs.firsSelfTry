@@ -1,10 +1,11 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import { unstable_getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { authOptions } from "../auth/[...nextauth]";
 
 async function handler(req, res) {
   const itemId = req.query.itemComments;
+  const session = await unstable_getServerSession(req, res, authOptions);
 
   let client;
   let db;
@@ -33,7 +34,6 @@ async function handler(req, res) {
     }
   }
   if (req.method === "POST") {
-    const session = await unstable_getServerSession(req, res, authOptions);
     console.log(session);
 
     if (!session) {
@@ -55,9 +55,25 @@ async function handler(req, res) {
         .insertOne({ ...req.body, item: itemId });
 
       res.status(200).json({ message: "success", result: comment });
+      return;
     } catch (error) {
       res.status(500).json({ message: "Не удалось добавить комментарии" });
+      return;
     }
+  }
+  if (req.method === "DELETE") {
+    if (!session) {
+      res.status(401).json({ message: "Не авторизованные запрос" });
+      return;
+    }
+    const o_id = new ObjectId(itemId);
+    console.log(o_id);
+
+    const deletedDocument = await db
+      .collection("sportNutritionComments")
+      .deleteOne({ _id: o_id });
+
+    res.status(200).json({ message: "Delete success" });
   }
   client.close();
 }

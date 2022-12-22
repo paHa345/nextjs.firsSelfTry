@@ -69,6 +69,15 @@ export const cartSlice = createSlice({
       const localStorageEl = JSON.parse(localStorage.getItem("cartItems"));
       state.cartItems = localStorageEl;
     },
+
+    setCartFromDB(state, action) {
+      // console.log(state.cartItems);
+
+      // console.log(action.payload.items);
+      // console.log("ppppp");
+      state.cartItems[0].item.price = action.payload.items[0].price;
+    },
+
     setCartItemsAmount(state, action) {
       if (action.payload === null) {
         state.cartItemsQuantity = 0;

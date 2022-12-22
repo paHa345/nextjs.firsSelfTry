@@ -20,12 +20,27 @@ function Card(props) {
     setQuantity(e.target.value);
   };
 
-  const addToCartHandler = (e) => {
+  const addToCartHandler = async (e) => {
     e.preventDefault();
+    async function fetchItem() {
+      const req = await fetch(`/api/item/${props.id}`);
+      const res = await req.json();
+      if (!req.ok) {
+        throw new Error(res.message);
+      }
+      return res;
+    }
 
-    const item = itemState.productsByType.find((el) => el.id === props.id);
+    const fetchedItem = await fetchItem().catch((error) => alert(error));
+    if (!fetchedItem) {
+      return;
+    }
+
     dispatch(
-      cartActions.addItemToCart({ item: item, quantity: Number(quantity) })
+      cartActions.addItemToCart({
+        item: fetchedItem.item,
+        quantity: Number(quantity),
+      })
     );
     setQuantity(1);
     dispatch(cartActions.setCartItemsAmount(localStorage.getItem("cartItems")));
