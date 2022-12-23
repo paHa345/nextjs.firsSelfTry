@@ -12,9 +12,8 @@ function CartElement(props) {
 
   const removeItemHandler = (e) => {
     e.preventDefault();
-    console.log(props);
 
-    dispatch(cartActions.removeItemFronCart(props.id));
+    dispatch(cartActions.removeItemFronCart(e.currentTarget.dataset.id));
     dispatch(cartActions.setCartItemsAmount(localStorage.getItem("cartItems")));
   };
 
@@ -33,7 +32,7 @@ function CartElement(props) {
               {props.name}
             </Link>
             <div className={styles.xMark}>
-              <Link href="/" onClick={removeItemHandler}>
+              <Link href="/" data-id={props.id} onClick={removeItemHandler}>
                 <FontAwesomeIcon icon={faXmarkCircle} size="1x" />
               </Link>
             </div>

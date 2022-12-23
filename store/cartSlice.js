@@ -59,7 +59,7 @@ export const cartSlice = createSlice({
     },
     removeItemFronCart(state, action) {
       const number = state.cartItems.findIndex(
-        (el) => el.item.id === action.payload.id
+        (el) => el.item.id === action.payload
       );
 
       state.cartItems.splice(number, 1);

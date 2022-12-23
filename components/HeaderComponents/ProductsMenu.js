@@ -9,6 +9,10 @@ function ProductsMenu(props) {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.item.productsByType);
 
+  const handle = (e) => {
+    console.log("llll");
+  };
+
   const clickHandler = (e) => {
     e.preventDefault();
 
@@ -33,6 +37,7 @@ function ProductsMenu(props) {
         <li className={styles.productsNavListEl}>
           <Link
             href="/catalog/protein"
+            onClick={props.onHide}
             // onClick={clickHandler}
             data-name="protein"
           >
@@ -41,6 +46,7 @@ function ProductsMenu(props) {
         </li>
         <li className={styles.productsNavListEl}>
           <Link
+            onClick={props.onHide}
             href="/catalog/creatine"
             // onClick={clickHandler}
             data-name="creatine"
@@ -50,6 +56,7 @@ function ProductsMenu(props) {
         </li>
         <li className={styles.productsNavListEl}>
           <Link
+            onClick={props.onHide}
             href="/catalog/lipo"
             //  onClick={clickHandler}
             data-name="lipo"
