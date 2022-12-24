@@ -38,10 +38,19 @@ function CartElement(props) {
             </div>
           </div>
         </div>
-        <div className={styles.cartElementCellPrice}>{props.price}</div>
-        <div className={styles.cartElementCellQuantity}>{props.quantity}</div>
-        <div className={styles.cartElementCellCost}>
-          {+props.price * props.quantity}
+        <div className={styles.cartElementCell}>
+          <div className={styles.cartElementCellPriceText}>Цена</div>
+          <div className={styles.cartElementCellPrice}>{props.price}</div>
+        </div>
+        <div className={styles.cartElementCell}>
+          <div className={styles.cartElementCellPriceText}>Количество</div>
+          <div className={styles.cartElementCellQuantity}>{props.quantity}</div>
+        </div>
+        <div className={styles.cartElementCell}>
+          <div className={styles.cartElementCellPriceText}>Стоимость</div>
+          <div className={styles.cartElementCellCost}>
+            {+props.price * props.quantity}
+          </div>
         </div>
       </div>
     </div>

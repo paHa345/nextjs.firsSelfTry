@@ -1,5 +1,6 @@
 import { TaskAbortError } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
+import LoadSpinner from "../UI/LoadSpinner";
 import styles from "./Orders.module.css";
 
 function Orders(props) {
@@ -7,7 +8,7 @@ function Orders(props) {
   console.log(orders);
 
   if (orders.status) {
-    return <h1>Загрузка</h1>;
+    return <LoadSpinner></LoadSpinner>;
   }
 
   if (orders.length === 0) {

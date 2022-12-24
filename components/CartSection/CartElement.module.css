@@ -32,6 +32,15 @@
 .cartElementDescription:active {
   color: #f76707;
 }
+
+.cartElementCell {
+  display: flex;
+  gap: 2.4rem;
+}
+.cartElementCellPriceText {
+  display: none;
+}
+
 .cartElementCellPrice {
   min-width: 13rem;
   /* flex-shrink: 1; */
@@ -48,5 +57,9 @@
 @media (max-width: 40em) {
   .cartElement {
     flex-direction: column;
+  }
+
+  .cartElementCellPriceText {
+    display: block;
   }
 }

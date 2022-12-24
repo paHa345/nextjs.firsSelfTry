@@ -6,7 +6,7 @@ function LoadSpinner(props) {
   return (
     <div className={styles.center}>
       <FontAwesomeIcon icon={faSpinner} size="10x" spin />
-      <h1>Загрузка</h1>
+      <h1 className={styles.text}>Загрузка</h1>
     </div>
   );
 }

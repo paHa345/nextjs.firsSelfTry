@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import styles from "./Card.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
@@ -11,6 +11,11 @@ import Image from "next/image";
 
 function Card(props) {
   const [quantity, setQuantity] = useState(1);
+  const [inCart, setInCart] = useState(props.elementInCart);
+
+  useEffect(() => {
+    console.log(`incart: ${inCart}`);
+  }, [inCart]);
 
   const dispatch = useDispatch();
 
@@ -42,6 +47,7 @@ function Card(props) {
         quantity: Number(quantity),
       })
     );
+    setInCart(true);
     setQuantity(1);
     dispatch(cartActions.setCartItemsAmount(localStorage.getItem("cartItems")));
   };
@@ -88,11 +94,20 @@ function Card(props) {
           </p>
         </div>
 
-        <div className={styles.productCardButton}>
-          <Link href="/" onClick={addToCartHandler}>
-            В корзину
-          </Link>
-        </div>
+        {!inCart && (
+          <div className={styles.productCardButton}>
+            <Link href="/" onClick={addToCartHandler}>
+              В корзину
+            </Link>
+          </div>
+        )}
+        {inCart && (
+          <div className={styles.productCardButton}>
+            <Link href="/" onClick={addToCartHandler}>
+              В корзинe
+            </Link>
+          </div>
+        )}
       </div>
     </Fragment>
   );
