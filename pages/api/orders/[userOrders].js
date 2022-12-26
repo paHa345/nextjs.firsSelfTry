@@ -44,12 +44,14 @@ async function handler(req, res) {
   }
 
   if (req.method === "POST") {
+    console.log(`BODY ${req.body.order}`);
+
     if (session.user.email !== req.body.email) {
       res.status(401).json({ message: "Не авторизованный пользователь" });
       return;
     }
 
-    if (req.body.length === 0) {
+    if (req.body.order.length === 0) {
       res
         .status(401)
         .json({ message: "Корзина пуста. Добавьте товары в корзину" });

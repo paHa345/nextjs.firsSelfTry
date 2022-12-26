@@ -12,7 +12,6 @@ function My(props) {
   const [name, setLogin] = useState("");
   const { data: session } = useSession();
   const dispatch = useDispatch();
-  console.log(session);
 
   useEffect(() => {
     const storage = localStorage.getItem("cartItems");

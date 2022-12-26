@@ -3,12 +3,14 @@ import { itemSlice } from "./itemSlice";
 
 import { cartSlice } from "./cartSlice";
 import { appStateSlice } from "./appStateSlice";
+import { orderSlice } from "./orderSlice";
 
 const store = configureStore({
   reducer: {
     item: itemSlice.reducer,
     cart: cartSlice.reducer,
     appState: appStateSlice.reducer,
+    order: orderSlice.reducer,
   },
 });
 

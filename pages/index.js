@@ -25,53 +25,6 @@ function HomePage(props) {
     return <h1>Загрузка</h1>;
   }
 
-  const getItemHandler = (e) => {
-    e.preventDefault();
-    async function fetchData() {
-      const req = await fetch(`/api/item/${"p1"}`, {
-        method: "GET",
-      });
-      const res = await req.json();
-    }
-    fetchData();
-  };
-
-  const getTypeItemsHandler = async (e) => {
-    e.preventDefault();
-    async function fetchData() {
-      try {
-        const req = await fetch(`/api/type/${"promo"}`, {
-          method: "GET",
-        });
-        const res = await req.json();
-
-        return res;
-      } catch (error) {
-        throw new Error({ message: "Что-то пошло не так" });
-      }
-    }
-    const items = await fetchData().catch((error) =>
-      console.log(error.message)
-    );
-  };
-
-  const getCommentsHandler = async (e) => {
-    e.preventDefault();
-
-    async function fetchData() {
-      try {
-        const req = await fetch("/api/comments/p1", {
-          method: "GET",
-        });
-        const res = await req.json();
-      } catch (error) {
-        throw new Error({ message: "Что-то пошло не так" });
-      }
-    }
-
-    const items = await fetchData();
-  };
-
   return (
     <Fragment>
       {/* <div>

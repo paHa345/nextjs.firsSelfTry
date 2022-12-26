@@ -11,9 +11,6 @@ export const cartSlice = createSlice({
   initialState: initCartState,
   reducers: {
     addItemToCart(state, action) {
-      console.log(state.cartItems);
-      console.log(state.cartItemsQuantity);
-
       let cartItems = [];
       if (state.cartItems !== null) {
         cartItems = state.cartItems;
@@ -91,6 +88,9 @@ export const cartSlice = createSlice({
     },
     setOrders(state, action) {
       state.orders = action.payload;
+    },
+    clearCart(state, action) {
+      state.cartItems = [];
     },
   },
 });

@@ -13,10 +13,6 @@ function Card(props) {
   const [quantity, setQuantity] = useState(1);
   const [inCart, setInCart] = useState(props.elementInCart);
 
-  useEffect(() => {
-    console.log(`incart: ${inCart}`);
-  }, [inCart]);
-
   const dispatch = useDispatch();
 
   const itemState = useSelector((state) => state.item);

@@ -6,7 +6,13 @@ import styles from "./ProductCards.module.css";
 
 function ProductCards() {
   const currentItems = useSelector((state) => state.item.currentItems);
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  let cartItems = useSelector((state) => state.cart.cartItems);
+  if (cartItems === null) {
+    cartItems = [];
+  }
+
+  console.log(cartItems);
+
   const cartIds = cartItems.map((el) => {
     return el.item.id;
   });
@@ -27,7 +33,6 @@ function ProductCards() {
           if (cartIds.includes(el.id)) {
             inCart = true;
           }
-          console.log(inCart);
 
           return (
             <Card

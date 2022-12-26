@@ -24,8 +24,6 @@ function Cart(props) {
       };
       const cartItems = fetchItems()
         .then((data) => {
-          console.log(data);
-
           const newStorage = JSON.parse(storage).map((el, index) => {
             console.log(data.items[index].price);
             el.item.price = data.items[index].price;

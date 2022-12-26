@@ -1,8 +1,13 @@
 import Link from "next/link";
 import styles from "./ButtonTakeOrder.module.css";
 import { useSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { orderActions } from "../../store/orderSlice";
+import { useRouter } from "next/router";
 
 function ButtonTakeOrder() {
+  const router = useRouter();
+  const dispatch = useDispatch();
   const { data: session, status } = useSession();
   const takeOrderHandler = async (e) => {
     e.preventDefault();
@@ -26,32 +31,33 @@ function ButtonTakeOrder() {
       return;
     }
 
-    // console.log(session.user.email);
-
     if (!session) {
       alert("Необходимо залогиниться");
       return;
     }
 
-    const fetchOrder = async (e) => {
-      const req = await fetch(`/api/orders/${session.user.email}`, {
-        method: "POST",
+    dispatch(orderActions.addOrder(data));
+    router.push("/payment");
 
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify({
-          order: data,
-          email: session.user.email,
-          totalCost: 10000,
-          paymentStatus: false,
-        }),
-      });
-      const res = await req.json();
-      console.log(res);
-    };
+    // const fetchOrder = async (e) => {
+    //   const req = await fetch(`/api/orders/${session.user.email}`, {
+    //     method: "POST",
 
-    await fetchOrder();
+    //     headers: {
+    //       "Content-Type": "application/json;charset=utf-8",
+    //     },
+    //     body: JSON.stringify({
+    //       order: data,
+    //       email: session.user.email,
+    //       totalCost: 10000,
+    //       paymentStatus: false,
+    //     }),
+    //   });
+    //   const res = await req.json();
+    //   console.log(res);
+    // };
+
+    // await fetchOrder();
   };
   return (
     <div className={styles.cartOrderButton}>
