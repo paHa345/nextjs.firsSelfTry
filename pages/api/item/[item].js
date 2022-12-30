@@ -18,7 +18,6 @@ async function handler(req, res) {
   }
 
   if (req.method === "GET") {
-    console.log(id);
     const db = client.db();
 
     const result = await db

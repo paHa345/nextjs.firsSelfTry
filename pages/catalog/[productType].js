@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductsSection from "../../components/CardsSection/ProductsSection";
+import { getFavourites } from "../../components/UI/fetchHelper";
 import LoadSpinner from "../../components/UI/LoadSpinner";
 import { appStateActions } from "../../store/appStateSlice";
 import { cartActions } from "../../store/cartSlice";
@@ -10,6 +11,7 @@ import { itemsActions } from "../../store/itemSlice";
 
 function ProductType(props) {
   const dispatch = useDispatch();
+  const favourites = useSelector((state) => state.item.favouriteItemsIDs);
 
   const type = JSON.parse(props.items)[0].ruType;
 
@@ -20,6 +22,15 @@ function ProductType(props) {
     dispatch(appStateActions.setCurrentType(type));
     dispatch(itemsActions.setCurrentTypeItems(JSON.parse(props.items)));
   });
+
+  useEffect(() => {
+    getFavourites()
+      .then((data) => {
+        dispatch(itemsActions.setFavouriteIDs(data));
+        dispatch(itemsActions.setFavouriteItems(data));
+      })
+      .catch((error) => console.log(error.message));
+  }, [dispatch]);
 
   if (!props.items) {
     return (

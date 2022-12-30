@@ -50,6 +50,7 @@ async function handler(req, res) {
         login: req.body.login,
         password: hashedPassword,
         email: req.body.email,
+        favouritesItems: [],
       });
 
     res.status(200).json({ message: "Success", account: addedAccount });

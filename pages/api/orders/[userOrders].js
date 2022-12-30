@@ -5,8 +5,6 @@ import { authOptions } from "../auth/[...nextauth]";
 
 async function handler(req, res) {
   const session = await unstable_getServerSession(req, res, authOptions);
-  console.log(req.query.userOrders);
-  console.log(session);
 
   let client;
   let db;
@@ -33,7 +31,6 @@ async function handler(req, res) {
         .collection("sportNutritionOrders")
         .find({ email: session.user.email })
         .toArray();
-      console.log(orders);
 
       res.status(200).json({ message: "success", result: orders });
       return;
@@ -46,12 +43,12 @@ async function handler(req, res) {
   if (req.method === "POST") {
     console.log(`BODY ${req.body.order}`);
 
-    if (session.user.email !== req.body.email) {
+    if (session?.user.email !== req.body.email) {
       res.status(401).json({ message: "Не авторизованный пользователь" });
       return;
     }
 
-    if (req.body.order.length === 0) {
+    if (req?.body?.order?.length === 0 || !req.body) {
       res
         .status(401)
         .json({ message: "Корзина пуста. Добавьте товары в корзину" });

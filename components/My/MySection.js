@@ -1,5 +1,6 @@
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import ProductCards from "../CardsSection/ProductCards";
 import styles from "./MySection.module.css";
 import Orders from "./Orders";
 
@@ -14,6 +15,8 @@ function MySection(props) {
       <div className={styles.container}>
         <div className={styles.myContainer}>
           <h1 className={styles.name}>Здравствуйте, {props.name}</h1>
+
+          <Link href="/favourites">Избранное</Link>
           <h1 className={styles.orderTitle}>Мои заказы</h1>
           <Orders></Orders>
         </div>

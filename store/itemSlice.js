@@ -238,60 +238,10 @@ export const initItemsState = {
     },
   ],
 
-  currentItems: [
-    // {
-    //   id: "p4",
-    //   promo: true,
-    //   type: "protein",
-    //   name: "Протеин Optimum Nutrition 100% Whey Gold Standard, 909 гр., шоколад мальт",
-    //   image: "/img/products/protein_1.jpg",
-    //   price: 1200,
-    //   description:
-    //     "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore voluptatibus impedit rerum voluptas unde quos facere qui pariatur sunt. Expedita commodi velit quaerat aperiam nostrum, hic porro quibusdam tempora atque?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore voluptatibus impedit rerum voluptas unde quos facere qui pariatur sunt. Expedita commodi velit quaerat aperiam nostrum, hic porro quibusdam tempora atque?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore voluptatibus impedit rerum voluptas unde quos facere qui pariatur sunt. Expedita commodi velit quaerat aperiam nostrum, hic porro quibusdam tempora atque?",
-    //   comments:
-    //     "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore voluptatibus impedit rerum voluptas unde quos facere qui pariatur sunt. Expedita commodi velit quaerat aperiam nostrum, hic porro quibusdam tempora atque?",
-    //   nutrients: {
-    //     protein: 12,
-    //     fat: 1,
-    //     carbohydrates: 5,
-    //   },
-    // },
-    // {
-    //   id: "c4",
-    //   type: "creatine",
-    //   promo: true,
-    //   name: "Creatine1",
-    //   image: "/img/products/creatine_1.jpg",
-    //   price: 1200,
-    //   description:
-    //     "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore voluptatibus impedit rerum voluptas unde quos facere qui pariatur sunt. Expedita commodi velit quaerat aperiam nostrum, hic porro quibusdam tempora atque?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore voluptatibus impedit rerum voluptas unde quos facere qui pariatur sunt. Expedita commodi velit quaerat aperiam nostrum, hic porro quibusdam tempora atque?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore voluptatibus impedit rerum voluptas unde quos facere qui pariatur sunt. Expedita commodi velit quaerat aperiam nostrum, hic porro quibusdam tempora atque?",
-    //   comments:
-    //     "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore voluptatibus impedit rerum voluptas unde quos facere qui pariatur sunt. Expedita commodi velit quaerat aperiam nostrum, hic porro quibusdam tempora atque?",
-    //   nutrients: {
-    //     protein: 12,
-    //     fat: 1,
-    //     carbohydrates: 5,
-    //   },
-    // },
-    // {
-    //   id: "l4",
-    //   type: "lipo",
-    //   promo: true,
-    //   name: "Lipo 6",
-    //   image: "/img/products/fat-burn_1.jpg",
-    //   price: 1200,
-    //   description:
-    //     "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore voluptatibus impedit rerum voluptas unde quos facere qui pariatur sunt. Expedita commodi velit quaerat aperiam nostrum, hic porro quibusdam tempora atque?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore voluptatibus impedit rerum voluptas unde quos facere qui pariatur sunt. Expedita commodi velit quaerat aperiam nostrum, hic porro quibusdam tempora atque?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore voluptatibus impedit rerum voluptas unde quos facere qui pariatur sunt. Expedita commodi velit quaerat aperiam nostrum, hic porro quibusdam tempora atque?",
-    //   comments:
-    //     "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore voluptatibus impedit rerum voluptas unde quos facere qui pariatur sunt. Expedita commodi velit quaerat aperiam nostrum, hic porro quibusdam tempora atque?",
-    //   nutrients: {
-    //     protein: 12,
-    //     fat: 1,
-    //     carbohydrates: 5,
-    //   },
-    // },
-  ],
+  currentItems: [],
   currentComments: [],
+  favouriteItemsIDs: [],
+  favouriteItems: [],
 };
 
 export const itemSlice = createSlice({
@@ -306,6 +256,13 @@ export const itemSlice = createSlice({
     },
     setCurrentComments(state, action) {
       state.currentComments = action.payload;
+    },
+    setFavouriteItems(state, action) {
+      state.favouriteItems = action.payload;
+    },
+    setFavouriteIDs(state, action) {
+      const IDs = action.payload.map((el) => el.id);
+      state.favouriteItemsIDs = IDs;
     },
   },
 });

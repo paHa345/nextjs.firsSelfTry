@@ -12,19 +12,14 @@ import { itemsActions } from "../../store/itemSlice";
 import { cartActions } from "../../store/cartSlice";
 import Link from "next/link";
 import Image from "next/image";
-import { addToFavourites } from "../UI/fetchHelper";
-import { useSession } from "next-auth/react";
 
-function Card(props) {
+function FavouritesCard(props) {
   const [quantity, setQuantity] = useState(1);
   const [inCart, setInCart] = useState(props.elementInCart);
+
   const dispatch = useDispatch();
-  const favouritesIDs = useSelector((state) => state.item.favouriteItemsIDs);
-  const favouriteItems = useSelector((state) => state.item.favouriteItems);
 
-  console.log(favouriteItems);
-
-  const { data: session, status } = useSession();
+  const itemState = useSelector((state) => state.item);
 
   const changeQuantityHandler = (e) => {
     setQuantity(e.target.value);
@@ -57,26 +52,9 @@ function Card(props) {
     dispatch(cartActions.setCartItemsAmount(localStorage.getItem("cartItems")));
   };
 
-  const addToFavouritesHandler = async (e) => {
+  const addToFavouritesHandler = (e) => {
     e.preventDefault();
-    if (!session) {
-      alert("Зарегистрируйтесь чтобы добавить товар в избранное");
-      return;
-    }
-
-    console.log(favouritesIDs);
-    await addToFavourites(
-      session.user.email,
-      props.id,
-      favouritesIDs,
-      props,
-      favouriteItems
-    );
-
-    const arr = [...favouriteItems];
-    arr.push(props);
-    dispatch(itemsActions.setFavouriteItems(arr));
-    dispatch(itemsActions.setFavouriteIDs(arr));
+    console.log("Add to favourites");
   };
 
   return (
@@ -121,10 +99,10 @@ function Card(props) {
           </p>
         </div>
         <div className={styles.footerCardSection}>
-          {favouritesIDs.includes(props.id) && (
+          {props.elementInFavourites && (
             <FontAwesomeIcon icon={faCircleCheck} size="4x" />
           )}
-          {!favouritesIDs.includes(props.id) && (
+          {!props.elementInFavourites && (
             <Link href="/" onClick={addToFavouritesHandler}>
               <FontAwesomeIcon icon={faHeart} size="4x" />
             </Link>
@@ -149,4 +127,4 @@ function Card(props) {
     </Fragment>
   );
 }
-export default Card;
+export default FavouritesCard;

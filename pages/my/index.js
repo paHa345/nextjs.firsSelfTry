@@ -7,11 +7,27 @@ import { appStateActions } from "../../store/appStateSlice";
 import { cartActions } from "../../store/cartSlice";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { unstable_getServerSession } from "next-auth";
+import Cookies from "js-cookie";
+import { compare, hash } from "bcryptjs";
 
 function My(props) {
   const [name, setLogin] = useState("");
   const { data: session } = useSession();
   const dispatch = useDispatch();
+
+  // const addTokenHandler = async (e) => {
+  //   e.preventDefault();
+
+  //   const token = await hash("paHa345", 12);
+  //   Cookies.set("paymentToken", token, {
+  //     expires: 1 / 24,
+  //   });
+  // };
+
+  // const removeTokenHandler = (e) => {
+  //   e.preventDefault();
+  //   Cookies.remove("paymentToken");
+  // };
 
   useEffect(() => {
     const storage = localStorage.getItem("cartItems");
@@ -42,6 +58,8 @@ function My(props) {
 
   return (
     <Fragment>
+      {/* <button onClick={addTokenHandler}>Add Token</button>
+      <button onClick={removeTokenHandler}>Remove Token</button> */}
       <MySection name={name}></MySection>
     </Fragment>
   );
@@ -54,8 +72,6 @@ export async function getServerSideProps({ req, res }) {
   if (session !== null) {
     session.user.image = "image";
   }
-
-  console.log(session);
 
   if (!session) {
     return {

@@ -2,19 +2,21 @@ import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import LoadSpinner from "../UI/LoadSpinner";
-import Card from "./Card";
+import FavouritesCard from "./FavouritesCard";
 import styles from "./ProductCards.module.css";
 
-function ProductCards() {
+function FavouritesProductCards() {
   const [favourites, setFavourites] = useState([]);
-  const currentItems = useSelector((state) => state.item.currentItems);
+  const favouriteItems = useSelector((state) => state.item.favouriteItems);
+  console.log(favouriteItems);
+
   const favouriteItemsIDs = useSelector(
     (state) => state.item.favouriteItemsIDs
   );
+  console.log(favouriteItemsIDs);
+
   let cartItems = useSelector((state) => state.cart.cartItems);
   const router = useRouter();
-
-  console.log(favouriteItemsIDs);
 
   // useEffect(() => {
   //   const fetchFavourites = async () => {
@@ -35,7 +37,7 @@ function ProductCards() {
     return el.item.id;
   });
 
-  if (currentItems.length === 0) {
+  if (favouriteItems.length === 0) {
     return (
       <Fragment>
         <LoadSpinner></LoadSpinner>
@@ -46,7 +48,7 @@ function ProductCards() {
   return (
     <Fragment>
       <div className={styles.productCardContainer}>
-        {currentItems.map((el, index) => {
+        {favouriteItems.map((el, index) => {
           let inCart = false;
           if (cartIds.includes(el.id)) {
             inCart = true;
@@ -56,15 +58,15 @@ function ProductCards() {
           console.log(fav);
 
           return (
-            <Card
+            <FavouritesCard
               cardName={el.name}
               cardImage={el.image}
               key={el.id}
               id={el.id}
               price={el.price}
               elementInCart={inCart}
-              // elementInFavourites={fav}
-            ></Card>
+              elementInFavourites={fav}
+            ></FavouritesCard>
           );
         })}
       </div>
@@ -72,4 +74,4 @@ function ProductCards() {
   );
 }
 
-export default ProductCards;
+export default FavouritesProductCards;
