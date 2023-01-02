@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import AddToFavourites from "../UI/AddToFavourites";
 import LoadSpinner from "../UI/LoadSpinner";
 import Card from "./Card";
 import styles from "./ProductCards.module.css";
@@ -13,8 +14,9 @@ function ProductCards() {
   );
   let cartItems = useSelector((state) => state.cart.cartItems);
   const router = useRouter();
-
-  console.log(favouriteItemsIDs);
+  const showAddToFavNotification = useSelector(
+    (state) => state.appState.addToFavouriteNotification
+  );
 
   // useEffect(() => {
   //   const fetchFavourites = async () => {
@@ -53,7 +55,6 @@ function ProductCards() {
           }
 
           const fav = favouriteItemsIDs.includes(el.id);
-          console.log(fav);
 
           return (
             <Card
@@ -67,6 +68,10 @@ function ProductCards() {
             ></Card>
           );
         })}
+
+        <div className={styles.notificationContainer}>
+          {showAddToFavNotification && <AddToFavourites></AddToFavourites>}
+        </div>
       </div>
     </Fragment>
   );

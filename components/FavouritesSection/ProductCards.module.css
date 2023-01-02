@@ -5,6 +5,10 @@
   gap: 3.2rem;
 }
 
+.notificationContainer {
+  position: relative;
+}
+
 @media (max-width: 64em) {
   .productCardContainer {
     grid-template-columns: 1fr 1fr;

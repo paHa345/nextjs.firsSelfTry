@@ -15,8 +15,9 @@ function MySection(props) {
       <div className={styles.container}>
         <div className={styles.myContainer}>
           <h1 className={styles.name}>Здравствуйте, {props.name}</h1>
-
-          <Link href="/favourites">Избранное</Link>
+          <div className={styles.loginButton}>
+            <Link href="/favourites">Избранное</Link>
+          </div>
           <h1 className={styles.orderTitle}>Мои заказы</h1>
           <Orders></Orders>
         </div>

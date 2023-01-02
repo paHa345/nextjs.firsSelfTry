@@ -5,6 +5,8 @@ export const initAppState = {
   showProducts: true,
   showItem: false,
   stickySection: false,
+  loadFavouriteItems: false,
+  addToFavouriteNotification: false,
 };
 
 export const appStateSlice = createSlice({
@@ -21,6 +23,12 @@ export const appStateSlice = createSlice({
     },
     setCurrentType(state, action) {
       state.currentType = action.payload;
+    },
+    setLoadFavouriteItemsStatus(state, action) {
+      state.loadFavouriteItems = action.payload;
+    },
+    setAddToFavouriteNotification(state, action) {
+      state.addToFavouriteNotification = action.payload;
     },
   },
 });

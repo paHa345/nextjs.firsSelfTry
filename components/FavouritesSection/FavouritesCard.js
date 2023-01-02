@@ -7,19 +7,35 @@ import {
   faCircleCheck,
 } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { appStateActions } from "../../store/appStateSlice";
 import { itemsActions } from "../../store/itemSlice";
 import { cartActions } from "../../store/cartSlice";
 import Link from "next/link";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { addToFavourites } from "../UI/fetchHelper";
 
 function FavouritesCard(props) {
   const [quantity, setQuantity] = useState(1);
   const [inCart, setInCart] = useState(props.elementInCart);
+  const [image, setImage] = useState("/img/products/defaultImage.jpg");
+  const [alt, setAlt] = useState("name");
+  useEffect(() => {
+    if (props.cardImage) {
+      setImage(props.cardImage);
+    }
+  }, [props.cardImage]);
+
+  useEffect(() => {
+    if (props.cardName) {
+      setAlt(props.cardName);
+    }
+  }, [props.cardName]);
 
   const dispatch = useDispatch();
 
-  const itemState = useSelector((state) => state.item);
+  const favouritesIDs = useSelector((state) => state.item.favouriteItemsIDs);
+  const favouriteItems = useSelector((state) => state.item.favouriteItems);
+  const { data: session, status } = useSession();
 
   const changeQuantityHandler = (e) => {
     setQuantity(e.target.value);
@@ -57,6 +73,37 @@ function FavouritesCard(props) {
     console.log("Add to favourites");
   };
 
+  const removeFromFavouritesHandler = async (e) => {
+    e.preventDefault();
+
+    if (!session) {
+      alert("Зарегистрируйтесь чтобы добавить товар в избранное");
+      return;
+    }
+
+    await addToFavourites(
+      session.user.email,
+      props.id,
+      favouritesIDs,
+      "remove"
+    );
+
+    const arr = [...favouriteItems];
+
+    arr.splice(
+      arr
+        .map((el) => {
+          return el.id;
+        })
+        .indexOf(props.id),
+      1
+    );
+
+    dispatch(itemsActions.setFavouriteIDs(arr));
+
+    dispatch(itemsActions.setFavouriteItems(arr));
+  };
+
   return (
     <Fragment>
       <div className={styles.productCard}>
@@ -69,9 +116,9 @@ function FavouritesCard(props) {
         </div>
         <Link href={`/products/${props.id}`}>
           <Image
-            src={props.cardImage}
+            src={image}
             className={styles.productCardImg}
-            alt={props.cardName}
+            alt={alt}
             width={200}
             height={200}
             priority={true}
@@ -99,10 +146,12 @@ function FavouritesCard(props) {
           </p>
         </div>
         <div className={styles.footerCardSection}>
-          {props.elementInFavourites && (
-            <FontAwesomeIcon icon={faCircleCheck} size="4x" />
+          {favouritesIDs.includes(props.id) && (
+            <Link href="/" onClick={removeFromFavouritesHandler}>
+              <FontAwesomeIcon icon={faCircleCheck} size="4x" />
+            </Link>
           )}
-          {!props.elementInFavourites && (
+          {!favouritesIDs.includes(props.id) && (
             <Link href="/" onClick={addToFavouritesHandler}>
               <FontAwesomeIcon icon={faHeart} size="4x" />
             </Link>

@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductsSection from "../../components/CardsSection/ProductsSection";
@@ -11,7 +11,7 @@ import { itemsActions } from "../../store/itemSlice";
 
 function ProductType(props) {
   const dispatch = useDispatch();
-  const favourites = useSelector((state) => state.item.favouriteItemsIDs);
+  const { data: session, status } = useSession();
 
   const type = JSON.parse(props.items)[0].ruType;
 
@@ -24,13 +24,15 @@ function ProductType(props) {
   });
 
   useEffect(() => {
-    getFavourites()
-      .then((data) => {
-        dispatch(itemsActions.setFavouriteIDs(data));
-        dispatch(itemsActions.setFavouriteItems(data));
-      })
-      .catch((error) => console.log(error.message));
-  }, [dispatch]);
+    if (session) {
+      getFavourites(session.user.email)
+        .then((data) => {
+          dispatch(itemsActions.setFavouriteIDs(data));
+          dispatch(itemsActions.setFavouriteItems(data));
+        })
+        .catch((error) => console.log(error.message));
+    }
+  }, [dispatch, session]);
 
   if (!props.items) {
     return (

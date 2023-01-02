@@ -21,14 +21,25 @@ function Card(props) {
   const dispatch = useDispatch();
   const favouritesIDs = useSelector((state) => state.item.favouriteItemsIDs);
   const favouriteItems = useSelector((state) => state.item.favouriteItems);
-
-  console.log(favouriteItems);
+  const showAddToFavNotification = useSelector(
+    (state) => state.appState.addToFavouriteNotification
+  );
 
   const { data: session, status } = useSession();
 
   const changeQuantityHandler = (e) => {
     setQuantity(e.target.value);
   };
+
+  useEffect(() => {
+    console.log("Notification");
+    const timer = setTimeout(() => {
+      dispatch(appStateActions.setAddToFavouriteNotification(false));
+    }, 2000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [showAddToFavNotification, dispatch]);
 
   const addToCartHandler = async (e) => {
     e.preventDefault();
@@ -64,17 +75,43 @@ function Card(props) {
       return;
     }
 
-    console.log(favouritesIDs);
+    try {
+      await addToFavourites(session.user.email, props.id, favouritesIDs, "add");
+      dispatch(appStateActions.setAddToFavouriteNotification(true));
+    } catch (error) {}
+
+    const arr = [...favouriteItems];
+    arr.push(props);
+    dispatch(itemsActions.setFavouriteItems(arr));
+    dispatch(itemsActions.setFavouriteIDs(arr));
+  };
+
+  const removeFromFavouritesHandler = async (e) => {
+    e.preventDefault();
+
+    if (!session) {
+      alert("Зарегистрируйтесь чтобы добавить товар в избранное");
+      return;
+    }
+
     await addToFavourites(
       session.user.email,
       props.id,
       favouritesIDs,
-      props,
-      favouriteItems
+      "remove"
     );
 
     const arr = [...favouriteItems];
-    arr.push(props);
+
+    arr.splice(
+      arr
+        .map((el) => {
+          return el.id;
+        })
+        .indexOf(props.id),
+      1
+    );
+
     dispatch(itemsActions.setFavouriteItems(arr));
     dispatch(itemsActions.setFavouriteIDs(arr));
   };
@@ -122,7 +159,9 @@ function Card(props) {
         </div>
         <div className={styles.footerCardSection}>
           {favouritesIDs.includes(props.id) && (
-            <FontAwesomeIcon icon={faCircleCheck} size="4x" />
+            <Link href="/" onClick={removeFromFavouritesHandler}>
+              <FontAwesomeIcon icon={faCircleCheck} size="4x" />
+            </Link>
           )}
           {!favouritesIDs.includes(props.id) && (
             <Link href="/" onClick={addToFavouritesHandler}>

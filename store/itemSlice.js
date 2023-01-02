@@ -258,11 +258,25 @@ export const itemSlice = createSlice({
       state.currentComments = action.payload;
     },
     setFavouriteItems(state, action) {
-      state.favouriteItems = action.payload;
+      state.favouriteItems = action.payload.sort((a, b) => {
+        if (a.id < b.id) {
+          return -1;
+        }
+        if (a.id > b.id) {
+          return 1;
+        }
+      });
     },
     setFavouriteIDs(state, action) {
       const IDs = action.payload.map((el) => el.id);
-      state.favouriteItemsIDs = IDs;
+      state.favouriteItemsIDs = IDs.sort((a, b) => {
+        if (a < b) {
+          return -1;
+        }
+        if (a > b) {
+          return 1;
+        }
+      });
     },
   },
 });

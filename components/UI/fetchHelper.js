@@ -5,13 +5,17 @@ export const addToFavourites = async (
   userEmail,
   id,
   favouriteItemsIDs,
-  props,
-  favouriteItems
+  type
 ) => {
-  console.log(userEmail);
   const arr = [...favouriteItemsIDs];
-  arr.push(id);
-  // console.log(arr);
+  if (type === "add") {
+    arr.push(id);
+  }
+
+  if (type === "remove") {
+    arr.splice(arr.indexOf(id), 1);
+    console.log(arr);
+  }
 
   const req = await fetch(`/api/users/${userEmail}`, {
     method: "PATCH",
@@ -23,7 +27,6 @@ export const addToFavourites = async (
     }),
   });
   const res = await req.json();
-  console.log(res);
 };
 
 const getUserFavouritesIDs = async (userName) => {
@@ -35,6 +38,7 @@ const getUserFavouritesIDs = async (userName) => {
 
 const getUserFavouritesItems = async (IDs) => {
   const req = await fetch(`/api/items/${IDs}`);
+
   const res = await req.json();
   if (!req.ok) {
     throw new Error("Не удалось подключиться");
@@ -44,8 +48,21 @@ const getUserFavouritesItems = async (IDs) => {
 
 export const getFavourites = async (email) => {
   try {
-    const favIDs = await getUserFavouritesIDs("pav.345@mail.ru");
-    const favItems = await getUserFavouritesItems(favIDs);
+    const favIDs = await getUserFavouritesIDs(email);
+    if (favIDs.length === 0) {
+      return [];
+    }
+
+    const sortedId = favIDs.sort((a, b) => {
+      if (a < b) {
+        return -1;
+      }
+      if (a > b) {
+        return 1;
+      }
+    });
+
+    const favItems = await getUserFavouritesItems(sortedId);
 
     return favItems;
   } catch (error) {
