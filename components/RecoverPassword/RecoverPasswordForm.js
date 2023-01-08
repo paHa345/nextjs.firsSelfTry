@@ -31,6 +31,7 @@ function RecoverPasswordForm(props) {
 
       return;
     }
+    alert("Пароль успешно изменён");
     console.log(data);
   };
   return (

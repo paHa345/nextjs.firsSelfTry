@@ -64,7 +64,7 @@ async function handler(req, res) {
 
     const mailData = {
       from: "pav.345@mail.ru",
-      to: "pahapav345@gmail.com",
+      to: req.body.email,
       subject: `Message From paHa store Admin`,
       text: req.body.message + " | Sent from: " + req.body.email,
       html: `<div>Для восстановления пароля перейдите по ссылке</div>
