@@ -14,15 +14,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { addToFavourites } from "../UI/fetchHelper";
 import { useSession } from "next-auth/react";
+import AddToFavourites from "../UI/AddToFavourites";
 
 function Card(props) {
   const [quantity, setQuantity] = useState(1);
   const [inCart, setInCart] = useState(props.elementInCart);
+  const [notificationText, setNotificationText] = useState("");
   const dispatch = useDispatch();
   const favouritesIDs = useSelector((state) => state.item.favouriteItemsIDs);
   const favouriteItems = useSelector((state) => state.item.favouriteItems);
   const showAddToFavNotification = useSelector(
     (state) => state.appState.addToFavouriteNotification
+  );
+
+  const notificationId = useSelector(
+    (state) => state.appState.itemNotification
   );
 
   const { data: session, status } = useSession();
@@ -32,7 +38,6 @@ function Card(props) {
   };
 
   useEffect(() => {
-    console.log("Notification");
     const timer = setTimeout(() => {
       dispatch(appStateActions.setAddToFavouriteNotification(false));
     }, 2000);
@@ -77,7 +82,13 @@ function Card(props) {
 
     try {
       await addToFavourites(session.user.email, props.id, favouritesIDs, "add");
-      dispatch(appStateActions.setAddToFavouriteNotification(true));
+      setNotificationText("Товар добавлен в избранное");
+      dispatch(
+        appStateActions.setAddToFavouriteNotification({
+          notification: true,
+          id: props.id,
+        })
+      );
     } catch (error) {}
 
     const arr = [...favouriteItems];
@@ -94,12 +105,21 @@ function Card(props) {
       return;
     }
 
-    await addToFavourites(
-      session.user.email,
-      props.id,
-      favouritesIDs,
-      "remove"
-    );
+    try {
+      await addToFavourites(
+        session.user.email,
+        props.id,
+        favouritesIDs,
+        "remove"
+      );
+      setNotificationText("Товар удалён из избранного");
+      dispatch(
+        appStateActions.setAddToFavouriteNotification({
+          notification: true,
+          id: props.id,
+        })
+      );
+    } catch (error) {}
 
     const arr = [...favouriteItems];
 
@@ -183,6 +203,13 @@ function Card(props) {
               </Link>
             </div>
           )}
+        </div>
+        <div className={styles.notification}>
+          <div className={styles.notificationContainer}>
+            {showAddToFavNotification && notificationId === props.id && (
+              <AddToFavourites text={notificationText}></AddToFavourites>
+            )}
+          </div>
         </div>
       </div>
     </Fragment>

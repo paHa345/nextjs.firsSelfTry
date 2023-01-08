@@ -5,6 +5,7 @@ import RegistrationForm from "./RegistrationForm";
 import styles from "./LoginSection.module.css";
 import { useState } from "react";
 import Modal from "../UI/Modal";
+import Link from "next/link";
 
 function LoginSection(props) {
   const [showregistration, setShowRegistration] = useState(false);
@@ -34,6 +35,9 @@ function LoginSection(props) {
         {showregistration && (
           <RegistrationForm onShowLogin={showLoginHandler}></RegistrationForm>
         )}
+        <div className={styles.forgetPasswordLink}>
+          <Link href="/forget-password">Забыл пароль</Link>
+        </div>
       </div>
     </section>
   );

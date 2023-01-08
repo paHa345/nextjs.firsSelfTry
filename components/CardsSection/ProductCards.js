@@ -69,9 +69,9 @@ function ProductCards() {
           );
         })}
 
-        <div className={styles.notificationContainer}>
+        {/* <div className={styles.notificationContainer}>
           {showAddToFavNotification && <AddToFavourites></AddToFavourites>}
-        </div>
+        </div> */}
       </div>
     </Fragment>
   );

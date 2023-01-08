@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { appStateActions } from "../../store/appStateSlice";
 import AddToFavourites from "../UI/AddToFavourites";
 import LoadSpinner from "../UI/LoadSpinner";
+import RemoveFromFavourites from "../UI/RemoveFromFavourites";
 import FavouritesCard from "./FavouritesCard";
 import styles from "./ProductCards.module.css";
 
@@ -44,9 +45,6 @@ function FavouritesProductCards() {
 
   return (
     <Fragment>
-      <div className={styles.notificationContainer}>
-        <AddToFavourites></AddToFavourites>
-      </div>
       <div className={styles.productCardContainer}>
         {[...favouriteItems]
           .sort((a, b) => {

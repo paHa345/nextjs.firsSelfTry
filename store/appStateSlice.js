@@ -7,6 +7,9 @@ export const initAppState = {
   stickySection: false,
   loadFavouriteItems: false,
   addToFavouriteNotification: false,
+  itemNotification: "",
+  fetchDataNotification: false,
+  fetchText: "",
 };
 
 export const appStateSlice = createSlice({
@@ -28,7 +31,13 @@ export const appStateSlice = createSlice({
       state.loadFavouriteItems = action.payload;
     },
     setAddToFavouriteNotification(state, action) {
-      state.addToFavouriteNotification = action.payload;
+      state.addToFavouriteNotification = action.payload.notification;
+      state.itemNotification = action.payload.id;
+    },
+
+    setFetchNotificationStatus(state, action) {
+      state.fetchDataNotification = action.payload.status;
+      state.fetchText = action.payload.text;
     },
   },
 });

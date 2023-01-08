@@ -1,0 +1,41 @@
+.notificationSuccess {
+  position: absolute;
+  /* bottom: -10rem; */
+  width: 80%;
+  top: -6rem;
+  z-index: 1000;
+  padding: 3rem;
+  background-color: rgba(128, 255, 0, 0.63);
+  margin: 3rem;
+  border-radius: 2rem;
+}
+
+.notificationinAction {
+  position: absolute;
+  /* bottom: -10rem; */
+  width: 80%;
+  top: -6rem;
+  z-index: 1000;
+  padding: 3rem;
+  background-color: rgba(0, 26, 255, 0.63);
+  margin: 3rem;
+  border-radius: 2rem;
+}
+.notificationError {
+  position: absolute;
+  /* bottom: -10rem; */
+  width: 80%;
+  top: -6rem;
+  z-index: 1000;
+  padding: 3rem;
+  background-color: rgba(255, 60, 0, 0.63);
+  margin: 3rem;
+  border-radius: 2rem;
+}
+.Error {
+  background-color: red;
+}
+.text {
+  text-align: center;
+  font-size: 2rem;
+}

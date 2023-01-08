@@ -13,6 +13,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { addToFavourites } from "../UI/fetchHelper";
+import AddToFavourites from "../UI/AddToFavourites";
 
 function FavouritesCard(props) {
   const [quantity, setQuantity] = useState(1);

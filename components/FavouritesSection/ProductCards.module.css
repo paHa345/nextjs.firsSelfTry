@@ -5,8 +5,9 @@
   gap: 3.2rem;
 }
 
-.notificationContainer {
+.notification {
   position: relative;
+  width: 100%;
 }
 
 @media (max-width: 64em) {
