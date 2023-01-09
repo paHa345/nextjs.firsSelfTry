@@ -241,7 +241,7 @@ export const initItemsState = {
   currentItems: [],
   currentComments: [],
   favouriteItemsIDs: [],
-  favouriteItems: [],
+  favouriteItems: [{ initial: true }],
 };
 
 export const itemSlice = createSlice({

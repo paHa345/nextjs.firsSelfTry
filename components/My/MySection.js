@@ -18,9 +18,13 @@ function MySection(props) {
           <div className={styles.loginButton}>
             <Link href="/favourites">Избранное</Link>
           </div>
-          <h1 className={styles.orderTitle}>Мои заказы</h1>
-          <Orders></Orders>
+          <br></br>
+
+          <div className={styles.loginButton}>
+            <Link href="/myOrders">Мои заказы</Link>
+          </div>
         </div>
+        <br></br>
 
         <div className={styles.loginButton}>
           <Link onClick={logoutHandler} href="/">

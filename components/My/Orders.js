@@ -1,14 +1,21 @@
 import { TaskAbortError } from "@reduxjs/toolkit";
+import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import LoadSpinner from "../UI/LoadSpinner";
 import styles from "./Orders.module.css";
 
 function Orders(props) {
   const orders = useSelector((state) => state.cart.orders);
-  console.log(orders);
 
   if (orders.status) {
-    return <LoadSpinner></LoadSpinner>;
+    return (
+      <Fragment>
+        <div>
+          <h1 className={styles.ordersTitle}>Мои заказы</h1>
+        </div>
+        <LoadSpinner></LoadSpinner>;
+      </Fragment>
+    );
   }
 
   if (orders.length === 0) {
@@ -16,6 +23,27 @@ function Orders(props) {
   }
 
   const ordersContainer = orders.map((el, index) => {
+    const orderDate = new Date(el.date);
+    console.log(orderDate.getFullYear());
+
+    const date = new Date(
+      orderDate.getFullYear(),
+      orderDate.getMonth(),
+      orderDate.getDate(),
+      orderDate.getHours(),
+      orderDate.getMinutes(),
+      orderDate.getSeconds()
+    );
+
+    const formatter = new Intl.DateTimeFormat("ru", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    console.log(formatter.format(date));
+
     return (
       <div key={index} className={styles.orderContainer}>
         {el.items.map((item, index) => {
@@ -28,7 +56,7 @@ function Orders(props) {
         })}
         <div className={styles.orderDate}>
           <p>Дата заказа</p>
-          <p>2022.10.12</p>
+          <p>{formatter.format(date)}</p>
         </div>
         <div className={styles.orderTotalCost}>
           <p>Цена заказа</p>
@@ -38,7 +66,18 @@ function Orders(props) {
     );
   });
 
-  return ordersContainer;
+  return (
+    <Fragment>
+      <div className={styles.container}>
+        <div className={styles.ordersSection}>
+          <div>
+            <h1 className={styles.ordersTitle}>Мои заказы</h1>
+          </div>
+          {ordersContainer}
+        </div>
+      </div>
+    </Fragment>
+  );
 
   // <div className={styles.orderContainer}>
   //   <div className={styles.orderElements}>

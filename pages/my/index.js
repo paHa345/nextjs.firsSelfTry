@@ -39,22 +39,22 @@ function My(props) {
     }
   }, [session, dispatch]);
 
-  useEffect(() => {
-    async function fetchOrders() {
-      dispatch(cartActions.setOrders({ status: "Загрузка" }));
-      // alert("Загрузка");
-      const req = await fetch(`/api/orders/${session.user.email}`);
-      const res = await req.json();
-      return res;
-    }
-    fetchOrders().then((data) => {
-      dispatch(cartActions.setOrders(data.result));
-    });
-  }, [session.user.email, dispatch]);
+  // useEffect(() => {
+  //   async function fetchOrders() {
+  //     dispatch(cartActions.setOrders({ status: "Загрузка" }));
+  //     // alert("Загрузка");
+  //     const req = await fetch(`/api/orders/${session.user.email}`);
+  //     const res = await req.json();
+  //     return res;
+  //   }
+  //   fetchOrders().then((data) => {
+  //     dispatch(cartActions.setOrders(data.result));
+  //   });
+  // }, [session.user.email, dispatch]);
 
-  if (!session) {
-    return <LoadSpinner></LoadSpinner>;
-  }
+  // if (!session) {
+  //   return <LoadSpinner></LoadSpinner>;
+  // }
 
   return (
     <Fragment>

@@ -94,7 +94,7 @@ export default function CheckoutForm() {
 
   return (
     <Fragment>
-      <h1>Цена 1200</h1>
+      {/* <h1>Цена 1200</h1> */}
 
       <form id="payment-form" onSubmit={handleSubmit}>
         <LinkAuthenticationElement
