@@ -19,7 +19,6 @@ function AddCommentForm(props) {
   const textNotification = useSelector((state) => state.appState.fetchText);
 
   const canAdd = useSelector((state) => state.appState.canAddComment);
-  console.log(canAdd);
 
   useEffect(() => {
     if (session.data !== null) {
@@ -88,7 +87,13 @@ function AddCommentForm(props) {
         }
       } catch (error) {
         console.log(error);
-        alert(error.message);
+        // alert(error.message);
+        dispatch(
+          appStateActions.setFetchNotificationStatus({
+            status: "Error",
+            text: error.message,
+          })
+        );
       }
 
       async function fetchComments() {

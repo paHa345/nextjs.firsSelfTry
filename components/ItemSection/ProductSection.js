@@ -48,7 +48,7 @@ function Item(props) {
       };
       getUser();
     }
-  }, [session]);
+  }, [session, dispatch]);
 
   useEffect(() => {
     if (props.item) {
