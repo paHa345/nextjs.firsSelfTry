@@ -1,7 +1,8 @@
-import { TaskAbortError } from "@reduxjs/toolkit";
+import { entriesIn } from "lodash";
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import LoadSpinner from "../UI/LoadSpinner";
+import Order from "./Order";
 import styles from "./Orders.module.css";
 
 function Orders(props) {
@@ -10,9 +11,6 @@ function Orders(props) {
   if (orders.status) {
     return (
       <Fragment>
-        <div>
-          <h1 className={styles.ordersTitle}>Мои заказы</h1>
-        </div>
         <LoadSpinner></LoadSpinner>;
       </Fragment>
     );
@@ -68,37 +66,12 @@ function Orders(props) {
 
   return (
     <Fragment>
-      <div className={styles.container}>
-        <div className={styles.ordersSection}>
-          <div>
-            <h1 className={styles.ordersTitle}>Мои заказы</h1>
-          </div>
-          {ordersContainer}
-        </div>
-      </div>
+      {/* {ordersContainer} */}
+      {orders.map((el, index) => {
+        return <Order order={el} key={el._id}></Order>;
+      })}
     </Fragment>
   );
-
-  // <div className={styles.orderContainer}>
-  //   <div className={styles.orderElements}>
-  //     <div className={styles.orderElement}>
-  //       <p className={styles.orderElementName}>Протеин</p>
-  //       <p className={styles.orderElementAmount}>X 2</p>
-  //     </div>
-  //     <div className={styles.orderElement}>
-  //       <p className={styles.orderElementName}>Протеин</p>
-  //       <p className={styles.orderElementAmount}>X 2</p>
-  //     </div>
-  //   </div>
-  //   <div className={styles.orderDate}>
-  //     <p>Дата заказа</p>
-  //     <p>2022.10.12</p>
-  //   </div>
-  //   <div className={styles.orderTotalCost}>
-  //     <p>Цена заказа</p>
-  //     <p>15200</p>
-  //   </div>
-  // </div>
 }
 
 export default Orders;

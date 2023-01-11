@@ -35,9 +35,6 @@ function LoginSection(props) {
         {showregistration && (
           <RegistrationForm onShowLogin={showLoginHandler}></RegistrationForm>
         )}
-        <div className={styles.forgetPasswordLink}>
-          <Link href="/forget-password">Забыл пароль</Link>
-        </div>
       </div>
     </section>
   );

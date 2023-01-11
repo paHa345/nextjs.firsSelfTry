@@ -54,44 +54,45 @@ function RegistrationForm(props) {
   return (
     <div className={styles.registrationContainer}>
       <h2>Регистрация</h2>
+      <form className={styles.form} onSubmit={authHandler}>
+        <div className={styles.loginForm}>
+          <div className={styles.loginFormElement}>
+            <label htmlFor="login">Логин</label>
+            <input
+              id="login"
+              value={enteredLogin}
+              onChange={changeLoginHandler}
+              required
+              placeholder="Введите логин"
+            />
+          </div>
+          <div className={styles.loginFormElement}>
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              value={enteredEmail}
+              onChange={changeEmailHandler}
+              required
+              placeholder="Введите email"
+            />
+          </div>
+          <div className={styles.loginFormElement}>
+            <label htmlFor="password">Пароль</label>
 
-      <div className={styles.loginForm}>
-        <div className={styles.loginFormElement}>
-          <label htmlFor="login">Логин</label>
-          <input
-            id="login"
-            value={enteredLogin}
-            onChange={changeLoginHandler}
-            required
-            placeholder="Введите логин"
-          />
+            <input
+              id="password"
+              value={enteredPassword}
+              onChange={changePasswordHandler}
+              required
+              placeholder="Введите пароль"
+            />
+          </div>
         </div>
-        <div className={styles.loginFormElement}>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            value={enteredEmail}
-            onChange={changeEmailHandler}
-            required
-            placeholder="Введите email"
-          />
-        </div>
-        <div className={styles.loginFormElement}>
-          <label htmlFor="password">Пароль</label>
-
-          <input
-            id="password"
-            value={enteredPassword}
-            onChange={changePasswordHandler}
-            required
-            placeholder="Введите пароль"
-          />
-        </div>
-      </div>
-      <RegistrationButton
-        onAuth={authHandler}
-        onShowLogin={props.onShowLogin}
-      ></RegistrationButton>
+        <RegistrationButton
+          onAuth={authHandler}
+          onShowLogin={props.onShowLogin}
+        ></RegistrationButton>
+      </form>
     </div>
   );
 }

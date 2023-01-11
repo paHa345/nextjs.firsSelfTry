@@ -6,15 +6,16 @@ function LoginButton(props) {
   return (
     <Fragment>
       <div className={styles.loginButton}>
-        <Link onClick={props.onLogin} href="/">
-          Войти на сайт
-        </Link>
+        <button>Войти на сайт</button>
       </div>
 
       <div className={styles.registrationLink}>
         <Link href="/" onClick={props.onShowReg}>
           Регистрация
         </Link>
+      </div>
+      <div className={styles.forgetPasswordLink}>
+        <Link href="/forget-password">Забыл пароль</Link>
       </div>
     </Fragment>
   );

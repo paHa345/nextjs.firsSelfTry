@@ -242,6 +242,7 @@ export const initItemsState = {
   currentComments: [],
   favouriteItemsIDs: [],
   favouriteItems: [{ initial: true }],
+  orderedItems: [{ initial: true }],
 };
 
 export const itemSlice = createSlice({
@@ -277,6 +278,9 @@ export const itemSlice = createSlice({
           return 1;
         }
       });
+    },
+    setOrderedItems(state, action) {
+      state.orderedItems = action.payload;
     },
   },
 });

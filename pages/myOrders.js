@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FavouritesProductsSection from "../components/FavouritesSection/FavouritesProductsSection";
 import { cartActions } from "../store/cartSlice";
 import { useSession } from "next-auth/react";
-import Orders from "../components/My/Orders";
+import OrdersSection from "../components/My/OrdersSection";
 import LoadSpinner from "../components/UI/LoadSpinner";
 
 function Favourites(props) {
@@ -54,7 +54,7 @@ function Favourites(props) {
 
   return (
     <Fragment>
-      <Orders></Orders>
+      <OrdersSection></OrdersSection>
     </Fragment>
   );
 }

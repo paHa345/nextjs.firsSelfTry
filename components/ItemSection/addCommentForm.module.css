@@ -49,6 +49,13 @@
   outline-offset: 0;
 }
 
+.notificationContainer {
+  position: relative;
+  /* width: 20rem;
+  height: 20rem;
+  background-color: #f76707; */
+}
+
 .loginButton {
   display: flex;
   width: 35rem;

@@ -2,7 +2,27 @@
   display: flex;
   width: 35rem;
   margin: 0 auto;
+  text-align: center;
+  font-size: 3.2rem;
+  border-radius: 4px;
+  padding: 0.5rem 2.5rem;
 }
+
+.loginButton button {
+  border-radius: 11px;
+  padding: 1.6rem 2.4rem;
+  cursor: pointer;
+  font: inherit;
+  color: #555;
+  background-color: #ffa94d;
+  border: 1px solid #fad4ac;
+}
+
+.loginButton button:hover {
+  background-color: #fd7e14;
+  color: #f8f9fa;
+}
+
 .loginButton a:link,
 .loginButton a:visited {
   text-align: center;
@@ -36,5 +56,23 @@
 
 .registrationLink a:hover,
 .registrationLink a:active {
+  color: #9e7b06;
+}
+
+.forgetPasswordLink {
+  padding-top: 3.2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.forgetPasswordLink a:link,
+.forgetPasswordLink a:visited {
+  font-size: 2.4rem;
+  text-decoration: none;
+  color: #34352e;
+}
+
+.forgetPasswordLink a:hover,
+.forgetPasswordLink a:active {
   color: #9e7b06;
 }

@@ -1,20 +1,21 @@
 import { useState } from "react";
 import LoginButton from "./LoginButton";
 import styles from "./LoginForm.module.css";
-import { getSession, signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 
 function LoginForm(props) {
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredEmail, setEnteredEmail] = useState("");
 
-  const { data: session } = useSession();
-  console.log(session);
-
   const router = useRouter();
 
   const changePasswordHandler = (e) => {
     setEnteredPassword(e.target.value);
+  };
+
+  const submitLoginFormHandler = (e) => {
+    console.log("rere");
   };
 
   const changeEmailHandler = (e) => {
@@ -45,33 +46,34 @@ function LoginForm(props) {
   return (
     <div className={styles.loginContainer}>
       <h2>Авторизация</h2>
-
-      <div className={styles.loginForm}>
-        <div className={styles.loginFormElement}>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            value={enteredEmail}
-            onChange={changeEmailHandler}
-            required
-            placeholder="Введите Email"
-          />
+      <form className={styles.form} onSubmit={loginHandler}>
+        <div className={styles.loginForm}>
+          <div className={styles.loginFormElement}>
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              value={enteredEmail}
+              onChange={changeEmailHandler}
+              required
+              placeholder="Введите Email"
+            />
+          </div>
+          <div className={styles.loginFormElement}>
+            <label htmlFor="password">Пароль</label>
+            <input
+              id="password"
+              value={enteredPassword}
+              onChange={changePasswordHandler}
+              required
+              placeholder="Введите пароль"
+            />
+          </div>
         </div>
-        <div className={styles.loginFormElement}>
-          <label htmlFor="password">Пароль</label>
-          <input
-            id="password"
-            value={enteredPassword}
-            onChange={changePasswordHandler}
-            required
-            placeholder="Введите пароль"
-          />
-        </div>
-      </div>
-      <LoginButton
-        onLogin={loginHandler}
-        onShowReg={props.onShowReg}
-      ></LoginButton>
+        <LoginButton
+          onLogin={loginHandler}
+          onShowReg={props.onShowReg}
+        ></LoginButton>
+      </form>
     </div>
   );
 }

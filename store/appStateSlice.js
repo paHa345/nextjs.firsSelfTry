@@ -10,6 +10,7 @@ export const initAppState = {
   itemNotification: "",
   fetchDataNotification: false,
   fetchText: "",
+  canAddComment: false,
 };
 
 export const appStateSlice = createSlice({
@@ -38,6 +39,9 @@ export const appStateSlice = createSlice({
     setFetchNotificationStatus(state, action) {
       state.fetchDataNotification = action.payload.status;
       state.fetchText = action.payload.text;
+    },
+    setCanAddComment(state, action) {
+      state.canAddComment = action.payload;
     },
   },
 });

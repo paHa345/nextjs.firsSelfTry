@@ -2,7 +2,9 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { appStateActions } from "../../store/appStateSlice";
 import { itemsActions } from "../../store/itemSlice";
+import FetchNotification from "../UI/FetchNotification";
 
 import styles from "./addCommentForm.module.css";
 
@@ -11,6 +13,13 @@ function AddCommentForm(props) {
   const [email, setEmail] = useState("anonimous");
   const dispatch = useDispatch();
   const session = useSession();
+  const dataNotification = useSelector(
+    (state) => state.appState.fetchDataNotification
+  );
+  const textNotification = useSelector((state) => state.appState.fetchText);
+
+  const canAdd = useSelector((state) => state.appState.canAddComment);
+  console.log(canAdd);
 
   useEffect(() => {
     if (session.data !== null) {
@@ -24,6 +33,17 @@ function AddCommentForm(props) {
     }
   }, [session.data]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(
+        appStateActions.setFetchNotificationStatus({
+          status: false,
+          text: "",
+        })
+      );
+    }, 4000);
+  }, [dataNotification, dispatch]);
+
   const currentItem = useSelector((state) => state.item.item);
 
   const [enteredText, setEnteredText] = useState("");
@@ -34,6 +54,16 @@ function AddCommentForm(props) {
 
   const addCommentHandler = async (e) => {
     e.preventDefault();
+    if (!canAdd) {
+      // alert("Невозможно добавить комментарий. Товара нет в списке купленных");
+      dispatch(
+        appStateActions.setFetchNotificationStatus({
+          status: "Error",
+          text: "Невозможно добавить комментарий. Товара нет в списке купленных",
+        })
+      );
+      return;
+    }
 
     const comment = {
       text: enteredText,
@@ -81,7 +111,11 @@ function AddCommentForm(props) {
   return (
     <Fragment>
       {!session.data && <h1>Зарегистрируйтесь для добавления комментариев</h1>}
-
+      <div className={styles.notificationContainer}>
+        {dataNotification && (
+          <FetchNotification text={textNotification}></FetchNotification>
+        )}
+      </div>
       {session.data && (
         <div className={styles.loginContainer}>
           <div className={styles.loginForm}>

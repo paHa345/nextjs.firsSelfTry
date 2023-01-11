@@ -1,0 +1,31 @@
+.orderContainer {
+  padding: 2rem;
+  border: 2px solid #ffa94d;
+  margin: 2rem;
+  width: 50%;
+}
+
+.orderElement {
+  display: flex;
+  gap: 2.4rem;
+  font-size: 2.4rem;
+  margin-bottom: 2.4rem;
+  border-bottom: 2px solid #ffa94d;
+}
+
+.orderDate {
+  display: flex;
+  gap: 2.4rem;
+  font-size: 2.4rem;
+}
+.orderTotalCost {
+  display: flex;
+  gap: 2.4rem;
+  font-size: 2.4rem;
+}
+
+@media (max-width: 40em) {
+  .orderContainer {
+    width: 100%;
+  }
+}

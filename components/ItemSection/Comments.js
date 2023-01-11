@@ -67,6 +67,24 @@ function Comments(props) {
   }
 
   const comments = currentComments.map((el, index) => {
+    const orderDate = new Date(el.date);
+    console.log(orderDate.getFullYear());
+
+    const date = new Date(
+      orderDate.getFullYear(),
+      orderDate.getMonth(),
+      orderDate.getDate(),
+      orderDate.getHours(),
+      orderDate.getMinutes(),
+      orderDate.getSeconds()
+    );
+
+    const formatter = new Intl.DateTimeFormat("ru", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
     return (
       <div key={index} className={styles.comment}>
         <div className={styles.comment}>
@@ -75,7 +93,7 @@ function Comments(props) {
               <FontAwesomeIcon icon={faUser} size="2x" />
 
               <strong className="me-auto">{el.name}</strong>
-              <small>{el.date}</small>
+              <small>{formatter.format(date)}</small>
               {session?.user.email === el.email && (
                 <Link href="/" onClick={deleteCommentHandler} data-id={el._id}>
                   <FontAwesomeIcon icon={faCircleXmark} size="1x" />

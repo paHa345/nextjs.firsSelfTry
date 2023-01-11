@@ -1,23 +1,6 @@
 .loginSection {
 }
 
-.forgetPasswordLink {
-  padding-top: 3.2rem;
-  display: flex;
-  justify-content: center;
-}
-
-.forgetPasswordLink a:link,
-.forgetPasswordLink a:visited {
-  font-size: 2.4rem;
-  text-decoration: none;
-  color: #34352e;
-}
-
-.forgetPasswordLink a:hover,
-.forgetPasswordLink a:active {
-  color: #9e7b06;
-}
 .container {
   max-width: 130rem;
   padding: 9.6rem 0;
