@@ -4,6 +4,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { appStateActions } from "../../store/appStateSlice";
 import { itemsActions } from "../../store/itemSlice";
+import { addComment } from "../UI/fetchHelper";
 import FetchNotification from "../UI/FetchNotification";
 
 import styles from "./addCommentForm.module.css";
@@ -12,7 +13,7 @@ function AddCommentForm(props) {
   const [login, setLogin] = useState("anonimous");
   const [email, setEmail] = useState("anonimous");
   const dispatch = useDispatch();
-  const session = useSession();
+  const { data: session, status } = useSession();
   const dataNotification = useSelector(
     (state) => state.appState.fetchDataNotification
   );
@@ -21,16 +22,16 @@ function AddCommentForm(props) {
   const canAdd = useSelector((state) => state.appState.canAddComment);
 
   useEffect(() => {
-    if (session.data !== null) {
-      setEmail(session.data.user.email);
+    if (session !== null) {
+      setEmail(session.user.email);
     }
-  }, [session.data]);
+  }, [session]);
 
   useEffect(() => {
-    if (session.data) {
-      setLogin(session.data.user.name);
+    if (session) {
+      setLogin(session.user.name);
     }
-  }, [session.data]);
+  }, [session]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -52,6 +53,15 @@ function AddCommentForm(props) {
   };
 
   const addCommentHandler = async (e) => {
+    // console.log(props);
+    // console.log(currentItem.id);
+    const comment = {
+      text: enteredText,
+      date: new Date().toISOString(),
+      name: login,
+      email: email,
+    };
+
     e.preventDefault();
     if (!canAdd) {
       // alert("Невозможно добавить комментарий. Товара нет в списке купленных");
@@ -63,65 +73,81 @@ function AddCommentForm(props) {
       );
       return;
     }
-
-    const comment = {
-      text: enteredText,
-      date: new Date().toISOString(),
-      name: login,
-      email: email,
-    };
-    const fetchdata = async (e) => {
-      try {
-        const req = await fetch(`/api/comments/${currentItem.id}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-          },
-          body: JSON.stringify(comment),
-        });
-
-        const res = await req.json();
-        if (!req.ok) {
-          console.log(res.message);
-          throw new Error(res.message);
+    try {
+      await addComment(currentItem.id, session.user.email, comment).then(
+        (data) => {
+          console.log(data);
+          dispatch(itemsActions.setCurrentComments(data.result));
         }
-      } catch (error) {
-        console.log(error);
-        // alert(error.message);
-        dispatch(
-          appStateActions.setFetchNotificationStatus({
-            status: "Error",
-            text: error.message,
-          })
-        );
-      }
+      );
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        appStateActions.setFetchNotificationStatus({
+          status: "Error",
+          text: error.message,
+        })
+      );
+    }
 
-      async function fetchComments() {
-        const req = await fetch(`/api/comments/${currentItem.id}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-          },
-        });
-        const res = await req.json();
-        dispatch(itemsActions.setCurrentComments(res.result));
-      }
-      await fetchComments();
-    };
-    await fetchdata().catch((e) => {
-      console.log(e.message);
-    });
+    // const fetchdata = async (e) => {
+    //   try {
+    //     const req = await fetch(`/api/comments/${currentItem.id}`, {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json;charset=utf-8",
+    //       },
+    //       body: JSON.stringify(comment),
+    //     });
+
+    //     const res = await req.json();
+    //     if (!req.ok) {
+    //       console.log(res.message);
+    //       throw new Error(res.message);
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //     // alert(error.message);
+    //     dispatch(
+    //       appStateActions.setFetchNotificationStatus({
+    //         status: "Error",
+    //         text: error.message,
+    //       })
+    //     );
+    //   }
+
+    //   async function fetchComments() {
+    //     const req = await fetch(`/api/comments/${currentItem.id}`, {
+    //       method: "GET",
+    //       headers: {
+    //         "Content-Type": "application/json;charset=utf-8",
+    //       },
+    //     });
+    //     console.log(req);
+
+    //     const res = await req.json();
+    //     if (!req.ok) {
+    //       dispatch(itemsActions.setCurrentComments([]));
+    //       return;
+    //     }
+    //     dispatch(itemsActions.setCurrentComments(res.result));
+    //   }
+    //   await fetchComments();
+    // };
+    // await fetchdata().catch((e) => {
+    //   console.log(e.message);
+    // });
     setEnteredText("");
   };
   return (
     <Fragment>
-      {!session.data && <h1>Зарегистрируйтесь для добавления комментариев</h1>}
+      {!session && <h1>Зарегистрируйтесь для добавления комментариев</h1>}
       <div className={styles.notificationContainer}>
         {dataNotification && (
           <FetchNotification text={textNotification}></FetchNotification>
         )}
       </div>
-      {session.data && (
+      {session && (
         <div className={styles.loginContainer}>
           <div className={styles.loginForm}>
             <div className={styles.loginFormElement}>

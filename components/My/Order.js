@@ -1,10 +1,7 @@
 import styles from "./Order.module.css";
 
 function Order(props) {
-  console.log(props.order);
-
   const orderDate = new Date(props.order.date);
-  console.log(orderDate.getFullYear());
 
   const date = new Date(
     orderDate.getFullYear(),

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Fragment, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { appStateActions } from "../../store/appStateSlice";
 import { itemsActions } from "../../store/itemSlice";
 
 import Comments from "./Comments";
@@ -12,6 +13,11 @@ function DescriptionComments(props) {
   const [showDescriptionComments, setShowDescriptionComments] =
     useState("description");
 
+  const dataNotification = useSelector(
+    (state) => state.appState.fetchDataNotification
+  );
+  const textNotification = useSelector((state) => state.appState.fetchText);
+
   const showHandler = async (e) => {
     e.preventDefault();
 
@@ -22,7 +28,17 @@ function DescriptionComments(props) {
 
         const req = await fetch(`/api/comments/${props.currentItem.id}`);
         const comments = await req.json();
-        if (comments.result.length === 0) {
+        if (!req.ok) {
+          dispatch(itemsActions.setCurrentComments(null));
+          dispatch(
+            appStateActions.setFetchNotificationStatus({
+              status: "Error",
+              text: comments.message,
+            })
+          );
+          return;
+        }
+        if (comments?.result?.length === 0) {
           dispatch(itemsActions.setCurrentComments(null));
         } else {
           dispatch(itemsActions.setCurrentComments(comments.result));
@@ -31,6 +47,7 @@ function DescriptionComments(props) {
       const comments = await fetchComments();
     }
   };
+
   return (
     <Fragment>
       <div className={styles.descriptionComments}>

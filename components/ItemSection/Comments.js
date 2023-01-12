@@ -42,6 +42,9 @@ function Comments(props) {
           },
         });
         const res = await req.json();
+        if (!req.ok) {
+          dispatch(itemsActions.setCurrentComments([]));
+        }
         dispatch(itemsActions.setCurrentComments(res.result));
       }
       await fetchComments();
@@ -54,7 +57,7 @@ function Comments(props) {
     }
   };
 
-  if (currentComments === null || currentComments.length === 0) {
+  if (currentComments === null || currentComments?.length === 0) {
     return (
       <div className={styles.itemCommentsElement}>
         <h3>Нет комментариев</h3>
@@ -62,13 +65,12 @@ function Comments(props) {
       </div>
     );
   }
-  if (currentComments.length === 0) {
+  if (currentComments?.length === 0) {
     return <h1>Комментарии загружаются</h1>;
   }
 
   const comments = currentComments.map((el, index) => {
     const orderDate = new Date(el.date);
-    console.log(orderDate.getFullYear());
 
     const date = new Date(
       orderDate.getFullYear(),

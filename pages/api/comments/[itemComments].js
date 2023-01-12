@@ -34,13 +34,10 @@ async function handler(req, res) {
     }
   }
   if (req.method === "POST") {
-    console.log(session);
-
     if (!session) {
       res.status(401).json({ message: "Не авторизованные запрос" });
       return;
     }
-    console.log(req.body);
     if (req.body.text.length < 1) {
       res.status(422).json({
         message:
@@ -48,7 +45,6 @@ async function handler(req, res) {
       });
       return;
     }
-    console.log(itemId);
     try {
       const comment = await db
         .collection("sportNutritionComments")
@@ -67,7 +63,6 @@ async function handler(req, res) {
       return;
     }
     const o_id = new ObjectId(itemId);
-    console.log(o_id);
 
     const deletedDocument = await db
       .collection("sportNutritionComments")

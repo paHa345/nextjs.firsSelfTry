@@ -22,7 +22,6 @@ function Orders(props) {
 
   const ordersContainer = orders.map((el, index) => {
     const orderDate = new Date(el.date);
-    console.log(orderDate.getFullYear());
 
     const date = new Date(
       orderDate.getFullYear(),
