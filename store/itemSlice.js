@@ -282,6 +282,18 @@ export const itemSlice = createSlice({
     setOrderedItems(state, action) {
       state.orderedItems = action.payload;
     },
+    sortCurrentItems(state, action) {
+      if (action.payload === "increment") {
+        state.currentItems = state.currentItems.sort((a, b) => {
+          return a.price - b.price;
+        });
+      } else
+        [
+          (state.currentItems = state.currentItems.sort((a, b) => {
+            return b.price - a.price;
+          })),
+        ];
+    },
   },
 });
 
