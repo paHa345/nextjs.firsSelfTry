@@ -1,9 +1,10 @@
 import { MongoClient } from "mongodb";
 import Link from "next/link";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductsSection from "../components/CardsSection/ProductsSection";
 import HeaderSection from "../components/HeaderComponents/HeaderComponent";
+import SliderContainer from "../components/Slider/SliderContainer";
 import { appStateActions } from "../store/appStateSlice";
 import { cartActions } from "../store/cartSlice";
 import { itemsActions } from "../store/itemSlice";
@@ -11,7 +12,7 @@ import { itemsActions } from "../store/itemSlice";
 function HomePage(props) {
   const dispatch = useDispatch();
   const name = useSelector((state) => state.appState.currentType);
-  console.log(process.env.SECRET);
+  // console.log(process.env.SECRET);
 
   useEffect(() => {
     const storage = localStorage.getItem("cartItems");
@@ -27,20 +28,7 @@ function HomePage(props) {
 
   return (
     <Fragment>
-      {/* <div>
-        <nav>
-          <Link href="/cart">Cart</Link>
-          <br></br>
-          <Link href="/login">Login</Link>
-          <br></br>
-          <Link href="/catalog">Catalog</Link>
-          <br></br>
-          <Link href="/catalog/protein">All Protein</Link>
-          <br></br>
-          <Link href="/products/p1">Protein 1</Link>
-        </nav>
-        <h1>Home page!!!!!</h1>;
-      </div> */}
+      <SliderContainer images={props.sliderImages}></SliderContainer>
 
       <ProductsSection typeName={name}></ProductsSection>
     </Fragment>
@@ -48,6 +36,19 @@ function HomePage(props) {
 }
 
 export async function getStaticProps(context) {
+  const path = require("path");
+  const fs = require("fs");
+  const { resolve } = require("path");
+  const dir = "./../public/img/sliderImage";
+
+  const absolutePath = resolve("./public/img/sliderImage");
+  let imagesName;
+  try {
+    imagesName = fs.readdirSync(absolutePath, "utf-8");
+  } catch (error) {
+    console.log(error);
+  }
+
   let client;
   let db;
   try {
@@ -72,6 +73,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       items: JSON.stringify(result),
+      sliderImages: imagesName,
     },
     revalidate: 300,
   };
