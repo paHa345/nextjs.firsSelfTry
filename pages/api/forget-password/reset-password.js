@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import jwt, { decode } from "jsonwebtoken";
 import { MongoClient } from "mongodb";
+import { reject } from "lodash";
 
 async function handler(req, res) {
   console.log(req.body);
@@ -73,9 +74,16 @@ async function handler(req, res) {
         ${req.body.email}</p>`,
     };
 
-    transporter.sendMail(mailData, function (err, info) {
-      if (err) console.log(err);
-      else console.log(info);
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(mailData, function (err, info) {
+        if (err) {
+          console.log(err);
+          reject(err);
+        } else {
+          console.log(info);
+          resolve(info);
+        }
+      });
     });
 
     res.status(200).json({ message: "Success" });
