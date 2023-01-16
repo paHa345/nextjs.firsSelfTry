@@ -53,71 +53,53 @@ async function handler(req, res) {
       return;
     }
 
-    async function main() {
-      let transporter = nodemailer.createTransport({
-        port: 465,
-        host: "smtp.mail.ru",
-        auth: {
-          user: "pav.345@mail.ru",
-          pass: "LJ1YPtKcVshZxGuE9cgB",
-        },
-        secure: true,
+    let transporter = nodemailer.createTransport({
+      port: 465,
+      host: "smtp.mail.ru",
+      auth: {
+        user: "pav.345@mail.ru",
+        pass: "LJ1YPtKcVshZxGuE9cgB",
+      },
+      secure: true,
+    });
+
+    await new Promise((resolve, reject) => {
+      // verify connection configuration
+      transporter.verify(function (error, success) {
+        if (error) {
+          console.log(error);
+          reject(error);
+        } else {
+          console.log("Server is ready to take our messages");
+          resolve(success);
+        }
       });
+    });
 
-      await new Promise((resolve, reject) => {
-        // verify connection configuration
-        transporter.verify(function (error, success) {
-          if (error) {
-            console.log(error);
-            reject(error);
-          } else {
-            console.log("Server is ready to take our messages");
-            resolve(success);
-          }
-        });
+    const mailData = {
+      from: {
+        name: `paHa lastName`,
+        address: "pav.345@mail.ru",
+      },
+      replyTo: "pav.345@mail.ru",
+      to: `${req.body.email}`,
+      subject: `form message`,
+      text: `message`,
+      html: `message`,
+    };
+
+    await new Promise((resolve, reject) => {
+      // send mail
+      transporter.sendMail(mailData, (err, info) => {
+        if (err) {
+          console.error(err);
+          reject(err);
+        } else {
+          console.log(info);
+          resolve(info);
+        }
       });
-
-      await new Promise((resolve, reject) => {
-        // send mail
-        transporter.sendMail(
-          {
-            from: "pav.345@mail.ru",
-            to: req.body.email,
-            subject: `Message From paHa store Admin`,
-            text: " | Sent from: " + req.body.email,
-            html: `<div>Для восстановления пароля перейдите по ссылке</div>
-              <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
-              <p>Sent from:
-                ${req.body.email}</p>`,
-          },
-          (err, info) => {
-            if (err) {
-              console.error(err);
-              reject(err);
-            } else {
-              console.log(info);
-              resolve(info);
-            }
-          }
-        );
-      });
-
-      //   let info = await transporter.sendMail({
-      //     from: "pav.345@mail.ru",
-      //     to: req.body.email,
-      //     subject: `Message From paHa store Admin`,
-      //     text: " | Sent from: " + req.body.email,
-      //     html: `<div>Для восстановления пароля перейдите по ссылке</div>
-      //     <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
-      //     <p>Sent from:
-      //       ${req.body.email}</p>`,
-      //   });
-      console.log("Message sent: %s", info.messageId);
-
-      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    }
-
-    main().catch(console.error);
+    });
 
     res.status(200).json({ message: "Success" });
   }
