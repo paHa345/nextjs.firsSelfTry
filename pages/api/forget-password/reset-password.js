@@ -74,17 +74,32 @@ async function handler(req, res) {
         ${req.body.email}</p>`,
     };
 
-    await new Promise((resolve, reject) => {
-      transporter.sendMail(mailData, function (err, info) {
-        if (err) {
-          console.log(err);
-          reject(err);
-        } else {
-          console.log(info);
-          resolve(info);
-        }
+    const sendMessage = async (message) => {
+      await transporter.sendMail({
+        mailData,
+        function(err, info) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(info);
+          }
+        },
       });
-    });
+    };
+
+    await sendMessage();
+
+    // const sendMessage = async(() => {
+    //   await transporter.sendMail(mailData, function (err, info) {
+    //     if (err) {
+    //       console.log(err);
+
+    //     } else {
+    //       console.log(info);
+
+    //     }
+    //   });
+    // });
 
     res.status(200).json({ message: "Success" });
   }
