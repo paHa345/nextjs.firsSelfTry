@@ -61,19 +61,57 @@ async function handler(req, res) {
           user: "pav.345@mail.ru",
           pass: "LJ1YPtKcVshZxGuE9cgB",
         },
-        // secure: true,
+        secure: true,
       });
 
-      let info = await transporter.sendMail({
-        from: "pav.345@mail.ru",
-        to: req.body.email,
-        subject: `Message From paHa store Admin`,
-        text: " | Sent from: " + req.body.email,
-        html: `<div>Для восстановления пароля перейдите по ссылке</div>
-        <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
-        <p>Sent from:
-          ${req.body.email}</p>`,
+      await new Promise((resolve, reject) => {
+        // verify connection configuration
+        transporter.verify(function (error, success) {
+          if (error) {
+            console.log(error);
+            reject(error);
+          } else {
+            console.log("Server is ready to take our messages");
+            resolve(success);
+          }
+        });
       });
+
+      await new Promise((resolve, reject) => {
+        // send mail
+        transporter.sendMail(
+          {
+            from: "pav.345@mail.ru",
+            to: req.body.email,
+            subject: `Message From paHa store Admin`,
+            text: " | Sent from: " + req.body.email,
+            html: `<div>Для восстановления пароля перейдите по ссылке</div>
+              <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
+              <p>Sent from:
+                ${req.body.email}</p>`,
+          },
+          (err, info) => {
+            if (err) {
+              console.error(err);
+              reject(err);
+            } else {
+              console.log(info);
+              resolve(info);
+            }
+          }
+        );
+      });
+
+      //   let info = await transporter.sendMail({
+      //     from: "pav.345@mail.ru",
+      //     to: req.body.email,
+      //     subject: `Message From paHa store Admin`,
+      //     text: " | Sent from: " + req.body.email,
+      //     html: `<div>Для восстановления пароля перейдите по ссылке</div>
+      //     <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
+      //     <p>Sent from:
+      //       ${req.body.email}</p>`,
+      //   });
       console.log("Message sent: %s", info.messageId);
 
       console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
