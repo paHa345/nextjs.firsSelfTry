@@ -12,7 +12,7 @@ import { itemsActions } from "../store/itemSlice";
 function HomePage(props) {
   const dispatch = useDispatch();
   const name = useSelector((state) => state.appState.currentType);
-  // console.log(process.env.SECRET);
+  console.log(`URL: ${process.env.NEXTAUTH_URL}`);
 
   useEffect(() => {
     const storage = localStorage.getItem("cartItems");
