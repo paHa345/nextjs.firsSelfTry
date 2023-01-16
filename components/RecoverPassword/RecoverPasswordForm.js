@@ -38,7 +38,7 @@ function RecoverPasswordForm(props) {
     <div className={styles.loginContainer}>
       <h2>Восстановление пароля</h2>
 
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={resetPasshordHandler}>
         <div className={styles.loginForm}>
           <div className={styles.loginFormElement}>
             <label htmlFor="email">Введите новый пароль</label>

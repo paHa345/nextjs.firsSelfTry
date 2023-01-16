@@ -53,56 +53,89 @@ async function handler(req, res) {
       return;
     }
 
-    const transporter = nodemailer.createTransport({
-      port: 465,
-      host: "smtp.mail.ru",
-      auth: {
-        user: "pav.345@mail.ru",
-        pass: "LJ1YPtKcVshZxGuE9cgB",
-      },
-      secure: true,
-    });
+    async function main() {
+      let transporter = nodemailer.createTransport({
+        port: 465,
+        host: "smtp.mail.ru",
+        auth: {
+          user: "pav.345@mail.ru",
+          pass: "LJ1YPtKcVshZxGuE9cgB",
+        },
+        // secure: true,
+      });
 
-    // const mailData = {
-    //   from: "pav.345@mail.ru",
-    //   to: req.body.email,
-    //   subject: `Message From paHa store Admin`,
-    //   text: " | Sent from: " + req.body.email,
-    //   html: `<div>Для восстановления пароля перейдите по ссылке</div>
-    //   <p>https://nextjs-firs-self-try.vercel.app/recover-password/${token}</p>
-    //   <p>Sent from:
-    //     ${req.body.email}</p>`,
-    // };
+      let info = await transporter.sendMail({
+        from: "pav.345@mail.ru",
+        to: req.body.email,
+        subject: `Message From paHa store Admin`,
+        text: " | Sent from: " + req.body.email,
+        html: `<div>Для восстановления пароля перейдите по ссылке</div>
+        <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
+        <p>Sent from:
+          ${req.body.email}</p>`,
+      });
+      console.log("Message sent: %s", info.messageId);
+    }
 
-    transporter.sendMail({
-      from: "pav.345@mail.ru",
-      to: req.body.email,
-      subject: `Message From paHa store Admin`,
-      text: " | Sent from: " + req.body.email,
-      html: `<div>Для восстановления пароля перейдите по ссылке</div>
-      <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
-      <p>Sent from:
-        ${req.body.email}</p>`,
-      function(err, info) {
-        if (err) {
-          console.log(`Error: ${err}`);
-        } else {
-          console.log(info);
-        }
-      },
-    });
+    main().catch(console.error);
 
-    // const sendMessage = async(() => {
-    //   await transporter.sendMail(mailData, function (err, info) {
-    //     if (err) {
-    //       console.log(err);
-
-    //     } else {
-    //       console.log(info);
-
-    //     }
-    //   });
+    // const transporter = nodemailer.createTransport({
+    //   port: 465,
+    //   host: "smtp.mail.ru",
+    //   auth: {
+    //     user: "pav.345@mail.ru",
+    //     pass: "LJ1YPtKcVshZxGuE9cgB",
+    //   },
+    //   secure: true,
     // });
+
+    // // const mailData = {
+    // //   from: "pav.345@mail.ru",
+    // //   to: req.body.email,
+    // //   subject: `Message From paHa store Admin`,
+    // //   text: " | Sent from: " + req.body.email,
+    // //   html: `<div>Для восстановления пароля перейдите по ссылке</div>
+    // //   <p>https://nextjs-firs-self-try.vercel.app/recover-password/${token}</p>
+    // //   <p>Sent from:
+    // //     ${req.body.email}</p>`,
+    // // };
+
+    // try {
+    //   transporter.sendMail({
+    //     from: "pav.345@mail.ru",
+    //     to: req.body.email,
+    //     subject: `Message From paHa store Admin`,
+    //     text: " | Sent from: " + req.body.email,
+    //     html: `<div>Для восстановления пароля перейдите по ссылке</div>
+    //     <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
+    //     <p>Sent from:
+    //       ${req.body.email}</p>`,
+    //     function(err, info) {
+    //       if (err) {
+    //         console.log(`Error: ${err}`);
+    //         throw new Error("Не удалось отправить письмо");
+    //       } else {
+    //         console.log(info);
+    //       }
+    //     },
+    //   });
+    // } catch (error) {
+    //   res.status(403).json({ message: error.message });
+    //   client.close();
+    //   return;
+    // }
+
+    // // const sendMessage = async(() => {
+    // //   await transporter.sendMail(mailData, function (err, info) {
+    // //     if (err) {
+    // //       console.log(err);
+
+    // //     } else {
+    // //       console.log(info);
+
+    // //     }
+    // //   });
+    // // });
 
     res.status(200).json({ message: "Success" });
   }
