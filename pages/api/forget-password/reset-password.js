@@ -86,8 +86,13 @@ async function handler(req, res) {
         },
       });
     };
-
-    await sendMessage();
+    try {
+      await sendMessage();
+    } catch (error) {
+      res.status(500).json({ message: "Не удалось обновить пароль" });
+      client.close();
+      return;
+    }
 
     // const sendMessage = async(() => {
     //   await transporter.sendMail(mailData, function (err, info) {
