@@ -63,16 +63,16 @@ async function handler(req, res) {
       secure: true,
     });
 
-    const mailData = {
-      from: "pav.345@mail.ru",
-      to: req.body.email,
-      subject: `Message From paHa store Admin`,
-      text: " | Sent from: " + req.body.email,
-      html: `<div>Для восстановления пароля перейдите по ссылке</div>
-      <p>https://nextjs-firs-self-try.vercel.app/recover-password/${token}</p>
-      <p>Sent from:
-        ${req.body.email}</p>`,
-    };
+    // const mailData = {
+    //   from: "pav.345@mail.ru",
+    //   to: req.body.email,
+    //   subject: `Message From paHa store Admin`,
+    //   text: " | Sent from: " + req.body.email,
+    //   html: `<div>Для восстановления пароля перейдите по ссылке</div>
+    //   <p>https://nextjs-firs-self-try.vercel.app/recover-password/${token}</p>
+    //   <p>Sent from:
+    //     ${req.body.email}</p>`,
+    // };
 
     transporter.sendMail({
       from: "pav.345@mail.ru",
@@ -80,7 +80,7 @@ async function handler(req, res) {
       subject: `Message From paHa store Admin`,
       text: " | Sent from: " + req.body.email,
       html: `<div>Для восстановления пароля перейдите по ссылке</div>
-      <p>https://nextjs-firs-self-try.vercel.app/recover-password/${token}</p>
+      <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
       <p>Sent from:
         ${req.body.email}</p>`,
       function(err, info) {
