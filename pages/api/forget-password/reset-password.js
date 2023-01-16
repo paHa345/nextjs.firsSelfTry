@@ -77,15 +77,14 @@ async function handler(req, res) {
     });
 
     const mailData = {
-      from: {
-        name: `paHa lastName`,
-        address: "pav.345@mail.ru",
-      },
-      replyTo: "pav.345@mail.ru",
-      to: `${req.body.email}`,
-      subject: `form message`,
-      text: `message`,
-      html: `message`,
+      from: "pav.345@mail.ru",
+      to: req.body.email,
+      subject: `Message From paHa store Admin`,
+      text: " | Sent from: " + req.body.email,
+      html: `<div>Для восстановления пароля перейдите по ссылке</div>
+        <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
+        <p>Sent from:
+          ${req.body.email}</p>`,
     };
 
     await new Promise((resolve, reject) => {
