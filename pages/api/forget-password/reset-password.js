@@ -68,7 +68,7 @@ async function handler(req, res) {
       subject: `Message From paHa store Admin`,
       text: req.body.message + " | Sent from: " + req.body.email,
       html: `<div>Для восстановления пароля перейдите по ссылке</div>
-      <p>https://nextjs-firs-self-try.vercel.app/recover-password/${token}</p>
+      <p>http://localhost:3000/recover-password/${token}</p>
       <p>Sent from:
         ${req.body.email}</p>`,
     };

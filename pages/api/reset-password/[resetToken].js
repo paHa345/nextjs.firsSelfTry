@@ -27,8 +27,6 @@ async function handler(req, res) {
       email: tokenIsTrue.email,
     });
 
-    console.log(req.query.resetToken === user.password);
-
     if (
       req.query.resetToken !== user.password ||
       req.body.newPassword.length < 5
