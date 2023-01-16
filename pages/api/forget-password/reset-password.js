@@ -67,34 +67,30 @@ async function handler(req, res) {
       from: "pav.345@mail.ru",
       to: req.body.email,
       subject: `Message From paHa store Admin`,
-      text: req.body.message + " | Sent from: " + req.body.email,
+      text: " | Sent from: " + req.body.email,
       html: `<div>Для восстановления пароля перейдите по ссылке</div>
       <p>https://nextjs-firs-self-try.vercel.app/recover-password/${token}</p>
       <p>Sent from:
         ${req.body.email}</p>`,
     };
 
-    const sendMessage = async (message) => {
-      console.log(mailData);
-
-      transporter.sendMail({
-        mailData,
-        function(err, info) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log(info);
-          }
-        },
-      });
-    };
-    try {
-      await sendMessage();
-    } catch (error) {
-      res.status(500).json({ message: "Не удалось обновить пароль" });
-      client.close();
-      return;
-    }
+    transporter.sendMail({
+      from: "pav.345@mail.ru",
+      to: req.body.email,
+      subject: `Message From paHa store Admin`,
+      text: " | Sent from: " + req.body.email,
+      html: `<div>Для восстановления пароля перейдите по ссылке</div>
+      <p>https://nextjs-firs-self-try.vercel.app/recover-password/${token}</p>
+      <p>Sent from:
+        ${req.body.email}</p>`,
+      function(err, info) {
+        if (err) {
+          console.log(`Error: ${err}`);
+        } else {
+          console.log(info);
+        }
+      },
+    });
 
     // const sendMessage = async(() => {
     //   await transporter.sendMail(mailData, function (err, info) {
