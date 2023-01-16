@@ -53,59 +53,33 @@ async function handler(req, res) {
       return;
     }
 
-    const transporter = nodemailer.createTransport({
-      port: 465,
-      host: "smtp.mail.ru",
-      auth: {
-        user: "pav.345@mail.ru",
-        pass: "LJ1YPtKcVshZxGuE9cgB",
-      },
-      secure: true,
-    });
+    async function main() {
+      let transporter = nodemailer.createTransport({
+        port: 465,
+        host: "smtp.mail.ru",
+        auth: {
+          user: "pav.345@mail.ru",
+          pass: "LJ1YPtKcVshZxGuE9cgB",
+        },
+        // secure: true,
+      });
 
-    const mailData = {
-      from: "pav.345@mail.ru",
-      to: "pav.345@yandex.ru",
-      subject: `Message From paHa store Admin`,
-      text: req.body.message + " | Sent from: " + req.body.email,
-      html: `<div>Для восстановления пароля перейдите по ссылке</div>
-      <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
-      <p>Sent from:
-        ${req.body.email}</p>`,
-    };
+      let info = await transporter.sendMail({
+        from: "pav.345@mail.ru",
+        to: req.body.email,
+        subject: `Message From paHa store Admin`,
+        text: " | Sent from: " + req.body.email,
+        html: `<div>Для восстановления пароля перейдите по ссылке</div>
+        <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
+        <p>Sent from:
+          ${req.body.email}</p>`,
+      });
+      console.log("Message sent: %s", info.messageId);
 
-    transporter.sendMail(mailData, function (err, info) {
-      if (err) console.log(err);
-      else console.log(info);
-    });
+      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    }
 
-    // async function main() {
-    //   let transporter = nodemailer.createTransport({
-    //     port: 465,
-    //     host: "smtp.mail.ru",
-    //     auth: {
-    //       user: "pav.345@mail.ru",
-    //       pass: "LJ1YPtKcVshZxGuE9cgB",
-    //     },
-    //     // secure: true,
-    //   });
-
-    //   let info = await transporter.sendMail({
-    //     from: "pav.345@mail.ru",
-    //     to: req.body.email,
-    //     subject: `Message From paHa store Admin`,
-    //     text: " | Sent from: " + req.body.email,
-    //     html: `<div>Для восстановления пароля перейдите по ссылке</div>
-    //     <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
-    //     <p>Sent from:
-    //       ${req.body.email}</p>`,
-    //   });
-    //   console.log("Message sent: %s", info.messageId);
-
-    //   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    // }
-
-    // main().catch(console.error);
+    main().catch(console.error);
 
     res.status(200).json({ message: "Success" });
   }
