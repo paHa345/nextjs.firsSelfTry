@@ -40,7 +40,6 @@ export async function getStaticProps(context) {
   const fs = require("fs");
   const { resolve } = require("path");
   const dir = "./../public/img/sliderImage";
-  console.log(process.env.SECRET);
 
   const absolutePath = resolve("./public/img/sliderImage");
   let imagesName;
