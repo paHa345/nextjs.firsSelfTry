@@ -75,7 +75,7 @@ async function handler(req, res) {
     };
 
     const sendMessage = async (message) => {
-      await transporter.sendMail({
+      transporter.sendMail({
         mailData,
         function(err, info) {
           if (err) {
