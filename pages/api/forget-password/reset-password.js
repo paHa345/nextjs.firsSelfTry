@@ -53,55 +53,44 @@ async function handler(req, res) {
       return;
     }
 
-    async function main() {
-      let transporter = nodemailer.createTransport({
-        port: 465,
-        host: "smtp.mail.ru",
-        auth: {
-          user: "pav.345@mail.ru",
-          pass: "LJ1YPtKcVshZxGuE9cgB",
-        },
-        // secure: true,
-      });
+    const transporter = nodemailer.createTransport({
+      port: 465,
+      host: "smtp.mail.ru",
+      auth: {
+        user: "pav.345@mail.ru",
+        pass: "LJ1YPtKcVshZxGuE9cgB",
+      },
+      secure: true,
+    });
 
-      let info = await transporter.sendMail({
-        from: "pav.345@mail.ru",
-        to: req.body.email,
-        subject: `Message From paHa store Admin`,
-        text: " | Sent from: " + req.body.email,
-        html: `<div>Для восстановления пароля перейдите по ссылке</div>
-        <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
-        <p>Sent from:
-          ${req.body.email}</p>`,
-      });
-      console.log("Message sent: %s", info.messageId);
-    }
+    const mailData = {
+      from: "pav.345@mail.ru",
+      to: "pahapav345@gmail.com",
+      subject: `Message From paHa store Admin`,
+      text: req.body.message + " | Sent from: " + req.body.email,
+      html: `<div>Для восстановления пароля перейдите по ссылке</div>
+      <p>http://localhost:3000/recover-password/${token}</p>
+      <p>Sent from:
+        ${req.body.email}</p>`,
+    };
 
-    main().catch(console.error);
+    transporter.sendMail(mailData, function (err, info) {
+      if (err) console.log(err);
+      else console.log(info);
+    });
 
-    // const transporter = nodemailer.createTransport({
-    //   port: 465,
-    //   host: "smtp.mail.ru",
-    //   auth: {
-    //     user: "pav.345@mail.ru",
-    //     pass: "LJ1YPtKcVshZxGuE9cgB",
-    //   },
-    //   secure: true,
-    // });
+    // async function main() {
+    //   let transporter = nodemailer.createTransport({
+    //     port: 465,
+    //     host: "smtp.mail.ru",
+    //     auth: {
+    //       user: "pav.345@mail.ru",
+    //       pass: "LJ1YPtKcVshZxGuE9cgB",
+    //     },
+    //     // secure: true,
+    //   });
 
-    // // const mailData = {
-    // //   from: "pav.345@mail.ru",
-    // //   to: req.body.email,
-    // //   subject: `Message From paHa store Admin`,
-    // //   text: " | Sent from: " + req.body.email,
-    // //   html: `<div>Для восстановления пароля перейдите по ссылке</div>
-    // //   <p>https://nextjs-firs-self-try.vercel.app/recover-password/${token}</p>
-    // //   <p>Sent from:
-    // //     ${req.body.email}</p>`,
-    // // };
-
-    // try {
-    //   transporter.sendMail({
+    //   let info = await transporter.sendMail({
     //     from: "pav.345@mail.ru",
     //     to: req.body.email,
     //     subject: `Message From paHa store Admin`,
@@ -110,32 +99,13 @@ async function handler(req, res) {
     //     <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
     //     <p>Sent from:
     //       ${req.body.email}</p>`,
-    //     function(err, info) {
-    //       if (err) {
-    //         console.log(`Error: ${err}`);
-    //         throw new Error("Не удалось отправить письмо");
-    //       } else {
-    //         console.log(info);
-    //       }
-    //     },
     //   });
-    // } catch (error) {
-    //   res.status(403).json({ message: error.message });
-    //   client.close();
-    //   return;
+    //   console.log("Message sent: %s", info.messageId);
+
+    //   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
     // }
 
-    // // const sendMessage = async(() => {
-    // //   await transporter.sendMail(mailData, function (err, info) {
-    // //     if (err) {
-    // //       console.log(err);
-
-    // //     } else {
-    // //       console.log(info);
-
-    // //     }
-    // //   });
-    // // });
+    // main().catch(console.error);
 
     res.status(200).json({ message: "Success" });
   }
