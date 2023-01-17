@@ -8,10 +8,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
+import FetchNotification from "../UI/FetchNotification";
 
 function BascetSection(props) {
   const [cart, setCart] = useState([]);
   const currentCart = useSelector((state) => state.cart.cartItems);
+
+  const fetchStatus = useSelector(
+    (state) => state.appState.fetchDataNotification
+  );
+  const fetchStatusText = useSelector((state) => state.appState.fetchText);
+
   useEffect(() => {
     if (currentCart) {
       setCart(currentCart);
@@ -57,6 +64,15 @@ function BascetSection(props) {
               <h2 className={styles.cartMainText}>Корзина</h2>
             </div>
 
+            <div className={styles.notificationContainer}>
+              {fetchStatus && (
+                <FetchNotification
+                  status={fetchStatus}
+                  text={fetchStatusText}
+                ></FetchNotification>
+              )}
+            </div>
+
             <div className={styles.cartContainer}>
               <CartMain></CartMain>
 
@@ -69,6 +85,7 @@ function BascetSection(props) {
                 <span>Р</span>
               </div>
             </div>
+
             <ButtonTakeOrder></ButtonTakeOrder>
           </div>
         </div>

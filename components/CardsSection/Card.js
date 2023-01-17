@@ -76,7 +76,13 @@ function Card(props) {
   const addToFavouritesHandler = async (e) => {
     e.preventDefault();
     if (!session) {
-      alert("Зарегистрируйтесь чтобы добавить товар в избранное");
+      dispatch(
+        appStateActions.setFetchNotificationStatus({
+          status: "Error",
+          text: `Зарегистрируйтесь чтобы добавить товар в избранное`,
+        })
+      );
+      // alert("Зарегистрируйтесь чтобы добавить товар в избранное");
       return;
     }
 
@@ -101,7 +107,13 @@ function Card(props) {
     e.preventDefault();
 
     if (!session) {
-      alert("Зарегистрируйтесь чтобы добавить товар в избранное");
+      // alert("Зарегистрируйтесь чтобы удалить товар из избранного");
+      dispatch(
+        appStateActions.setFetchNotificationStatus({
+          status: "Error",
+          text: `Зарегистрируйтесь чтобы удалить товар из избранного`,
+        })
+      );
       return;
     }
 

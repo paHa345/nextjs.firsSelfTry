@@ -1,7 +1,6 @@
 import nodemailer from "nodemailer";
 import jwt, { decode } from "jsonwebtoken";
 import { MongoClient } from "mongodb";
-import { reject } from "lodash";
 
 async function handler(req, res) {
   console.log(req.body);

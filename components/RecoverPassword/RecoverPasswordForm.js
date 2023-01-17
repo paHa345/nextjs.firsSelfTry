@@ -1,9 +1,19 @@
-import { useState } from "react";
+import { useDeferredValue, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { appStateActions } from "../../store/appStateSlice";
+import FetchNotification from "../UI/FetchNotification";
 import RecoverPasswordButton from "./RecoverPasswordButton";
 import styles from "./RecoverPasswordForm.module.css";
 
 function RecoverPasswordForm(props) {
   const [recoverPassword, setRecoverPassword] = useState("");
+
+  const fetchStatus = useSelector(
+    (state) => state.appState.fetchDataNotification
+  );
+  const fetchStatusText = useSelector((state) => state.appState.fetchText);
+
+  const dispatch = useDispatch();
 
   const changePasswordHandler = (e) => {
     setRecoverPassword(e.target.value);
@@ -12,7 +22,13 @@ function RecoverPasswordForm(props) {
   const resetPasshordHandler = async (e) => {
     e.preventDefault();
     if (recoverPassword.length < 5) {
-      alert("Длинна пароля должна быть более 5 символов");
+      // alert("Длинна пароля должна быть более 5 символов");
+      dispatch(
+        appStateActions.setFetchNotificationStatus({
+          status: "Error",
+          text: `Длинна пароля должна быть более 5 символов`,
+        })
+      );
       return;
     }
     const req = await fetch(`/api/reset-password/${props.recoverToken}`, {
@@ -31,12 +47,28 @@ function RecoverPasswordForm(props) {
 
       return;
     }
-    alert("Пароль успешно изменён");
+    // alert("Пароль успешно изменён");
+    dispatch(
+      appStateActions.setFetchNotificationStatus({
+        status: "Success",
+        text: `Пароль успешно изменён`,
+      })
+    );
+    setRecoverPassword("");
     console.log(data);
   };
   return (
     <div className={styles.loginContainer}>
       <h2>Восстановление пароля</h2>
+
+      <div className={styles.notificationContainer}>
+        {fetchStatus && (
+          <FetchNotification
+            status={fetchStatus}
+            text={fetchStatusText}
+          ></FetchNotification>
+        )}
+      </div>
 
       <form className={styles.form} onSubmit={resetPasshordHandler}>
         <div className={styles.loginForm}>

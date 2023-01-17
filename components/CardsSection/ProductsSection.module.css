@@ -39,3 +39,8 @@
   color: #fff5f5;
   background-color: #e8590c;
 }
+.notificationContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}

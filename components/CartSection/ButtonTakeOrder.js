@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { orderActions } from "../../store/orderSlice";
 import { useRouter } from "next/router";
+import { appStateActions } from "../../store/appStateSlice";
 
 function ButtonTakeOrder() {
   const router = useRouter();
@@ -12,7 +13,13 @@ function ButtonTakeOrder() {
   const takeOrderHandler = async (e) => {
     e.preventDefault();
     if (JSON.parse(localStorage.getItem("cartItems")) === null) {
-      alert("Добавьте продукты в корзину");
+      dispatch(
+        appStateActions.setFetchNotificationStatus({
+          status: "Error",
+          text: "Добавьте продукты в корзину",
+        })
+      );
+      // alert("Добавьте продукты в корзину");
       return;
     }
     const data = JSON.parse(localStorage.getItem("cartItems")).map((el) => {
@@ -27,12 +34,24 @@ function ButtonTakeOrder() {
       };
     });
     if (data.length === 0) {
-      alert("Добавьте продукты в корзину");
+      dispatch(
+        appStateActions.setFetchNotificationStatus({
+          status: "Error",
+          text: "Добавьте продукты в корзину",
+        })
+      );
+      // alert("Добавьте продукты в корзину");
       return;
     }
 
     if (!session) {
-      alert("Необходимо залогиниться");
+      dispatch(
+        appStateActions.setFetchNotificationStatus({
+          status: "Error",
+          text: `Необходимо залогиниться`,
+        })
+      );
+      // alert("Необходимо залогиниться");
       return;
     }
 

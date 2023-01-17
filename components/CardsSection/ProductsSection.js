@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { itemsActions, itemSlice } from "../../store/itemSlice";
+import FetchNotification from "../UI/FetchNotification";
 import ProductCards from "./ProductCards";
 import styles from "./ProductsSection.module.css";
 
@@ -12,6 +13,11 @@ function ProductsSection(props) {
   const [priceSort, setPriceSort] = useState("decrement");
 
   const dispatch = useDispatch();
+
+  const fetchStatus = useSelector(
+    (state) => state.appState.fetchDataNotification
+  );
+  const fetchStatusText = useSelector((state) => state.appState.fetchText);
 
   const sortingByPriceHandler = (e) => {
     e.preventDefault();
@@ -37,6 +43,15 @@ function ProductsSection(props) {
             </div>
 
             <ProductCards></ProductCards>
+
+            <div className={styles.notificationContainer}>
+              {fetchStatus && (
+                <FetchNotification
+                  status={fetchStatus}
+                  text={fetchStatusText}
+                ></FetchNotification>
+              )}
+            </div>
           </div>
         </div>
       </section>
