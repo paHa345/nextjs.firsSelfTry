@@ -14,7 +14,6 @@ function ProductType(props) {
   const dispatch = useDispatch();
 
   const router = useRouter();
-  console.log(router.query.sortBy);
   const { data: session, status } = useSession();
 
   const type = JSON.parse(props.items)[0].ruType;

@@ -18,9 +18,7 @@ function ProductCards() {
     (state) => state.appState.addToFavouriteNotification
   );
   const sort = useSelector((state) => state.item.sortBy);
-  console.log(sort);
 
-  console.log(`Routes: ${router.query.page}`);
   let itemsInPage = [];
 
   const setItemsInPage = () => {
@@ -32,7 +30,6 @@ function ProductCards() {
     } else {
       itemsInPage = currentItems.slice(0, 4);
     }
-    console.log(itemsInPage);
   };
   setItemsInPage();
 

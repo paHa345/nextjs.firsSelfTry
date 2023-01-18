@@ -41,18 +41,20 @@ function ProductsSection(props) {
         <div className={`${styles.container}`}>
           <div className={styles.bestProductsMain}>
             <h2 className={styles.bestProductH2}>{currentType}</h2>
-            <div className={styles.sortButton}>
-              <Link
-                href={`${process.env.NEXTAUTH_URL}/catalog/${
-                  router.query.productType
-                }?page=${1} ${sort ? `&sortBy=${sort}` : ""}`}
-                onClick={sortingByPriceHandler}
-              >
-                {priceSort === "increment"
-                  ? "По увеличению цены"
-                  : "По уменьшению цены"}
-              </Link>
-            </div>
+            {router.query.productType && (
+              <div className={styles.sortButton}>
+                <Link
+                  href={`${process.env.NEXTAUTH_URL}/catalog/${
+                    router.query.productType
+                  }?page=${1} ${sort ? `&sortBy=${sort}` : ""}`}
+                  onClick={sortingByPriceHandler}
+                >
+                  {priceSort === "increment"
+                    ? "По увеличению цены"
+                    : "По уменьшению цены"}
+                </Link>
+              </div>
+            )}
 
             <ProductCards></ProductCards>
 
@@ -64,10 +66,12 @@ function ProductsSection(props) {
                 ></FetchNotification>
               )}
             </div> */}
-            <PaginationSection
-              itemsQuantity={currentItems.length}
-              type={currentType}
-            ></PaginationSection>
+            {router.query.productType && (
+              <PaginationSection
+                itemsQuantity={currentItems.length}
+                type={currentType}
+              ></PaginationSection>
+            )}
           </div>
         </div>
       </section>
