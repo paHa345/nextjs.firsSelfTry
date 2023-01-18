@@ -17,17 +17,24 @@ function ProductCards() {
   const showAddToFavNotification = useSelector(
     (state) => state.appState.addToFavouriteNotification
   );
+  const sort = useSelector((state) => state.item.sortBy);
+  console.log(sort);
 
-  // useEffect(() => {
-  //   const fetchFavourites = async () => {
-  //     const req = await fetch("/api/users/paHa345");
-  //     const res = await req.json();
-  //     console.log(res);
-  //     setFavourites(res.favouritesItems);
-  //   };
+  console.log(`Routes: ${router.query.page}`);
+  let itemsInPage = [];
 
-  //   fetchFavourites();
-  // }, []);
+  const setItemsInPage = () => {
+    if (router.query.page) {
+      itemsInPage = currentItems.slice(
+        router.query.page * 4 - 4,
+        router.query.page * 4
+      );
+    } else {
+      itemsInPage = currentItems.slice(0, 4);
+    }
+    console.log(itemsInPage);
+  };
+  setItemsInPage();
 
   if (cartItems === null) {
     cartItems = [];
@@ -48,7 +55,7 @@ function ProductCards() {
   return (
     <Fragment>
       <div className={styles.productCardContainer}>
-        {currentItems.map((el, index) => {
+        {itemsInPage.map((el, index) => {
           let inCart = false;
           if (cartIds.includes(el.id)) {
             inCart = true;

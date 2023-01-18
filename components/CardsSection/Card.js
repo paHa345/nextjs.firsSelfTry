@@ -15,6 +15,7 @@ import Image from "next/image";
 import { addToFavourites } from "../UI/fetchHelper";
 import { useSession } from "next-auth/react";
 import AddToFavourites from "../UI/AddToFavourites";
+import FetchNotification from "../UI/FetchNotification";
 
 function Card(props) {
   const [quantity, setQuantity] = useState(1);
@@ -26,6 +27,11 @@ function Card(props) {
   const showAddToFavNotification = useSelector(
     (state) => state.appState.addToFavouriteNotification
   );
+
+  const fetchStatus = useSelector(
+    (state) => state.appState.fetchDataNotification
+  );
+  const fetchStatusText = useSelector((state) => state.appState.fetchText);
 
   const notificationId = useSelector(
     (state) => state.appState.itemNotification
@@ -216,6 +222,13 @@ function Card(props) {
             </div>
           )}
         </div>
+
+        {/* <div className={styles.notificationContainer}>
+          {fetchStatus && notificationId === props.id && (
+            <AddToFavourites text={notificationText}></AddToFavourites>
+          )}
+        </div> */}
+
         <div className={styles.notification}>
           <div className={styles.notificationContainer}>
             {showAddToFavNotification && notificationId === props.id && (

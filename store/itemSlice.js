@@ -243,6 +243,7 @@ export const initItemsState = {
   favouriteItemsIDs: [],
   favouriteItems: [{ initial: true }],
   orderedItems: [{ initial: true }],
+  sortBy: false,
 };
 
 export const itemSlice = createSlice({
@@ -254,6 +255,7 @@ export const itemSlice = createSlice({
     },
     setCurrentTypeItems(state, action) {
       state.currentItems = action.payload;
+      console.log("setCurrentItems");
     },
     setCurrentComments(state, action) {
       state.currentComments = action.payload;
@@ -293,6 +295,10 @@ export const itemSlice = createSlice({
             return b.price - a.price;
           })),
         ];
+    },
+    setSortBy(state, action) {
+      state.sortBy = action.payload;
+      console.log(state.sortBy);
     },
   },
 });

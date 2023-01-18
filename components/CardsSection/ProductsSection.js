@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { itemsActions, itemSlice } from "../../store/itemSlice";
+import PaginationSection from "../PaginationSection/PaginationSection";
 import FetchNotification from "../UI/FetchNotification";
 import ProductCards from "./ProductCards";
 import styles from "./ProductsSection.module.css";
@@ -12,6 +14,9 @@ function ProductsSection(props) {
   const currentItems = useSelector((state) => state.item.currentItems);
   const [priceSort, setPriceSort] = useState("decrement");
 
+  const sort = useSelector((state) => state.item.sortBy);
+  const router = useRouter();
+
   const dispatch = useDispatch();
 
   const fetchStatus = useSelector(
@@ -20,10 +25,12 @@ function ProductsSection(props) {
   const fetchStatusText = useSelector((state) => state.appState.fetchText);
 
   const sortingByPriceHandler = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (priceSort === "decrement") {
+      dispatch(itemsActions.setSortBy("increment"));
       setPriceSort("increment");
     } else {
+      dispatch(itemsActions.setSortBy("decrement"));
       setPriceSort("decrement");
     }
     dispatch(itemsActions.sortCurrentItems(priceSort));
@@ -35,7 +42,12 @@ function ProductsSection(props) {
           <div className={styles.bestProductsMain}>
             <h2 className={styles.bestProductH2}>{currentType}</h2>
             <div className={styles.sortButton}>
-              <Link href="/" onClick={sortingByPriceHandler}>
+              <Link
+                href={`${process.env.NEXTAUTH_URL}/catalog/${
+                  router.query.productType
+                }?page=${1} ${sort ? `&sortBy=${sort}` : ""}`}
+                onClick={sortingByPriceHandler}
+              >
                 {priceSort === "increment"
                   ? "По увеличению цены"
                   : "По уменьшению цены"}
@@ -44,14 +56,18 @@ function ProductsSection(props) {
 
             <ProductCards></ProductCards>
 
-            <div className={styles.notificationContainer}>
+            {/* <div className={styles.notificationContainer}>
               {fetchStatus && (
                 <FetchNotification
                   status={fetchStatus}
                   text={fetchStatusText}
                 ></FetchNotification>
               )}
-            </div>
+            </div> */}
+            <PaginationSection
+              itemsQuantity={currentItems.length}
+              type={currentType}
+            ></PaginationSection>
           </div>
         </div>
       </section>

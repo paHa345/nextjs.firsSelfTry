@@ -102,3 +102,10 @@
   position: relative;
   width: 100%;
 }
+
+.notificationContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 40rem;
+}

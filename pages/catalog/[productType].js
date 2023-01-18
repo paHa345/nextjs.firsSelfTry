@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductsSection from "../../components/CardsSection/ProductsSection";
@@ -11,6 +12,9 @@ import { itemsActions } from "../../store/itemSlice";
 
 function ProductType(props) {
   const dispatch = useDispatch();
+
+  const router = useRouter();
+  console.log(router.query.sortBy);
   const { data: session, status } = useSession();
 
   const type = JSON.parse(props.items)[0].ruType;
@@ -21,6 +25,9 @@ function ProductType(props) {
     dispatch(cartActions.setCartItemsAmount(localStorage.getItem("cartItems")));
     dispatch(appStateActions.setCurrentType(type));
     dispatch(itemsActions.setCurrentTypeItems(JSON.parse(props.items)));
+    if (router.query.sortBy) {
+      dispatch(itemsActions.sortCurrentItems(router.query.sortBy));
+    }
   });
 
   useEffect(() => {
@@ -33,6 +40,8 @@ function ProductType(props) {
         .catch((error) => console.log(error.message));
     }
   }, [dispatch, session]);
+
+  useEffect;
 
   if (!props.items) {
     return (
