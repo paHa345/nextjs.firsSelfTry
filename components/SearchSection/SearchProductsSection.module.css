@@ -1,0 +1,46 @@
+.container {
+  max-width: 130rem;
+  padding: 9.6rem 0;
+  margin: 0 auto;
+}
+.bestProducts {
+  background-color: #f4fce336;
+}
+
+.bestProductsMain {
+  margin: 0 3.2rem;
+}
+
+.color {
+  background-color: aquamarine;
+}
+
+.bestProductH2 {
+  text-align: center;
+  font-size: 6rem;
+  margin-bottom: 3.2rem;
+}
+
+.sortButton a:link,
+.sortButton a:visited {
+  color: #555;
+  background-color: #ffd8a8;
+  /* border: 2px solid black; */
+  padding: 1.2rem 2rem;
+  font-size: 2.4rem;
+  text-decoration: none;
+  border-radius: 11px;
+  transition: all 0.3s;
+  margin-top: 5rem;
+}
+
+.sortButton a:hover,
+.sortButton a:active {
+  color: #fff5f5;
+  background-color: #e8590c;
+}
+.notificationContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}

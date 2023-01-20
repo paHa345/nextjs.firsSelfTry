@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
 import Link from "next/link";
 import Image from "next/image";
+import SearchComponent from "./SearchComponent";
 
 function HeaderComponent() {
   // const storage = localStorage.getItem("cartItems");
@@ -83,7 +84,9 @@ function HeaderComponent() {
             onShowLogin={showLoginHandler}
           ></MenuContainer>
         </div>
+        <SearchComponent></SearchComponent>
       </header>
+
       {/* {appState.showProducts && <ProductsSection></ProductsSection>}
       {showCart && <CartSection onHideCart={hideCartHandler}></CartSection>}
       {showLogin && (

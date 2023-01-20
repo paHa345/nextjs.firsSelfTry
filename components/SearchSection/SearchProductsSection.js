@@ -5,14 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { itemsActions, itemSlice } from "../../store/itemSlice";
 import PaginationSection from "../PaginationSection/PaginationSection";
 import FetchNotification from "../UI/FetchNotification";
-import ProductCards from "./ProductCards";
-import styles from "./ProductsSection.module.css";
+import SearchProductCards from "./SearchProductCards";
+import styles from "./SearchProductsSection.module.css";
 
-function ProductsSection(props) {
+function SearchProductsSection(props) {
   const stickySection = useSelector((state) => state.appState.stickySection);
   const currentType = useSelector((state) => state.appState.currentType);
   const currentItems = useSelector((state) => state.item.currentItems);
   const [priceSort, setPriceSort] = useState("decrement");
+
+  console.log(props.items);
 
   const sort = useSelector((state) => state.item.sortBy);
   const router = useRouter();
@@ -41,22 +43,20 @@ function ProductsSection(props) {
         <div className={`${styles.container}`}>
           <div className={styles.bestProductsMain}>
             <h2 className={styles.bestProductH2}>{currentType}</h2>
-            {router.query.productType && (
-              <div className={styles.sortButton}>
-                <Link
-                  href={`${process.env.NEXTAUTH_URL}/catalog/${
-                    router.query.productType
-                  }?page=${1}${sort ? `&sortBy=${sort}` : ""}`}
-                  onClick={sortingByPriceHandler}
-                >
-                  {priceSort === "increment"
-                    ? "По увеличению цены"
-                    : "По уменьшению цены"}
-                </Link>
-              </div>
-            )}
+            <div className={styles.sortButton}>
+              <Link
+                href={`${process.env.NEXTAUTH_URL}/search/${
+                  router.query.searchText
+                }?page=${1}${sort ? `&sortBy=${sort}` : ""}`}
+                onClick={sortingByPriceHandler}
+              >
+                {priceSort === "increment"
+                  ? "По увеличению цены"
+                  : "По уменьшению цены"}
+              </Link>
+            </div>
 
-            <ProductCards></ProductCards>
+            <SearchProductCards items={props.items}></SearchProductCards>
 
             {/* <div className={styles.notificationContainer}>
               {fetchStatus && (
@@ -66,12 +66,12 @@ function ProductsSection(props) {
                 ></FetchNotification>
               )}
             </div> */}
-            {router.query.productType && (
-              <PaginationSection
-                itemsQuantity={currentItems.length}
-                type={currentType}
-              ></PaginationSection>
-            )}
+
+            <PaginationSection
+              itemsQuantity={props?.items?.length}
+              type={"search"}
+              search={true}
+            ></PaginationSection>
           </div>
         </div>
       </section>
@@ -79,4 +79,4 @@ function ProductsSection(props) {
   );
 }
 
-export default ProductsSection;
+export default SearchProductsSection;

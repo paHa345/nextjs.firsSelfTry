@@ -22,11 +22,24 @@ function PaginationSection(props) {
         }`}
       >
         <Link
-          href={`${process.env.NEXTAUTH_URL}/catalog/${
-            router.query.productType
-          }?page=${index + 1}${
-            router.query.sortBy ? `&sortBy=${router.query.sortBy}` : ""
+          href={`${
+            props.search
+              ? `${process.env.NEXTAUTH_URL}/search/${
+                  router.query.searchText
+                }?page=${index + 1}${
+                  router.query.sortBy ? `&sortBy=${router.query.sortBy}` : ""
+                }`
+              : `${process.env.NEXTAUTH_URL}/catalog/${
+                  router.query.productType
+                }?page=${index + 1}${
+                  router.query.sortBy ? `&sortBy=${router.query.sortBy}` : ""
+                }`
           }`}
+          // href={`${process.env.NEXTAUTH_URL}/catalog/${
+          //   router.query.productType
+          // }?page=${index + 1}${
+          //   router.query.sortBy ? `&sortBy=${router.query.sortBy}` : ""
+          // }`}
           className={styles.pageNumber}
         >
           {el}
