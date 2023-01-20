@@ -47,18 +47,20 @@ function SearchProductsSection(props) {
             <h2
               className={styles.bestProductH2}
             >{`Результаты поиска: ${router.query.searchText} `}</h2>
-            <div className={styles.sortButton}>
-              <Link
-                href={`${process.env.NEXTAUTH_URL}/search/${
-                  router.query.searchText
-                }?page=${1}${sort ? `&sortBy=${sort}` : ""}`}
-                onClick={sortingByPriceHandler}
-              >
-                {priceSort === "increment"
-                  ? "По увеличению цены"
-                  : "По уменьшению цены"}
-              </Link>
-            </div>
+            {!currentSearchItems.status && (
+              <div className={styles.sortButton}>
+                <Link
+                  href={`${process.env.NEXTAUTH_URL}/search/${
+                    router.query.searchText
+                  }?page=${1}${sort ? `&sortBy=${sort}` : ""}`}
+                  onClick={sortingByPriceHandler}
+                >
+                  {priceSort === "increment"
+                    ? "По увеличению цены"
+                    : "По уменьшению цены"}
+                </Link>
+              </div>
+            )}
 
             <SearchProductCards items={props.items}></SearchProductCards>
 

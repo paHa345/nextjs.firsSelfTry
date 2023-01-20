@@ -14,6 +14,9 @@ function SearchComponent(props) {
     e.preventDefault();
     console.log("Search");
     console.log(searchText);
+    if (searchText === "") {
+      return;
+    }
     router.push(`/search/${searchText}`);
   };
 

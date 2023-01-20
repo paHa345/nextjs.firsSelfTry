@@ -30,6 +30,14 @@ function SearchProductCards(props) {
     );
   }
 
+  if (currentSearchItems.status) {
+    return (
+      <Fragment>
+        <h1 className={styles.bestProductH2}>Ничего не найдено</h1>
+      </Fragment>
+    );
+  }
+
   let itemsInPage = [];
 
   const setItemsInPage = () => {

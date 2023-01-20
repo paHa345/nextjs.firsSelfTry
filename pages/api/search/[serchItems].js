@@ -31,8 +31,17 @@ async function handler(req, res) {
         .collection("sportNutritionItems")
         .find({ name: { $regex: re } })
         .toArray();
-      res.status(200).json({ message: "Success", searchItems: searchItems });
-      return;
+      console.log(searchItems);
+
+      if (searchItems.length === 0) {
+        res
+          .status(200)
+          .json({ message: "Success", searchItems: { status: "Not found" } });
+        return;
+      } else {
+        res.status(200).json({ message: "Success", searchItems: searchItems });
+        return;
+      }
     } catch (error) {
       res.status(400).json({ message: "Не удалось получить список продуктов" });
     }
