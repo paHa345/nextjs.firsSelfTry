@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import Error from "next/error";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import SearchProductsSection from "../../components/SearchSection/SearchProductsSection";
@@ -15,12 +16,16 @@ function Search(props) {
   console.log(props.search);
   const dispatch = useDispatch();
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     const storage = localStorage.getItem("cartItems");
     dispatch(cartActions.setCartFromLocalStorage(storage));
     dispatch(cartActions.setCartItemsAmount(localStorage.getItem("cartItems")));
-  }, [dispatch]);
+    if (router.query.sortBy) {
+      dispatch(itemsActions.sortCurrentItems(router.query.sortBy));
+    }
+  }, [dispatch, router.query.sortBy]);
 
   useEffect(() => {
     if (session) {
@@ -45,9 +50,12 @@ function Search(props) {
       return res;
     };
     getSearchItems()
-      .then((data) => console.log(data))
+      .then((data) => {
+        dispatch(itemsActions.setCurrentSearchItems(data.searchItems));
+        console.log(data);
+      })
       .catch((error) => console.log(error.props));
-  }, [props.search]);
+  }, [props.search, dispatch]);
 
   return <SearchProductsSection items={searchItems}></SearchProductsSection>;
 }

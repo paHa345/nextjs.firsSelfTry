@@ -17,9 +17,12 @@ function SearchProductCards(props) {
   const showAddToFavNotification = useSelector(
     (state) => state.appState.addToFavouriteNotification
   );
+  const currentSearchItems = useSelector(
+    (state) => state.item.currentSearchItems
+  );
   const sort = useSelector((state) => state.item.sortBy);
 
-  if (!props.items) {
+  if (currentSearchItems.length === 0) {
     return (
       <Fragment>
         <LoadSpinner></LoadSpinner>
@@ -31,12 +34,12 @@ function SearchProductCards(props) {
 
   const setItemsInPage = () => {
     if (router.query.page) {
-      itemsInPage = props.items.slice(
+      itemsInPage = currentSearchItems.slice(
         router.query.page * 4 - 4,
         router.query.page * 4
       );
     } else {
-      itemsInPage = props.items.slice(0, 4);
+      itemsInPage = currentSearchItems.slice(0, 4);
     }
   };
   setItemsInPage();

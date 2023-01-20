@@ -244,6 +244,7 @@ export const initItemsState = {
   favouriteItems: [{ initial: true }],
   orderedItems: [{ initial: true }],
   sortBy: false,
+  currentSearchItems: [],
 };
 
 export const itemSlice = createSlice({
@@ -297,6 +298,21 @@ export const itemSlice = createSlice({
     },
     setSortBy(state, action) {
       state.sortBy = action.payload;
+    },
+    setCurrentSearchItems(state, action) {
+      state.currentSearchItems = action.payload;
+    },
+    sortCurrentSearchItems(state, action) {
+      if (action.payload === "increment") {
+        state.currentSearchItems = state.currentSearchItems.sort((a, b) => {
+          return a.price - b.price;
+        });
+      } else
+        [
+          (state.currentSearchItems = state.currentSearchItems.sort((a, b) => {
+            return b.price - a.price;
+          })),
+        ];
     },
   },
 });

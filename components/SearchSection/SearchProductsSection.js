@@ -11,10 +11,12 @@ import styles from "./SearchProductsSection.module.css";
 function SearchProductsSection(props) {
   const stickySection = useSelector((state) => state.appState.stickySection);
   const currentType = useSelector((state) => state.appState.currentType);
-  const currentItems = useSelector((state) => state.item.currentItems);
+  const currentSearchItems = useSelector(
+    (state) => state.item.currentSearchItems
+  );
   const [priceSort, setPriceSort] = useState("decrement");
 
-  console.log(props.items);
+  // console.log(currentSearchItems);
 
   const sort = useSelector((state) => state.item.sortBy);
   const router = useRouter();
@@ -35,14 +37,16 @@ function SearchProductsSection(props) {
       dispatch(itemsActions.setSortBy("decrement"));
       setPriceSort("decrement");
     }
-    dispatch(itemsActions.sortCurrentItems(priceSort));
+    dispatch(itemsActions.sortCurrentSearchItems(priceSort));
   };
   return (
     <Fragment>
       <section className={`${styles.bestProducts} ${stickySection}`}>
         <div className={`${styles.container}`}>
           <div className={styles.bestProductsMain}>
-            <h2 className={styles.bestProductH2}>{currentType}</h2>
+            <h2
+              className={styles.bestProductH2}
+            >{`Результаты поиска: ${router.query.searchText} `}</h2>
             <div className={styles.sortButton}>
               <Link
                 href={`${process.env.NEXTAUTH_URL}/search/${
