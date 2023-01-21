@@ -10,7 +10,7 @@ import styles from "./SearchProductsSection.module.css";
 
 function SearchProductsSection(props) {
   const stickySection = useSelector((state) => state.appState.stickySection);
-  const currentType = useSelector((state) => state.appState.currentType);
+  // const currentType = useSelector((state) => state.appState.currentType);
   const currentSearchItems = useSelector(
     (state) => state.item.currentSearchItems
   );

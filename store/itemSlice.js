@@ -243,7 +243,7 @@ export const initItemsState = {
   favouriteItemsIDs: [],
   favouriteItems: [{ initial: true }],
   orderedItems: [{ initial: true }],
-  sortBy: false,
+  sortBy: "decrement",
   currentSearchItems: [],
 };
 
