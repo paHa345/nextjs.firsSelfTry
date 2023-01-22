@@ -18,6 +18,8 @@ import AddToFavourites from "../UI/AddToFavourites";
 import FetchNotification from "../UI/FetchNotification";
 
 function Card(props) {
+  const [image, setImage] = useState(props.cardImage[0]);
+  const [ImageIndex, setImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [inCart, setInCart] = useState(props.elementInCart);
   const [notificationText, setNotificationText] = useState("");
@@ -154,6 +156,40 @@ function Card(props) {
     dispatch(itemsActions.setFavouriteIDs(arr));
   };
 
+  const onHoverHandler = (e) => {
+    setImage(props.cardImage[e.target.dataset.image]);
+    setImageIndex(Number(e.target.dataset.image));
+  };
+
+  const setImageOnLeaveHandler = (e) => {
+    setImage(props.cardImage[0]);
+    setImageIndex(0);
+  };
+
+  const changeImage = props.cardImage?.map((el, index) => {
+    return (
+      <div
+        key={`${props.id}_${index}`}
+        className={styles.changeImage}
+        onMouseEnter={onHoverHandler}
+        data-image={index}
+      ></div>
+    );
+  });
+
+  const imagesDots = props.cardImage.map((el, index) => {
+    return (
+      <div
+        className={
+          ImageIndex === index
+            ? `${styles.imageDotsActive}`
+            : `${styles.imageDots}`
+        }
+        key={`${props.id}_dots_${index}`}
+      ></div>
+    );
+  });
+
   return (
     <Fragment>
       <div className={styles.productCard}>
@@ -164,16 +200,28 @@ function Card(props) {
             <p>5</p>
           </div>
         </div>
-        <Link href={`/products/${props.id}`}>
-          <Image
-            src={props.cardImage}
-            className={styles.productCardImg}
-            alt={props.cardName}
-            width={200}
-            height={200}
-            priority={true}
-          />
-        </Link>
+        <div className={styles.imageContainer}>
+          <Link href={`/products/${props.id}`}>
+            <div className={styles.ImageSection}>
+              <Image
+                src={image}
+                className={styles.productCardImg}
+                alt={props.cardName}
+                width={200}
+                height={200}
+                priority={true}
+              />
+
+              <div
+                className={styles.changeImageContainer}
+                onMouseLeave={setImageOnLeaveHandler}
+              >
+                {changeImage}
+                <div className={styles.imageDotsContainer}>{imagesDots}</div>
+              </div>
+            </div>
+          </Link>
+        </div>
 
         <div className={styles.productCardTextSection}>
           <Link className={styles.cardLink} href={`/products/${props.id}`}>
