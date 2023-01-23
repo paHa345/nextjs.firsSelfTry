@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { appStateActions } from "../../store/appStateSlice";
+import Card from "../CardsSection/Card";
 import AddToFavourites from "../UI/AddToFavourites";
 import LoadSpinner from "../UI/LoadSpinner";
 import RemoveFromFavourites from "../UI/RemoveFromFavourites";
@@ -64,7 +65,7 @@ function FavouritesProductCards() {
             const fav = favouriteItemsIDs.includes(el.id);
 
             return (
-              <FavouritesCard
+              <Card
                 cardName={el.name}
                 cardImage={el.image}
                 key={el.id}
@@ -72,7 +73,7 @@ function FavouritesProductCards() {
                 price={el.price}
                 elementInCart={inCart}
                 // elementInFavourites={fav}
-              ></FavouritesCard>
+              ></Card>
             );
           })}
       </div>

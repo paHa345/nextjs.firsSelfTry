@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Card from "../CardsSection/Card";
 import AddToFavourites from "../UI/AddToFavourites";
 import LoadSpinner from "../UI/LoadSpinner";
 import SearchCard from "./SearchCard";
@@ -80,7 +81,7 @@ function SearchProductCards(props) {
           const fav = favouriteItemsIDs.includes(el.id);
 
           return (
-            <SearchCard
+            <Card
               cardName={el.name}
               cardImage={el.image}
               key={el.id}
@@ -88,7 +89,7 @@ function SearchProductCards(props) {
               price={el.price}
               elementInCart={inCart}
               // elementInFavourites={fav}
-            ></SearchCard>
+            ></Card>
           );
         })}
 
