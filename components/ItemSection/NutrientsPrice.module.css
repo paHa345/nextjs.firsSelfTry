@@ -14,9 +14,48 @@
   flex-grow: 0;
   flex-shrink: 0;
 }
-.itemDescriptionImages img {
+.bigImage {
   width: 100%;
   height: auto;
+}
+
+.arrowLeftContainer {
+  position: absolute;
+  z-index: 10;
+  top: 40%;
+}
+
+.arrowRightContainer {
+  position: absolute;
+  z-index: 10;
+  top: 40%;
+  right: 0;
+}
+
+.smallImagesSection {
+  display: flex;
+  overflow: hidden;
+  gap: 1.2rem;
+  height: 15rem;
+  position: relative;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.smallImagesContainer {
+  padding-left: 4rem;
+}
+
+.smallImageLink {
+  position: absolute;
+  height: 100%;
+  width: auto;
+  transition: all 1s ease-out;
+  transition: opacity 0.1s linear;
+}
+
+.smallImage {
+  height: 100%;
+  width: auto;
 }
 
 .itemDescriptionComponents {

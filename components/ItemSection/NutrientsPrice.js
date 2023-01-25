@@ -3,9 +3,19 @@ import Link from "next/link";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleLeft,
+  faCircleRight,
+} from "@fortawesome/free-regular-svg-icons";
 import styles from "./NutrientsPrice.module.css";
 
 function NutrientsPrice(props) {
+  const [currentImage, setCurrentImage] = useState(props.currentItem.image[0]);
+  const [imageArr, setImageArr] = useState([...props.currentItem.image]);
+  console.log(imageArr);
+
+  const [numberImage, setNumberImage] = useState(0);
   const [itemQuantity, serItemQuantity] = useState(1);
   const dispatch = useDispatch();
   const item = useSelector((state) => state.item.item);
@@ -21,18 +31,97 @@ function NutrientsPrice(props) {
     dispatch(cartActions.setCartItemsAmount(localStorage.getItem("cartItems")));
   };
 
+  const clickSmallImageHandler = (e) => {
+    e.preventDefault();
+
+    // const arr2 = imageArr.splice(e.target.dataset.imagenumber);
+
+    // const newArr = [...arr2, ...imageArr];
+
+    // setImageArr([...newArr]);
+
+    setCurrentImage(e.target.dataset.image);
+  };
+
+  const shiftLeftHandler = (e) => {
+    e.preventDefault();
+    console.log("Left");
+    if (numberImage === 0) {
+      return;
+    }
+    setNumberImage((prev) => {
+      return prev + 1;
+    });
+  };
+
+  const shiftRightHandler = (e) => {
+    e.preventDefault();
+    console.log(props.currentItem.image.length);
+    console.log(numberImage);
+
+    if (numberImage * -1 > props.currentItem.image.length - 3) {
+      return;
+    }
+
+    setNumberImage((prev) => {
+      return prev - 1;
+    });
+  };
+
+  const smallImages = imageArr.map((el, index) => {
+    const translate = 15 * index + numberImage * 15;
+
+    return (
+      <Link
+        className={styles.smallImageLink}
+        href={"/"}
+        onClick={clickSmallImageHandler}
+        style={{
+          transform: `translateX(${translate}rem)`,
+        }}
+        key={`${props.currentItem.id}_${props.currentItem.image[index]}`}
+      >
+        <Image
+          className={styles.smallImage}
+          data-image={el}
+          data-imageNumber={index}
+          src={el}
+          alt={el}
+          height={250}
+          width={150}
+          // layout="fill"
+          // objectFit="contain"
+        />
+      </Link>
+    );
+  });
+
   return (
     <div className={styles.itemInfoElement}>
       <div className={styles.itemInfoDescription}>
         <div className={styles.itemDescriptionImages}>
           <Image
-            src={props.currentItem.image}
-            alt={props.currentItem.image}
+            className={styles.bigImage}
+            src={currentImage}
+            alt={currentImage}
             height={500}
             width={200}
             // layout="fill"
             // objectFit="contain"
           />
+          <div className={styles.smallImagesSection}>
+            <div className={styles.arrowLeftContainer}>
+              <Link href={"/"} onClick={shiftLeftHandler}>
+                <FontAwesomeIcon icon={faCircleLeft} size="4x" />
+              </Link>
+            </div>
+            <div className={styles.smallImagesContainer}>{smallImages}</div>
+            <div className={styles.arrowRightContainer}>
+              <Link href={"/"} onClick={shiftRightHandler}>
+                <FontAwesomeIcon icon={faCircleRight} size="4x" />
+              </Link>
+            </div>
+          </div>
         </div>
         <div className={styles.itemDescriptionComponents}>
           <p className={styles.itemDescriptionHead}>Состав:</p>
