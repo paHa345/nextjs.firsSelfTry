@@ -23,6 +23,10 @@
   position: absolute;
   z-index: 10;
   top: 40%;
+  border: 2px solid #1d1f1b;
+  padding: 0.2rem;
+  background-color: #fff5f5;
+  border-radius: 0.5rem;
 }
 
 .arrowRightContainer {
@@ -30,6 +34,10 @@
   z-index: 10;
   top: 40%;
   right: 0;
+  border: 2px solid #1d1f1b;
+  padding: 0.2rem;
+  background-color: #fff5f5;
+  border-radius: 0.5rem;
 }
 
 .smallImagesSection {
@@ -50,7 +58,6 @@
   height: 100%;
   width: auto;
   transition: all 1s ease-out;
-  transition: opacity 0.1s linear;
 }
 
 .smallImage {
