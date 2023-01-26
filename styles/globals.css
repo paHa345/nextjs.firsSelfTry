@@ -183,7 +183,7 @@ button:disabled {
   top: 0;
   bottom: 0;
   width: 100%;
-  height: 12.2rem;
+  height: 13.2rem;
   padding-top: 0;
   padding-bottom: 0;
   background-color: #c0eb75dc !important;
@@ -193,6 +193,18 @@ button:disabled {
 
 .stickySection {
   margin-top: 10.2rem;
+}
+
+@media (max-width: 53em) {
+  .sticky {
+    height: 15.2rem;
+  }
+}
+
+@media (max-width: 26em) {
+  .sticky {
+    height: 20.2rem;
+  }
 }
 
 :root,
