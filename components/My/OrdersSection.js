@@ -10,8 +10,11 @@ function OrdersSection(props) {
     <Fragment>
       <div className={styles.container}>
         <div className={styles.ordersSection}>
-          <div>
-            <h1 className={styles.ordersTitle}>Мои заказы</h1>
+          <div className={styles.nameContainer}>
+            <div className={styles.backgroundNameContainer}>
+              <div className={styles.backgroundName}>Мои заказы</div>
+            </div>
+            <h2 className={styles.bestProductH2}>Мои заказы</h2>
           </div>
           <Orders></Orders>
         </div>

@@ -19,7 +19,12 @@ function FavouritesProductsSection(props) {
       <section className={`${styles.bestProducts} ${stickySection}`}>
         <div className={`${styles.container}`}>
           <div className={styles.bestProductsMain}>
-            <h2 className={styles.bestProductH2}>Избранное</h2>
+            <div className={styles.nameContainer}>
+              <div className={styles.backgroundNameContainer}>
+                <div className={styles.backgroundName}>Избранное</div>
+              </div>
+              <h2 className={styles.bestProductH2}>Избранное</h2>
+            </div>
 
             <FavouritesProductCards></FavouritesProductCards>
           </div>

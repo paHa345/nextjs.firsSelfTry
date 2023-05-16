@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: row;
   list-style: none;
-  gap: 6.4rem;
+  gap: 3.2rem;
+  justify-content: space-evenly;
 }
 
 .allProducts {
@@ -21,15 +22,28 @@
 }
 
 .cartElementQuantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   position: absolute;
   font-size: 2rem;
-  /* width: 3rem;
-  height: 3rem; */
-  bottom: 1rem;
+  font-weight: 600;
+
+  /* bottom: 1rem;
   border: 1px solid black;
   padding: 0.5rem;
   border-radius: 20%;
-  background-color: aliceblue;
+  background-color: aliceblue; */
+
+  color: #fff;
+  background: #e72419;
+  border-radius: 50%;
+
+  height: 2.3rem;
+  padding: 0 0.6rem;
+  bottom: 2rem;
+  left: 2rem;
 }
 
 .headerNavLink:hover,
@@ -37,9 +51,9 @@
   color: #212223;
 }
 
-.menuIcons {
+/* .menuIcons {
   display: none;
-}
+} */
 
 @media (max-width: 33em) {
   .menuText {

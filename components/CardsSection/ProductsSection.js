@@ -40,7 +40,12 @@ function ProductsSection(props) {
       <section className={`${styles.bestProducts} ${stickySection}`}>
         <div className={`${styles.container}`}>
           <div className={styles.bestProductsMain}>
-            <h2 className={styles.bestProductH2}>{currentType}</h2>
+            <div className={styles.nameContainer}>
+              <div className={styles.backgroundNameContainer}>
+                <div className={styles.backgroundName}>{currentType}</div>
+              </div>
+              <h2 className={styles.bestProductH2}>{currentType}</h2>
+            </div>
             {router.query.productType && (
               <div className={styles.sortButton}>
                 <Link

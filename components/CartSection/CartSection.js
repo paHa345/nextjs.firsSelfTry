@@ -60,8 +60,11 @@ function BascetSection(props) {
       <section className={styles.bestProducts}>
         <div className={styles.container}>
           <div className={styles.cardSection}>
-            <div className={styles.cartHaedSection}>
-              <h2 className={styles.cartMainText}>Корзина</h2>
+            <div className={styles.nameContainer}>
+              <div className={styles.backgroundNameContainer}>
+                <div className={styles.backgroundName}>Корзина</div>
+              </div>
+              <h2 className={styles.bestProductH2}>Корзина</h2>
             </div>
 
             <div className={styles.notificationContainer}>
@@ -73,20 +76,23 @@ function BascetSection(props) {
               )}
             </div>
 
-            <div className={styles.cartContainer}>
-              <CartMain></CartMain>
+            <div className={styles.cartMainContainer}>
+              <div className={styles.cartContainer}>
+                <CartMain></CartMain>
 
-              {storage && cartElements}
-            </div>
-            <div className={styles.cartTotalAmount}>
-              <div>Сумма товаров</div>
-              <div>
-                {`${totalAmount} `}
-                <span>Р</span>
+                {storage && cartElements}
+              </div>
+              <div className={styles.cartTotalAmount}>
+                <div>
+                  <div className={styles.totalText}>Сумма товаров</div>
+                  <div className={styles.totalAmount}>
+                    {`${totalAmount} `}
+                    <span>₽</span>
+                  </div>
+                </div>
+                <ButtonTakeOrder></ButtonTakeOrder>
               </div>
             </div>
-
-            <ButtonTakeOrder></ButtonTakeOrder>
           </div>
         </div>
       </section>

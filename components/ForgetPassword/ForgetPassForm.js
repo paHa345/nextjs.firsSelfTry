@@ -76,7 +76,12 @@ function ForgetPassForm(props) {
   };
   return (
     <div className={styles.loginContainer}>
-      <h2>Восстановление пароля</h2>
+      <div className={styles.nameContainer}>
+        <div className={styles.backgroundNameContainer}>
+          <div className={styles.backgroundName}>Восстановление пароля</div>
+        </div>
+        <h2 className={styles.bestProductH2}>Восстановление пароля</h2>
+      </div>
       <div className={styles.notificationContainer}>
         {fetchStatus && (
           <FetchNotification

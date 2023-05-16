@@ -22,7 +22,7 @@ function CartElement(props) {
       <div className={styles.cartElement}>
         <div className={styles.cartElementCellProducts}>
           <Image
-            src={props.image}
+            src={props.image[0]}
             alt="productsImage"
             width={200}
             height={200}

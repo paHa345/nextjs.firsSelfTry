@@ -44,9 +44,17 @@ function SearchProductsSection(props) {
       <section className={`${styles.bestProducts} ${stickySection}`}>
         <div className={`${styles.container}`}>
           <div className={styles.bestProductsMain}>
-            <h2
-              className={styles.bestProductH2}
-            >{`Результаты поиска: ${router.query.searchText} `}</h2>
+            <div className={styles.nameContainer}>
+              <div className={styles.backgroundNameContainer}>
+                <div
+                  className={styles.backgroundName}
+                >{`Результаты поиска: ${router.query.searchText} `}</div>
+              </div>
+              <h2
+                className={styles.bestProductH2}
+              >{`Результаты поиска: ${router.query.searchText} `}</h2>
+            </div>
+
             {!currentSearchItems.status && (
               <div className={styles.sortButton}>
                 <Link

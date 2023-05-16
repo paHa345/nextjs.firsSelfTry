@@ -6,40 +6,46 @@ import { useRouter } from "next/router";
 
 function SearchComponent(props) {
   const router = useRouter();
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState("Введите название");
   const changeSearchtextHandler = (e) => {
     setSearchText(e.target.value);
   };
   const searchHandler = (e) => {
     e.preventDefault();
-    console.log("Search");
-    console.log(searchText);
+
     if (searchText === "") {
       return;
     }
     router.push(`/search/${searchText}`);
   };
 
+  const clickhandler = (e) => {
+    e.preventDefault();
+    setSearchText("");
+  };
+
   return (
     <div className={styles.searchContainer}>
-      <form className={styles.searchForm} onSubmit={searchHandler}>
+      <div className={styles.searchForm}>
         <div className={styles.searchInputContainer}>
           <input
             onChange={changeSearchtextHandler}
             className={styles.searchInput}
-            placeholder="Введите название товара"
+            onClick={clickhandler}
+            placeholder={searchText}
           ></input>
         </div>
         <div className={styles.searchButton}>
-          <button>
+          <div>
             <FontAwesomeIcon
+              onClick={searchHandler}
               className={styles.menuIcons}
               icon={faMagnifyingGlass}
-              size="4x"
+              size="2x"
             />
-          </button>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

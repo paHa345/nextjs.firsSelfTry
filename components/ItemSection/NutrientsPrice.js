@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCircleLeft,
-  faCircleRight,
+  faSquareCaretRight,
+  faSquareCaretLeft,
 } from "@fortawesome/free-regular-svg-icons";
 import styles from "./NutrientsPrice.module.css";
 
@@ -112,13 +112,13 @@ function NutrientsPrice(props) {
           <div className={styles.smallImagesSection}>
             <div className={styles.arrowLeftContainer}>
               <Link href={"/"} onClick={shiftLeftHandler}>
-                <FontAwesomeIcon icon={faCircleLeft} size="4x" />
+                <FontAwesomeIcon icon={faSquareCaretLeft} size="4x" />
               </Link>
             </div>
             <div className={styles.smallImagesContainer}>{smallImages}</div>
             <div className={styles.arrowRightContainer}>
               <Link href={"/"} onClick={shiftRightHandler}>
-                <FontAwesomeIcon icon={faCircleRight} size="4x" />
+                <FontAwesomeIcon icon={faSquareCaretRight} size="4x" />
               </Link>
             </div>
           </div>
@@ -155,7 +155,7 @@ function NutrientsPrice(props) {
             {" "}
             {props.currentItem.price}{" "}
           </span>
-          Р
+          ₽
         </p>
         <div className={styles.productCardButton}>
           <Link href="/" onClick={addToCartHandler}>

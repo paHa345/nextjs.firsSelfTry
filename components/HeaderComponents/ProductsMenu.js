@@ -17,6 +17,8 @@ function ProductsMenu(props) {
     e.preventDefault();
 
     const name = e.target.dataset.name;
+    console.log(name);
+
     const currentProd = items.filter((el) => el.type === name);
 
     dispatch(appStateActions.setCurrentType(e.target.textContent));
@@ -33,38 +35,44 @@ function ProductsMenu(props) {
 
   return (
     <div className={styles.productsNav} onMouseLeave={props.onLeave}>
-      <ul className={styles.productsNavList}>
-        <li className={styles.productsNavListEl}>
+      <div className={styles.productsNavList}>
+        <div
+          data-name="protein"
+          onClick={props.onHide}
+          className={styles.productsNavListEl}
+        >
           <Link
             href="/catalog/protein"
-            onClick={props.onHide}
             // onClick={clickHandler}
-            data-name="protein"
           >
             Протеин
           </Link>
-        </li>
-        <li className={styles.productsNavListEl}>
+        </div>
+        <div
+          data-name="creatine"
+          onClick={props.onHide}
+          className={styles.productsNavListEl}
+        >
           <Link
-            onClick={props.onHide}
             href="/catalog/creatine"
             // onClick={clickHandler}
-            data-name="creatine"
           >
             Креатин
           </Link>
-        </li>
-        <li className={styles.productsNavListEl}>
+        </div>
+        <div
+          data-name="lipo"
+          onClick={props.onHide}
+          className={styles.productsNavListEl}
+        >
           <Link
-            onClick={props.onHide}
             href="/catalog/lipo"
             //  onClick={clickHandler}
-            data-name="lipo"
           >
             Жиросжигающие добавки
           </Link>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   );
 }

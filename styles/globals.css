@@ -31,9 +31,19 @@ a {
   box-sizing: border-box;
 }
 
+main {
+  background-color: #f8ffdd2a;
+}
+
 html {
   /* font-size: 10px; */
   font-size: 62.5%;
+  font-family: "Uni Sans Demo", sans-serif;
+  font-weight: 500;
+}
+
+.body {
+  color: #666;
 }
 
 /* XXXXXXXXXXXXXXXXX */

@@ -5,15 +5,12 @@
   align-items: center;
   justify-content: space-around; */
   /* position: relative; */
+  height: 10rem;
 }
 
-/* .headerImg {
-  height: 10rem;
-}
-.headerLogo {
+/* .headerLogo {
   height: 10rem;
   width: 20rem;
-  position: inherit;
 } */
 .menuIcons {
   display: none;
@@ -30,7 +27,9 @@
 }
 .prodC {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 10rem 40% 40%;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  /* gap: 2rem; */
 }

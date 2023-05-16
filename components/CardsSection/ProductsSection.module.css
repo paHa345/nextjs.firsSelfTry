@@ -3,6 +3,33 @@
   padding: 9.6rem 0;
   margin: 0 auto;
 }
+
+.nameContainer {
+  position: relative;
+}
+
+.backgroundNameContainer {
+  font-size: 24rem;
+  line-height: 1;
+  position: absolute;
+  color: rgba(17, 156, 201, 0.11);
+  opacity: 0.5;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  left: 0;
+  top: -5rem;
+  z-index: -1;
+}
+.backgroundName {
+  max-width: 1440px;
+  padding: 0;
+  margin: 0 auto;
+  font-family: "Uni Sans Demo", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.03em;
+}
 .bestProducts {
   background-color: #f4fce336;
 }
@@ -19,6 +46,11 @@
   text-align: center;
   font-size: 6rem;
   margin-bottom: 3.2rem;
+  font-family: "Uni Sans Demo", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  color: #185288;
 }
 
 .sortButton a:link,
@@ -29,9 +61,14 @@
   padding: 1.2rem 2rem;
   font-size: 2.4rem;
   text-decoration: none;
-  border-radius: 11px;
+  /* border-radius: 11px; */
   transition: all 0.3s;
   margin-top: 5rem;
+  transition: all 0.3s;
+  border: 1px solid #666;
+  color: #666;
+  background: #fff;
+  padding: 10px 20px;
 }
 
 .sortButton a:hover,

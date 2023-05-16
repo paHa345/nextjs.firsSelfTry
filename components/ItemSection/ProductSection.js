@@ -1,4 +1,4 @@
-import styles from "./ItemSection.module.css";
+import styles from "./ProductSection.module.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleLeft } from "@fortawesome/free-regular-svg-icons";
@@ -50,6 +50,8 @@ function Item(props) {
     }
   }, [session, dispatch]);
 
+  console.log(currentItem.type.toUpperCase());
+
   useEffect(() => {
     if (props.item) {
       dispatch(
@@ -74,9 +76,17 @@ function Item(props) {
 
             // onClick={goToProductsHandler}
           >
-            <FontAwesomeIcon icon={faCircleLeft} size="1x" />
-            Назад
+            {/* <FontAwesomeIcon icon={faCircleLeft} size="1x" /> */}
+            {currentItem.type[0].toUpperCase() + currentItem.type.slice(1)}
           </Link>
+
+          <div className={styles.nameContainer}>
+            <div className={styles.backgroundNameContainer}>
+              <div className={styles.backgroundName}>{currentItem.name}</div>
+            </div>
+            <h2 className={styles.bestProductH2}>{currentItem.name}</h2>
+          </div>
+
           <div className={styles.itemContainer}>
             <div className={styles.itemBreadcrumbClement}></div>
             <div className={styles.itemNameElement}>

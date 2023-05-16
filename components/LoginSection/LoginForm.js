@@ -45,7 +45,12 @@ function LoginForm(props) {
   };
   return (
     <div className={styles.loginContainer}>
-      <h2>Авторизация</h2>
+      <div className={styles.nameContainer}>
+        <div className={styles.backgroundNameContainer}>
+          <div className={styles.backgroundName}>Авторизация</div>
+        </div>
+        <h2 className={styles.bestProductH2}>Авторизация</h2>
+      </div>
       <form className={styles.form} onSubmit={loginHandler}>
         <div className={styles.loginForm}>
           <div className={styles.loginFormElement}>

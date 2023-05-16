@@ -35,20 +35,12 @@ function MainMenu(props) {
     <ul className={styles.headerNavList}>
       <li className={styles.allProducts}>
         <Link onClick={props.onShow} href="/" className={styles.headerNavLink}>
-          <span className={styles.menuText}>Все товары</span>
+          {/* <span className={styles.menuText}>Все товары</span> */}
           <FontAwesomeIcon
-            className={styles.menuIcons}
+            className={`${styles.menuText} ${styles.menuIcons}`}
             icon={faBars}
-            size="2x"
+            size="1x"
           />
-          {/* <Image
-            className={styles.menuIcons}
-            priority
-            height={30}
-            width={60}
-            src="/img/logo.png"
-            alt="logo"
-          ></Image> */}
         </Link>
       </li>
       <li>
@@ -57,12 +49,12 @@ function MainMenu(props) {
           // onClick={props.onShowCart}
           className={`${styles.headerNavLink} ${styles.cartMenuElement}`}
         >
-          <span className={styles.menuText}>Корзина</span>
+          {/* <span className={styles.menuText}>Корзина</span> */}
 
           <FontAwesomeIcon
             className={styles.menuIcons}
             icon={faCartShopping}
-            size="2x"
+            size="1x"
           />
           <span className={styles.cartElementQuantity}>{quantity}</span>
         </Link>
@@ -74,11 +66,11 @@ function MainMenu(props) {
             // onClick={props.onShowLogin}
             className={styles.headerNavLink}
           >
-            <span className={styles.menuText}>Войти</span>
+            {/* <span className={styles.menuText}>Войти</span> */}
             <FontAwesomeIcon
               className={styles.menuIcons}
               icon={faUser}
-              size="2x"
+              size="1x"
             />
           </Link>
         </li>
@@ -90,11 +82,11 @@ function MainMenu(props) {
             // onClick={props.onShowLogin}
             className={styles.headerNavLink}
           >
-            <span className={styles.menuText}>Кабинет</span>
+            {/* <span className={styles.menuText}>Кабинет</span> */}
             <FontAwesomeIcon
               className={styles.menuIcons}
               icon={faIdCard}
-              size="2x"
+              size="1x"
             />
           </Link>
         </li>

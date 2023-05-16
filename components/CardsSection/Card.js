@@ -240,18 +240,18 @@ function Card(props) {
             ></input>
           </div>
           <p className={styles.price}>
-            {props.price} <span>Р</span>
+            {props.price} <span>₽</span>
           </p>
         </div>
         <div className={styles.footerCardSection}>
           {favouritesIDs.includes(props.id) && (
             <Link href="/" onClick={removeFromFavouritesHandler}>
-              <FontAwesomeIcon icon={faCircleCheck} size="4x" />
+              <FontAwesomeIcon icon={faCircleCheck} size="2x" />
             </Link>
           )}
           {!favouritesIDs.includes(props.id) && (
             <Link href="/" onClick={addToFavouritesHandler}>
-              <FontAwesomeIcon icon={faHeart} size="4x" />
+              <FontAwesomeIcon icon={faHeart} size="2x" />
             </Link>
           )}
 

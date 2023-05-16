@@ -14,22 +14,26 @@ function MySection(props) {
     <section>
       <div className={styles.container}>
         <div className={styles.myContainer}>
-          <h1 className={styles.name}>Здравствуйте, {props.name}</h1>
-          <div className={styles.loginButton}>
-            <Link href="/favourites">Избранное</Link>
+          <div className={styles.nameContainer}>
+            <div className={styles.backgroundNameContainer}>
+              <div className={styles.backgroundName}>Здравствуйте</div>
+            </div>
+            <h2 className={styles.bestProductH2}>Здравствуйте, {props.name}</h2>
           </div>
-          <br></br>
+          <div className={styles.cabinetButtonContainer}>
+            <div className={styles.cabinetButton}>
+              <Link href="/favourites">Избранное</Link>
+            </div>
 
-          <div className={styles.loginButton}>
-            <Link href="/myOrders">Мои заказы</Link>
+            <div className={styles.cabinetButton}>
+              <Link href="/myOrders">Мои заказы</Link>
+            </div>
+            <div className={styles.cabinetButton}>
+              <Link onClick={logoutHandler} href="/">
+                Выйти
+              </Link>
+            </div>
           </div>
-        </div>
-        <br></br>
-
-        <div className={styles.loginButton}>
-          <Link onClick={logoutHandler} href="/">
-            Выйти
-          </Link>
         </div>
       </div>
     </section>

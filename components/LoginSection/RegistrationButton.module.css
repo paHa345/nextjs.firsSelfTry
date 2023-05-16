@@ -9,18 +9,21 @@
 }
 
 .loginButton button {
-  border-radius: 11px;
-  padding: 1.6rem 2.4rem;
-  cursor: pointer;
-  font: inherit;
+  margin: 0 5px 20px;
   color: #555;
-  background-color: #ffa94d;
-  border: 1px solid #fad4ac;
+  padding: 1.2rem 2rem;
+  font-size: 2.4rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  border: 1px solid #666;
+  color: #666;
+  background: #fff;
+  padding: 10px 20px;
 }
 
 .loginButton button:hover {
-  background-color: #fd7e14;
-  color: #f8f9fa;
+  color: #fff5f5;
+  background-color: #e8590c;
 }
 
 .loginButton a:link,

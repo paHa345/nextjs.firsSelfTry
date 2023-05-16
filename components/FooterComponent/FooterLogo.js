@@ -2,7 +2,7 @@ import styles from "./FooterLogo.module.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 
 function FooterLogo() {
@@ -10,21 +10,23 @@ function FooterLogo() {
     <div className={styles.footerSocial}>
       <Image
         className={styles.footerLogo}
-        src="/img/logo.png"
+        src="/img/protLogo.png"
         alt="imageFooterLogo"
+        height={100}
         width={100}
-        height={50}
+        // objectFit="cover"
+        layout="responsive"
       />
-      <div className={styles.socialIcons}>
+      {/* <div className={styles.socialIcons}>
         <Link href="/">
-          <FontAwesomeIcon icon={faUser} size="4x" />
+          <FontAwesomeIcon icon={faUser} size="2x" />
         </Link>
         <Link href="/">
-          <FontAwesomeIcon icon={faThumbsUp} size="4x" />
+          <FontAwesomeIcon icon={faThumbsUp} size="2x" />
         </Link>
-      </div>
+      </div> */}
       <p className={styles.copyright}>
-        Copyright © 2022 by paHa. All right reserved.
+        Copyright © 2023 by paHa. All right reserved.
       </p>
     </div>
   );

@@ -3,6 +3,20 @@
   border: 2px solid #ffa94d;
   margin: 2rem;
   width: 50%;
+
+  min-width: 21rem;
+  border-radius: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 3.2rem;
+  background-color: #ffffff;
+  box-shadow: 0 10px 15px rgb(0 0 0 / 5%);
+  transition: box-shadow 0.3s;
+}
+
+.orderContainer:hover {
+  box-shadow: 15px 10px 15px rgb(0 0 0 / 5%);
 }
 
 .orderElement {

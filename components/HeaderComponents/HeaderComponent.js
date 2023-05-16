@@ -5,7 +5,7 @@ import MenuContainer from "./MenuContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import SearchComponent from "./SearchComponent";
 
 function HeaderComponent() {
@@ -69,22 +69,20 @@ function HeaderComponent() {
         <div className={styles.prodC}>
           <Link href="/" className={styles.headerLogo}>
             <Image
-              // className={styles.headerImg}
-              // layout="fill"
-              priority
-              height={80}
-              width={160}
+              height={100}
+              width={100}
               // objectFit="cover"
-              src="/img/logo.png"
+              layout="responsive"
+              src="/img/protLogo.png"
               alt="logo"
             />
           </Link>
+          <SearchComponent></SearchComponent>
           <MenuContainer
             onShowCart={showCartHandler}
             onShowLogin={showLoginHandler}
           ></MenuContainer>
         </div>
-        <SearchComponent></SearchComponent>
       </header>
 
       {/* {appState.showProducts && <ProductsSection></ProductsSection>}

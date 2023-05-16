@@ -1,14 +1,12 @@
+.itemSection {
+  /* margin: 0 3.6rem; */
+  margin-left: 3.6rem;
+  margin-right: 3.6rem;
+}
 .container {
   max-width: 130rem;
   padding: 9.6rem 0;
   margin: 0 auto;
-  position: relative;
-}
-
-.myContainer {
-  margin: 0 3.6rem;
-
-  position: relative;
 }
 
 .nameContainer {
@@ -28,6 +26,7 @@
   top: -5rem;
   z-index: -1;
 }
+
 .backgroundName {
   max-width: 1440px;
   padding: 0;
@@ -49,47 +48,61 @@
   color: #185288;
 }
 
-.name {
-  font-size: 2.4rem;
-  padding: 3.2rem 0;
+.backLink {
+  outline: 0 !important;
+  -webkit-tap-highlight-color: transparent;
+  font-weight: 400;
+  color: #333;
+  text-decoration: none;
+  margin-left: 15rem;
+  font-size: 2rem;
 }
 
-.orderTitle {
-  font-size: 2.4rem;
-  padding: 3.2rem 0;
-}
-
-.loginButton {
-  display: flex;
-  width: 20rem;
-  margin: 0 auto;
-}
-
-.cabinetButtonContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3.2rem;
-}
-
-.cabinetButton a:link,
-.cabinetButton a:visited {
+/* .backLink:link,
+.backLink:visited {
   color: #555;
   background-color: #ffd8a8;
-  padding: 1.2rem 2rem;
-  font-size: 2.4rem;
+  /* border: 2px solid black; */
+/* padding: 0.6rem;
+  font-size: 3.2rem;
   text-decoration: none;
+  border-radius: 11px;
   transition: all 0.3s;
-  margin-top: 5rem;
-  transition: all 0.3s;
-  border: 1px solid #666;
-  color: #666;
-  background: #fff;
-  padding: 10px 20px;
+} */
+
+.backLink:hover,
+.backLink:active {
+  /* color: #fff5f5; */
+  text-decoration: underline;
+
+  /* background-color: #e8590c; */
+}
+.itemContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+  box-shadow: 0 10px 15px rgb(0 0 0 / 5%);
+  padding: 2rem;
+}
+.itemName {
+  font-size: 3.2rem;
+  font-weight: 700;
 }
 
-.cabinetButton a:hover,
-.cabinetButton a:active {
+.productCardButton a:link,
+.productCardButton a:visited {
+  color: #555;
+  background-color: #ffd8a8;
+  /* border: 2px solid black; */
+  padding: 1.2rem 3.2rem;
+  font-size: 3.2rem;
+  text-decoration: none;
+  border-radius: 11px;
+  transition: all 0.3s;
+}
+
+.productCardButton a:hover,
+.productCardButton a:active {
   color: #fff5f5;
   background-color: #e8590c;
 }

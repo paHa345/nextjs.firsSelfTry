@@ -17,6 +17,45 @@
   padding: 1rem;
   text-align: center;
 } */
+
+.nameContainer {
+  position: relative;
+}
+
+.backgroundNameContainer {
+  font-size: 24rem;
+  line-height: 1;
+  position: absolute;
+  color: rgba(17, 156, 201, 0.11);
+  opacity: 0.5;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  left: 0;
+  top: -5rem;
+  z-index: -1;
+}
+
+.backgroundName {
+  max-width: 1440px;
+  padding: 0;
+  margin: 0 auto;
+  font-family: "Uni Sans Caps", sans-serif, BlinkMacSystemFont, -apple-system;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.03em;
+}
+
+.bestProductH2 {
+  text-align: center;
+  font-size: 6rem;
+  margin-bottom: 3.2rem;
+  font-family: "Uni Sans Caps", sans-serif, BlinkMacSystemFont, -apple-system;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  color: #185288;
+}
 .loginContainer h2 {
   text-align: center;
   font-size: 4.8rem;
@@ -34,7 +73,7 @@
   padding: 3.2rem;
   background-color: #f8f9fa;
   margin-bottom: 2.4rem;
-  border-radius: 1rem;
+  border-radius: 0.1rem;
 }
 .loginFormElement {
   display: flex;
@@ -51,7 +90,7 @@
 
   font-size: 1.8rem;
   text-align: center;
-  border-radius: 9px;
+  border-radius: 1px;
   padding: 1.2rem;
   margin-top: 1.2rem;
 }

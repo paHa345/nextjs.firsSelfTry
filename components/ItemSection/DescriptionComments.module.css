@@ -6,7 +6,13 @@
 .descriptionLinkSection,
 .commentsLinkSection {
   padding: 1.6rem;
-  background-color: #eeded3;
+  /* background-color: #eeded3; */
+  border: 1px solid #666;
+  background-color: rgba(17, 156, 201, 0.11);
+}
+
+.descriptionLinkSection :hover,
+.commentsLinkSection:hover {
 }
 
 .descriptionCommentsLinksSection div a:link,

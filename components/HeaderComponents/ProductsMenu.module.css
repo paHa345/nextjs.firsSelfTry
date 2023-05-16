@@ -1,34 +1,59 @@
 .productsNav {
-  /* top: 20%;
-      left: 50%; */
-  top: 100%;
-  width: 100%;
-  /* transform: translate(-50%, -50%); */
+  display: flex;
+  top: 83%;
+  width: 70%;
   padding: 2.4rem;
-  background-color: #e6e6e6;
-  /* opacity: 0.7; */
+  background-color: #f9fdf8;
   position: absolute;
   border-radius: 5px;
-
   transition: all 1s;
   transition-delay: 0.5s;
   z-index: 100;
+  justify-content: center;
+  right: 15%;
+  border-top: 2px solid rgb(241, 206, 156);
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 10px 15px rgb(0 0 0 / 5%);
 }
-.productsNav ul {
+
+.productsNavList {
+  width: 80%;
+}
+.productsNavListEl {
   text-align: center;
+  /* padding: 1rem; */
+  /* border: 2px solid black; */
+  margin-bottom: 1rem;
+  cursor: pointer;
 }
-.productsNav ul li {
-  list-style: none;
+
+/* .productsNavListEl :hover {
+  text-decoration: none;
+  background-color: rgb(241, 206, 156);
+  color: #582b00;
+  width: 80%;
+  border: 2px solid rgb(247, 7, 7);
+} */
+
+.productsNavListEl a {
+  color: #000000;
+  display: flex;
+  justify-content: center;
 }
+
 .productsNavListEl a:link,
 .productsNavListEl a link:visited {
   font-size: 3.2rem;
   text-decoration: none;
-  color: #34352e;
+  color: #000000;
+  padding: 1rem;
+  border-radius: 0.1rem;
 }
 
 .productsNavListEl a:hover,
 .productsNavListEl a link:active {
+  box-shadow: 0 10px 15px rgb(0 0 0 / 5%);
   text-decoration: none;
-  color: #f76707;
+  color: #582b00;
+  background-color: rgb(241, 206, 156);
 }

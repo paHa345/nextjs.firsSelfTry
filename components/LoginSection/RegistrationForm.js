@@ -53,7 +53,12 @@ function RegistrationForm(props) {
 
   return (
     <div className={styles.registrationContainer}>
-      <h2>Регистрация</h2>
+      <div className={styles.nameContainer}>
+        <div className={styles.backgroundNameContainer}>
+          <div className={styles.backgroundName}>Регистрация</div>
+        </div>
+        <h2 className={styles.bestProductH2}>Регистрация</h2>
+      </div>
       <form className={styles.form} onSubmit={authHandler}>
         <div className={styles.loginForm}>
           <div className={styles.loginFormElement}>

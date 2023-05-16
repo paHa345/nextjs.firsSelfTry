@@ -5,13 +5,10 @@
 }
 .bestProducts {
   background-color: #f4fce336;
-  /* max-height: 80rem;
-  overflow: scroll; */
 }
 
 .cardSection {
   margin: 0 3.6rem;
-  /* min-width: 62rem; */
   position: relative;
 }
 
@@ -26,25 +23,90 @@
 }
 
 .cartContainer {
-  /* background-color: antiquewhite; */
-  max-height: 40rem;
-  overflow: auto;
+  box-shadow: 0 1rem, 5rem rgb(0 0 0 / 5%);
+  background: #fff;
+  border-radius: 1rem;
+  padding: 3rem;
+  margin-bottom: 1.7rem;
+  font-size: 14px;
 }
 
-.cartMainText {
-  font-size: 3.6rem;
+.nameContainer {
+  position: relative;
+}
+
+.backgroundNameContainer {
+  font-size: 24rem;
+  line-height: 1;
+  position: absolute;
+  color: rgba(17, 156, 201, 0.11);
+  opacity: 0.5;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  left: 0;
+  top: -5rem;
+  z-index: -1;
+}
+
+.backgroundName {
+  max-width: 1440px;
+  padding: 0;
+  margin: 0 auto;
+  font-family: "Uni Sans Caps", sans-serif, BlinkMacSystemFont, -apple-system;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.03em;
+}
+
+.bestProductH2 {
   text-align: center;
+  font-size: 6rem;
+  margin-bottom: 3.2rem;
+  font-family: "Uni Sans Caps", sans-serif, BlinkMacSystemFont, -apple-system;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  color: #185288;
+}
+
+.cartMainContainer {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  gap: 2.4rem;
 }
 
 .cartTotalAmount {
-  margin: 2.4rem 0;
-  display: flex;
-  justify-content: flex-end;
-  gap: 2.4rem;
+  box-shadow: 0 10px 15px rgb(0 0 0 / 5%);
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 17px;
+  font-size: 14px;
+  position: sticky;
+  top: 11rem;
+  padding: 32px 40px;
+  height: 33%;
+  min-height: 25rem;
+}
+
+.totalText {
+  padding-bottom: 2rem;
 }
 
 .cartTotalAmount div {
   font-size: 2.4rem;
+}
+
+.totalAmount {
+  font-size: 3.2rem;
+  line-height: 1;
+  font-family: "Uni Sans Demo", sans-serif;
+  letter-spacing: 0.03em;
+  color: #e72419;
+  text-transform: uppercase;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .notificationContainer {
@@ -53,8 +115,11 @@
   justify-content: center;
 }
 
-@media (max-width: 33em) {
+@media (max-width: 43em) {
   .cardSection {
     min-width: auto;
+  }
+  .cartMainContainer {
+    grid-template-columns: 100%;
   }
 }
