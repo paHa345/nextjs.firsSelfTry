@@ -24,14 +24,21 @@
   z-index: 10;
   top: 40%;
   background-color: #fffcfc;
+  border: 0.1rem solid black;
 }
 
 .arrowRightContainer {
   position: absolute;
   z-index: 10;
   top: 40%;
-  right: 0;
+  right: 1.7rem;
   background-color: #fffcfc;
+  border: 0.1rem solid black;
+}
+
+.arrowRightContainer:hover,
+.arrowLeftContainer:hover {
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.521);
 }
 
 .smallImagesSection {

@@ -34,12 +34,6 @@ function NutrientsPrice(props) {
   const clickSmallImageHandler = (e) => {
     e.preventDefault();
 
-    // const arr2 = imageArr.splice(e.target.dataset.imagenumber);
-
-    // const newArr = [...arr2, ...imageArr];
-
-    // setImageArr([...newArr]);
-
     setCurrentImage(e.target.dataset.image);
   };
 
@@ -112,13 +106,24 @@ function NutrientsPrice(props) {
           <div className={styles.smallImagesSection}>
             <div className={styles.arrowLeftContainer}>
               <Link href={"/"} onClick={shiftLeftHandler}>
-                <FontAwesomeIcon icon={faSquareCaretLeft} size="4x" />
+                <Image
+                  src="/img/left100.png"
+                  alt="leftArrow"
+                  height={50}
+                  width={50}
+                ></Image>
+                {/* <FontAwesomeIcon icon={faSquareCaretLeft} size="4x" /> */}
               </Link>
             </div>
             <div className={styles.smallImagesContainer}>{smallImages}</div>
             <div className={styles.arrowRightContainer}>
               <Link href={"/"} onClick={shiftRightHandler}>
-                <FontAwesomeIcon icon={faSquareCaretRight} size="4x" />
+                <Image
+                  src="/img/right100.png"
+                  alt="rightArrow"
+                  height={50}
+                  width={50}
+                ></Image>{" "}
               </Link>
             </div>
           </div>

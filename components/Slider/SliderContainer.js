@@ -39,22 +39,24 @@ function SliderContainer(props) {
   return (
     <div className={styles.container}>
       <div className={styles.arrowContainer}>
-        <Link href="/">
-          <FontAwesomeIcon
-            icon={faCircleLeft}
-            size="6x"
-            className={styles.leftArrow}
+        <Link className={styles.leftArrow} href="/">
+          <Image
             onClick={prevImagesHandler}
-          />
+            src="/img/left100.png"
+            alt="leftArrow"
+            height={50}
+            width={50}
+          ></Image>
         </Link>
       </div>
-      <Link href="/">
-        <FontAwesomeIcon
-          icon={faCircleRight}
-          size="6x"
-          className={styles.rightArrow}
+      <Link className={styles.rightArrow} href="/">
+        <Image
           onClick={nextImagesHandler}
-        />
+          src="/img/right100.png"
+          alt="rightArrow"
+          height={50}
+          width={50}
+        ></Image>{" "}
       </Link>
       <div className={styles.sliderContainer}>
         {/* {slides[current - 1]}

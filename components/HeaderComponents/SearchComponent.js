@@ -13,7 +13,7 @@ function SearchComponent(props) {
   const searchHandler = (e) => {
     e.preventDefault();
 
-    if (searchText === "") {
+    if (searchText === "" || searchText === "Введите название") {
       return;
     }
     router.push(`/search/${searchText}`);

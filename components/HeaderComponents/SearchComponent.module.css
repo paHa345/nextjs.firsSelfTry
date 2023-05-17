@@ -26,7 +26,7 @@
   border: 1px solid #eeded3;
   font-size: 1.8rem;
   text-align: center;
-  border-radius: 0.5rem;
+  border-radius: 0.1rem;
   width: 17rem;
 }
 
@@ -39,9 +39,7 @@
 
 .searchButton {
   display: flex;
-
   text-align: center;
-  /* font-size: 3.2rem; */
   border-radius: 4px;
   padding: 0.5rem 2.5rem;
   cursor: pointer;
@@ -49,7 +47,6 @@
 
 .searchButton button {
   border-radius: 11px;
-  /* padding: 1.6rem 2.4rem; */
   cursor: pointer;
   font: inherit;
   color: #555;
