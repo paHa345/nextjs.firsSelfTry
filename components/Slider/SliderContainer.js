@@ -37,32 +37,34 @@ function SliderContainer(props) {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.arrowContainer}>
-        <Link className={styles.leftArrow} href="/">
-          <Image
-            onClick={prevImagesHandler}
-            src="/img/left100.png"
-            alt="leftArrow"
-            height={50}
-            width={50}
-          ></Image>
-        </Link>
-      </div>
-      <Link className={styles.rightArrow} href="/">
-        <Image
-          onClick={nextImagesHandler}
-          src="/img/right100.png"
-          alt="rightArrow"
-          height={50}
-          width={50}
-        ></Image>{" "}
-      </Link>
-      <div className={styles.sliderContainer}>
-        {/* {slides[current - 1]}
+    <div className={styles.slider}>
+      <div className={styles.container}>
+        <div className={styles.arrowContainer}>
+          <Link className={styles.leftArrow} href="/">
+            <Image
+              onClick={prevImagesHandler}
+              src="/img/left100.png"
+              alt="leftArrow"
+              height={50}
+              width={50}
+            ></Image>
+          </Link>
+          <Link className={styles.rightArrow} href="/">
+            <Image
+              onClick={nextImagesHandler}
+              src="/img/right100.png"
+              alt="rightArrow"
+              height={50}
+              width={50}
+            ></Image>{" "}
+          </Link>
+        </div>
+        <div className={styles.sliderContainer}>
+          {/* {slides[current - 1]}
         {slides[current]}
-        {slides[current + 1]} */}
-        <Slides current={current} images={props.images}></Slides>
+      {slides[current + 1]} */}
+          <Slides current={current} images={props.images}></Slides>
+        </div>
       </div>
     </div>
   );

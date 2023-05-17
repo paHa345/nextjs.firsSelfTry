@@ -12,8 +12,8 @@ function FooterLogo() {
         className={styles.footerLogo}
         src="/img/protLogo.png"
         alt="imageFooterLogo"
-        height={100}
-        width={100}
+        height={200}
+        width={200}
         // objectFit="cover"
         layout="responsive"
       />

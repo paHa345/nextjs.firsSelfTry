@@ -21,14 +21,14 @@
 }
 .slideButton {
   position: absolute;
-  background-color: #c0eb75;
+  background-color: #ffffffd5;
   top: 4rem;
   right: 4rem;
   margin: 1rem;
   padding: 3.2rem;
   color: #29231d;
   font-size: 2.4rem;
-  border-radius: 1rem;
+  border-radius: 0.1rem;
   text-decoration: none;
   box-shadow: 20px 10px 10px rgba(0, 0, 0, 0.5);
 }

@@ -4,25 +4,8 @@
   flex-direction: column;
 }
 
-/* .footerLogo {
-  width: 15rem;
-} */
-
-.socialIcons {
-  display: flex;
-  justify-content: flex-start;
-  gap: 3.2rem;
-  padding: 2.4rem 0;
-}
-
-.socialIcon {
-  height: 3.2rem;
-  width: 3.2rem;
-  color: #34352e;
-}
-
-.socialIcon:hover {
-  color: red;
+.footerLogo {
+  height: 80%;
 }
 
 .copyright {
