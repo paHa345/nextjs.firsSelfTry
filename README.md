@@ -1,5 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">paHa store</h1>
 
-## paHa store
+## Использованные технологии
+Проект написанн на React; клинт-серверное взаимодействие, API и предварительная генерация страниц написана на NextJS; авторизация и восстановление пароля - Next Auth, jsonwebtoken, bcryptjs, nodemailer; корзина товаров - Local Storage; база данных - Mongo DB; управление состоянием - Redux(redux/toolkit)
 
 
