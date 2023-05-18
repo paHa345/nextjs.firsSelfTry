@@ -7,6 +7,7 @@
 <p align="center">
   <img src="https://github.com/paHa345/nextjs.firsSelfTry/assets/55974360/3665ddee-39a9-4833-8fca-f4e131b1d022" />
 </p>
+
 ## Использованные технологии
 Проект написанн на React; клинт-серверное взаимодействие, API и предварительная генерация страниц написана на NextJS; авторизация и восстановление пароля - Next Auth, jsonwebtoken, bcryptjs, nodemailer; корзина товаров - Local Storage; база данных - Mongo DB; управление состоянием - Redux(redux/toolkit)
 
