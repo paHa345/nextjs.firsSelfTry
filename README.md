@@ -1,34 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">paHa store</h1>
 
-## Getting Started
+Посмотреть проект по ссылке https://paha-store-nextjs.vercel.app/
 
-First, run the development server:
+<!-- ![2023-05-18_13-57-26](https://github.com/paHa345/nextjs.firsSelfTry/assets/55974360/3665ddee-39a9-4833-8fca-f4e131b1d022)
+ -->
+<p align="center">
+  <img src="https://github.com/paHa345/nextjs.firsSelfTry/assets/55974360/3665ddee-39a9-4833-8fca-f4e131b1d022" />
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Использованные технологии
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Проект написанн на React; клиент-серверное взаимодействие, API и предварительная генерация страниц написана на NextJS; авторизация и восстановление пароля - Next Auth, jsonwebtoken, bcryptjs, nodemailer; корзина товаров - Local Storage; база данных - Mongo DB; управление состоянием - Redux(redux/toolkit).
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Функциональность проекта
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- paHa store - проект магазина спортивного питания, написанный на React, NextJS.
+- с помощью NextJS реализован предварительный рендеринг получаемой страницы на сервере как предварительная генерация страниц товаров во время сборки (SSG), так и рендеринг на стороне сервера страниц при запросе.
+- с помощью NextJS API Routes реализованы API endpoints для получения записи о продукте из базы данных, поиске нескольки продуктов с помощью регулярных выражений, загрузки комментариев о продукте, добавления комментариев и удаление комментариев, получение заказа, создание заказов. Для этого используется REST API и Fetch API.
+- реализована регистрация на сайте и вход под своей учётной записью с помощью Next Auth (с использованием JWT), восстановление забытого пароля путём отправки токена на почту (с использованием nodemailer).
+- доступ в личный кабинет доступен только авторизованному пользователю.
+- товары, добавленные пользователем в корзину хранятся в Local storage, при перезапуске приложения они не пропадают.
+- используется NoSQL база данных Mongo DB.
+- за управлением состояния этого приложения отвечает Redux(redux/toolkit).
+- реализована фейковая обработка платежей с помощью системы Stripe.
