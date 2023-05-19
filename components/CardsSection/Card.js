@@ -16,6 +16,7 @@ import { addToFavourites } from "../UI/fetchHelper";
 import { useSession } from "next-auth/react";
 import AddToFavourites from "../UI/AddToFavourites";
 import FetchNotification from "../UI/FetchNotification";
+import AddToFavouritesError from "../UI/AddToFavouritesError";
 
 function Card(props) {
   const [image, setImage] = useState(props.cardImage[0]);
@@ -83,14 +84,21 @@ function Card(props) {
 
   const addToFavouritesHandler = async (e) => {
     e.preventDefault();
+
     if (!session) {
+      // dispatch(
+      //   appStateActions.setFetchNotificationStatus({
+      //     status: "Error",
+      //     text: `Зарегистрируйтесь чтобы добавить товар в избранное`,
+      //   })
+      // );
       dispatch(
-        appStateActions.setFetchNotificationStatus({
-          status: "Error",
-          text: `Зарегистрируйтесь чтобы добавить товар в избранное`,
+        appStateActions.setAddToFavouriteNotification({
+          notification: false,
+          id: props.id,
         })
       );
-      // alert("Зарегистрируйтесь чтобы добавить товар в избранное");
+
       return;
     }
 
@@ -115,13 +123,14 @@ function Card(props) {
     e.preventDefault();
 
     if (!session) {
-      // alert("Зарегистрируйтесь чтобы удалить товар из избранного");
+      console.log(showAddToFavNotification);
       dispatch(
-        appStateActions.setFetchNotificationStatus({
-          status: "Error",
-          text: `Зарегистрируйтесь чтобы удалить товар из избранного`,
+        appStateActions.setAddToFavouriteNotification({
+          notification: "Error",
+          id: props.id,
         })
       );
+
       return;
     }
 
@@ -271,11 +280,14 @@ function Card(props) {
           )}
         </div>
 
-        {/* <div className={styles.notificationContainer}>
-          {fetchStatus && notificationId === props.id && (
-            <AddToFavourites text={notificationText}></AddToFavourites>
+        <div className={styles.notificationContainer}>
+          {showAddToFavNotification && (
+            <AddToFavouritesError
+              notification={showAddToFavNotification}
+              text={notificationText}
+            ></AddToFavouritesError>
           )}
-        </div> */}
+        </div>
 
         <div className={styles.notification}>
           <div className={styles.notificationContainer}>

@@ -1,0 +1,14 @@
+.notification {
+  position: absolute;
+  bottom: -10rem;
+
+  z-index: 1000;
+  padding: 3rem;
+  background-color: rgba(255, 51, 0, 0.63);
+  margin: 3rem;
+  border-radius: 2rem;
+}
+.notification h1 {
+  text-align: center;
+  font-size: 2rem;
+}

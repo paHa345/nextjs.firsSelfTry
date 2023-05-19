@@ -49,7 +49,7 @@ function ProductsSection(props) {
             {router.query.productType && (
               <div className={styles.sortButton}>
                 <Link
-                  href={`${process.env.NEXTAUTH_URL}/catalog/${
+                  href={`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/catalog/${
                     router.query.productType
                   }?page=${1}${sort ? `&sortBy=${sort}` : ""}`}
                   onClick={sortingByPriceHandler}
