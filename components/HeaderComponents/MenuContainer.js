@@ -15,12 +15,10 @@ function MenuContainer(props) {
   };
 
   const hideProductsHandler = (e) => {
-    // router.push("/cart");
     setShowProductsMenu(false);
   };
 
   const mouseLeaveHandler = () => {
-    console.log("Leave");
     setShowProductsMenu(false);
   };
 

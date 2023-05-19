@@ -1,11 +1,14 @@
 import { useState } from "react";
 import RegistrationButton from "./RegistrationButton";
 import styles from "./RegistrationForm.module.css";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 function RegistrationForm(props) {
   const [enteredLogin, setEnteredLogin] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredEmail, setEnteredEmail] = useState("");
+  const router = useRouter();
 
   const changeLoginHandler = (e) => {
     setEnteredLogin(e.target.value);
@@ -41,6 +44,19 @@ function RegistrationForm(props) {
 
       if (!req.ok) {
         throw new Error(res.message);
+      }
+
+      const result = await signIn("credentials", {
+        redirect: false,
+        email: enteredEmail,
+        password: enteredPassword,
+      });
+      if (result.error) {
+        alert(result.error);
+      }
+
+      if (!result.error) {
+        router.replace("/my");
       }
     }
 

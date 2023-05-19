@@ -29,7 +29,6 @@ function HomePage(props) {
   return (
     <Fragment>
       <SliderContainer images={props.sliderImages}></SliderContainer>
-
       <ProductsSection typeName={name}></ProductsSection>
     </Fragment>
   );

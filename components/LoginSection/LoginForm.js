@@ -39,9 +39,6 @@ function LoginForm(props) {
     if (!result.error) {
       router.replace("/my");
     }
-
-    // setEnteredLogin("");
-    // setEnteredPassword("");
   };
   return (
     <div className={styles.loginContainer}>

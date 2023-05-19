@@ -46,6 +46,14 @@
   left: 2rem;
 }
 
+.catalog {
+  font-weight: 600;
+}
+
+.catalog:hover {
+  text-decoration: underline;
+}
+
 .headerNavLink:hover,
 .headerNavLink:active {
   color: #212223;
