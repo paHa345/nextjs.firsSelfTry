@@ -19,8 +19,6 @@ function Order(props) {
     day: "numeric",
   });
 
-  console.log(formatter.format(date));
-
   return (
     <div key={props.order._id} className={styles.orderContainer}>
       {props.order.items.map((item, index) => {

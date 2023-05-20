@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
-function MenuIcon(props) {
+function MenuIcon() {
   return (
     <div className={styles.menuIcons}>
       <Link href="/" className={styles.headerNavLink}>

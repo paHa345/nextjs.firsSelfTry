@@ -1,7 +1,5 @@
 import Image from "next/legacy/image";
 import styles from "./SliderContainer.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleLeft, faCircleRight } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Slides from "./Slides";
@@ -60,9 +58,6 @@ function SliderContainer(props) {
           </Link>
         </div>
         <div className={styles.sliderContainer}>
-          {/* {slides[current - 1]}
-        {slides[current]}
-      {slides[current + 1]} */}
           <Slides current={current} images={props.images}></Slides>
         </div>
       </div>

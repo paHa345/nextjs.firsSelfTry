@@ -3,11 +3,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSquareCaretRight,
-  faSquareCaretLeft,
-} from "@fortawesome/free-regular-svg-icons";
 import styles from "./NutrientsPrice.module.css";
 
 function NutrientsPrice(props) {
@@ -18,7 +13,6 @@ function NutrientsPrice(props) {
   const [numberImage, setNumberImage] = useState(0);
   const [itemQuantity, serItemQuantity] = useState(1);
   const dispatch = useDispatch();
-  const item = useSelector((state) => state.item.item);
   const addToCartHandler = (e) => {
     e.preventDefault();
 
@@ -33,13 +27,11 @@ function NutrientsPrice(props) {
 
   const clickSmallImageHandler = (e) => {
     e.preventDefault();
-
     setCurrentImage(e.target.dataset.image);
   };
 
   const shiftLeftHandler = (e) => {
     e.preventDefault();
-    console.log("Left");
     if (numberImage === 0) {
       return;
     }
@@ -83,8 +75,6 @@ function NutrientsPrice(props) {
           alt={el}
           height={250}
           width={150}
-          // layout="fill"
-          // objectFit="contain"
         />
       </Link>
     );
@@ -100,8 +90,6 @@ function NutrientsPrice(props) {
             alt={currentImage}
             height={500}
             width={200}
-            // layout="fill"
-            // objectFit="contain"
           />
           <div className={styles.smallImagesSection}>
             <div className={styles.arrowLeftContainer}>
@@ -112,7 +100,6 @@ function NutrientsPrice(props) {
                   height={50}
                   width={50}
                 ></Image>
-                {/* <FontAwesomeIcon icon={faSquareCaretLeft} size="4x" /> */}
               </Link>
             </div>
             <div className={styles.smallImagesContainer}>{smallImages}</div>

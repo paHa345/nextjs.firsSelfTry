@@ -13,11 +13,6 @@ function DescriptionComments(props) {
   const [showDescriptionComments, setShowDescriptionComments] =
     useState("description");
 
-  const dataNotification = useSelector(
-    (state) => state.appState.fetchDataNotification
-  );
-  const textNotification = useSelector((state) => state.appState.fetchText);
-
   const showHandler = async (e) => {
     e.preventDefault();
 

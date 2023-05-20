@@ -1,4 +1,4 @@
-import { useDeferredValue, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { appStateActions } from "../../store/appStateSlice";
 import FetchNotification from "../UI/FetchNotification";
@@ -22,7 +22,6 @@ function RecoverPasswordForm(props) {
   const resetPasshordHandler = async (e) => {
     e.preventDefault();
     if (recoverPassword.length < 5) {
-      // alert("Длинна пароля должна быть более 5 символов");
       dispatch(
         appStateActions.setFetchNotificationStatus({
           status: "Error",
@@ -42,12 +41,8 @@ function RecoverPasswordForm(props) {
 
     const data = await req.json();
     if (!req.ok) {
-      console.log("Error");
-      console.log(data);
-
       return;
     }
-    // alert("Пароль успешно изменён");
     dispatch(
       appStateActions.setFetchNotificationStatus({
         status: "Success",
@@ -55,7 +50,6 @@ function RecoverPasswordForm(props) {
       })
     );
     setRecoverPassword("");
-    console.log(data);
   };
   return (
     <div className={styles.loginContainer}>

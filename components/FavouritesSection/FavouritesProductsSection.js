@@ -4,12 +4,10 @@ import LoadSpinner from "../UI/LoadSpinner";
 import FavouritesProductCards from "./FavouritesProductCards";
 import styles from "./ProductsSection.module.css";
 
-function FavouritesProductsSection(props) {
+function FavouritesProductsSection() {
   const stickySection = useSelector((state) => state.appState.stickySection);
-  const currentType = useSelector((state) => state.appState.currentType);
 
   const favourites = useSelector((state) => state.item.favouriteItems);
-  console.log(favourites);
   if (favourites[0]?.initial) {
     return <LoadSpinner></LoadSpinner>;
   }

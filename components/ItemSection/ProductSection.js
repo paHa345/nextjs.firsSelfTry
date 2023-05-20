@@ -1,7 +1,4 @@
 import styles from "./ProductSection.module.css";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleLeft } from "@fortawesome/free-regular-svg-icons";
 import { useSelector } from "react-redux";
 import NutrientsPrice from "../ItemSection/NutrientsPrice";
 import DescriptionComments from "../ItemSection/DescriptionComments";
@@ -27,7 +24,6 @@ function Item(props) {
         const req = await fetch(`/api/orders/${session?.user?.email}`);
         const data = await req.json();
         if (!req.ok) {
-          console.log("Не удалось загрузить список заказов");
         }
 
         const arr = data.result.map((el, index) => {
@@ -43,14 +39,11 @@ function Item(props) {
             }
           });
         });
-        console.log(orderedItems);
         dispatch(itemsActions.setOrderedItems(orderedItems));
       };
       getUser();
     }
   }, [session, dispatch]);
-
-  console.log(currentItem.type.toUpperCase());
 
   useEffect(() => {
     if (props.item) {
@@ -73,10 +66,7 @@ function Item(props) {
           <Link
             className={styles.backLink}
             href={`/catalog/${currentItem.type}`}
-
-            // onClick={goToProductsHandler}
           >
-            {/* <FontAwesomeIcon icon={faCircleLeft} size="1x" /> */}
             {currentItem.type[0].toUpperCase() + currentItem.type.slice(1)}
           </Link>
 
@@ -102,7 +92,6 @@ function Item(props) {
             {props.item && (
               <DescriptionComments
                 currentItem={currentItem}
-                // canAddComment={ordereditems.includes(JSON.parse(props.item).id)}
               ></DescriptionComments>
             )}
           </div>

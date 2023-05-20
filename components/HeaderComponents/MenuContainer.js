@@ -2,11 +2,9 @@ import { Fragment, useState } from "react";
 import styles from "./MenuContainer.module.css";
 import MainMenu from "./MainMenu";
 import ProductsMenu from "./ProductsMenu";
-import { useRouter } from "next/router";
 
 function MenuContainer(props) {
   const [showProductsMenu, setShowProductsMenu] = useState(false);
-  const router = useRouter();
 
   const showProductsMenuHandler = (e) => {
     e.preventDefault();

@@ -40,8 +40,6 @@ function RegistrationForm(props) {
         body: JSON.stringify(user),
       });
       const res = await req.json();
-      console.log(res);
-
       if (!req.ok) {
         throw new Error(res.message);
       }

@@ -2,9 +2,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { itemsActions, itemSlice } from "../../store/itemSlice";
+import { itemsActions } from "../../store/itemSlice";
 import PaginationSection from "../PaginationSection/PaginationSection";
-import FetchNotification from "../UI/FetchNotification";
 import ProductCards from "./ProductCards";
 import styles from "./ProductsSection.module.css";
 
@@ -19,13 +18,7 @@ function ProductsSection(props) {
 
   const dispatch = useDispatch();
 
-  const fetchStatus = useSelector(
-    (state) => state.appState.fetchDataNotification
-  );
-  const fetchStatusText = useSelector((state) => state.appState.fetchText);
-
   const sortingByPriceHandler = (e) => {
-    // e.preventDefault();
     if (priceSort === "decrement") {
       dispatch(itemsActions.setSortBy("increment"));
       setPriceSort("increment");
@@ -63,14 +56,6 @@ function ProductsSection(props) {
 
             <ProductCards></ProductCards>
 
-            {/* <div className={styles.notificationContainer}>
-              {fetchStatus && (
-                <FetchNotification
-                  status={fetchStatus}
-                  text={fetchStatusText}
-                ></FetchNotification>
-              )}
-            </div> */}
             {router.query.productType && (
               <PaginationSection
                 itemsQuantity={currentItems.length}

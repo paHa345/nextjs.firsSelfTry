@@ -1,12 +1,8 @@
-import { useRouter } from "next/router";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { appStateActions } from "../../store/appStateSlice";
 import Card from "../CardsSection/Card";
-import AddToFavourites from "../UI/AddToFavourites";
 import LoadSpinner from "../UI/LoadSpinner";
-import RemoveFromFavourites from "../UI/RemoveFromFavourites";
-import FavouritesCard from "./FavouritesCard";
 import styles from "./ProductCards.module.css";
 
 function FavouritesProductCards() {
@@ -14,9 +10,6 @@ function FavouritesProductCards() {
   const favouriteItems = useSelector((state) => state.item.favouriteItems);
   const loadFavouritesStatus = useSelector(
     (state) => state.appState.loadFavouriteItems
-  );
-  const favouriteItemsIDs = useSelector(
-    (state) => state.item.favouriteItemsIDs
   );
 
   let cartItems = useSelector((state) => state.cart.cartItems);
@@ -43,40 +36,41 @@ function FavouritesProductCards() {
       </Fragment>
     );
   }
+  console.log(favouriteItems);
 
   return (
     <Fragment>
-      <div className={styles.productCardContainer}>
-        {[...favouriteItems]
-          .sort((a, b) => {
-            if (a.id < b.id) {
-              return -1;
-            }
-            if (a.id > b.id) {
-              return 1;
-            }
-          })
-          .map((el, index) => {
-            let inCart = false;
-            if (cartIds.includes(el.id)) {
-              inCart = true;
-            }
+      {loadFavouritesStatus && (
+        <div className={styles.productCardContainer}>
+          {[...favouriteItems]
+            .sort((a, b) => {
+              if (a.id < b.id) {
+                return -1;
+              }
+              if (a.id > b.id) {
+                return 1;
+              }
+            })
+            .map((el) => {
+              let inCart = false;
+              if (cartIds.includes(el.id)) {
+                inCart = true;
+              }
+              console.log(el);
 
-            const fav = favouriteItemsIDs.includes(el.id);
-
-            return (
-              <Card
-                cardName={el.name}
-                cardImage={el.image}
-                key={el.id}
-                id={el.id}
-                price={el.price}
-                elementInCart={inCart}
-                // elementInFavourites={fav}
-              ></Card>
-            );
-          })}
-      </div>
+              return (
+                <Card
+                  cardName={el.name}
+                  image={el.image}
+                  key={el.id}
+                  id={el.id}
+                  price={el.price}
+                  elementInCart={inCart}
+                ></Card>
+              );
+            })}
+        </div>
+      )}
     </Fragment>
   );
 }

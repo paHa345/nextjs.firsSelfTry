@@ -21,7 +21,6 @@ async function handler(req, res) {
     return;
   }
   if (req.method === "POST") {
-    console.log(req.body);
     if (
       req.body.login.length < 5 ||
       req.body.password.length < 5 ||
@@ -36,7 +35,6 @@ async function handler(req, res) {
     const existUser = await db
       .collection("sportNutritionAccounts")
       .findOne({ email: req.body.email });
-    console.log(existUser);
     if (existUser) {
       res.status(400).json({ message: "Такой пользователь существует" });
       return;

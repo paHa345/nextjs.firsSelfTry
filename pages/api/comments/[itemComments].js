@@ -1,6 +1,5 @@
 import { MongoClient, ObjectId } from "mongodb";
 import { unstable_getServerSession } from "next-auth";
-import { getSession } from "next-auth/react";
 import { authOptions } from "../auth/[...nextauth]";
 
 async function handler(req, res) {

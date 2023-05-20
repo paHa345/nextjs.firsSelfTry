@@ -1,27 +1,19 @@
 import { useRouter } from "next/router";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
 import Card from "../CardsSection/Card";
-import AddToFavourites from "../UI/AddToFavourites";
 import LoadSpinner from "../UI/LoadSpinner";
-import SearchCard from "./SearchCard";
 import styles from "./SearchProductCards.module.css";
 
-function SearchProductCards(props) {
-  const [favourites, setFavourites] = useState([]);
-  const currentItems = useSelector((state) => state.item.currentItems);
+function SearchProductCards() {
   const favouriteItemsIDs = useSelector(
     (state) => state.item.favouriteItemsIDs
   );
   let cartItems = useSelector((state) => state.cart.cartItems);
   const router = useRouter();
-  const showAddToFavNotification = useSelector(
-    (state) => state.appState.addToFavouriteNotification
-  );
   const currentSearchItems = useSelector(
     (state) => state.item.currentSearchItems
   );
-  const sort = useSelector((state) => state.item.sortBy);
 
   if (currentSearchItems.length === 0) {
     return (
@@ -61,18 +53,10 @@ function SearchProductCards(props) {
     return el.item.id;
   });
 
-  // if (props.items.length === 0) {
-  //   return (
-  //     <Fragment>
-  //       <LoadSpinner></LoadSpinner>
-  //     </Fragment>
-  //   );
-  // }
-
   return (
     <Fragment>
       <div className={styles.productCardContainer}>
-        {itemsInPage.map((el, index) => {
+        {itemsInPage.map((el) => {
           let inCart = false;
           if (cartIds.includes(el.id)) {
             inCart = true;
@@ -83,19 +67,14 @@ function SearchProductCards(props) {
           return (
             <Card
               cardName={el.name}
-              cardImage={el.image}
+              image={el.image}
               key={el.id}
               id={el.id}
               price={el.price}
               elementInCart={inCart}
-              // elementInFavourites={fav}
             ></Card>
           );
         })}
-
-        {/* <div className={styles.notificationContainer}>
-          {showAddToFavNotification && <AddToFavourites></AddToFavourites>}
-        </div> */}
       </div>
     </Fragment>
   );

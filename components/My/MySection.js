@@ -1,8 +1,6 @@
 import { signOut } from "next-auth/react";
 import Link from "next/link";
-import ProductCards from "../CardsSection/ProductCards";
 import styles from "./MySection.module.css";
-import Orders from "./Orders";
 
 function MySection(props) {
   const logoutHandler = (e) => {

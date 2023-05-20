@@ -10,7 +10,6 @@ import {
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 
 function MainMenu(props) {
   const { data: session } = useSession();

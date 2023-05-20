@@ -19,7 +19,6 @@ function Slides(props) {
           alt={el}
           width={500}
           height={307}
-          //   objectFit="contain"
           layout="responsive"
         ></Image>
         <Link href="/" className={styles.slideButton}>

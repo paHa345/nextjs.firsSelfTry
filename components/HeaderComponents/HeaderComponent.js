@@ -2,25 +2,11 @@ import { Fragment, useEffect, useState } from "react";
 import styles from "./HeaderComponent.module.css";
 
 import MenuContainer from "./MenuContainer";
-import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from "../../store/cartSlice";
 import Link from "next/link";
 import Image from "next/legacy/image";
 import SearchComponent from "./SearchComponent";
 
 function HeaderComponent() {
-  // const storage = localStorage.getItem("cartItems");
-  const dispatch = useDispatch();
-
-  const appState = useSelector((state) => state.appState);
-
-  // useEffect(() => {
-  //   if (storage === null) {
-  //   } else {
-  //     dispatch(cartActions.setCartFromLocalStorage());
-  //   }
-  // }, []);
-
   const [scrolled, setScrolled] = useState(false);
   const handleScroll = () => {
     const offset = window.scrollY;
@@ -44,20 +30,9 @@ function HeaderComponent() {
     setShowCart(true);
   };
 
-  const hideCartHandler = (e) => {
-    e.preventDefault();
-    setShowCart(false);
-  };
-
   const showLoginHandler = (e) => {
     e.preventDefault();
     setShowLogin(true);
-    setShowCart(false);
-  };
-
-  const HideLoginHandler = (e) => {
-    e.preventDefault();
-    setShowLogin(false);
     setShowCart(false);
   };
 
@@ -71,7 +46,6 @@ function HeaderComponent() {
             <Image
               height={100}
               width={100}
-              // objectFit="cover"
               layout="responsive"
               src="/img/protLogo.png"
               alt="logo"
@@ -84,13 +58,6 @@ function HeaderComponent() {
           ></MenuContainer>
         </div>
       </header>
-
-      {/* {appState.showProducts && <ProductsSection></ProductsSection>}
-      {showCart && <CartSection onHideCart={hideCartHandler}></CartSection>}
-      {showLogin && (
-        <LoginSection onHideLogin={HideLoginHandler}></LoginSection>
-      )}
-      {appState.showItem && <Item></Item>} */}
     </Fragment>
   );
 }

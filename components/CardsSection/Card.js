@@ -15,11 +15,9 @@ import Image from "next/image";
 import { addToFavourites } from "../UI/fetchHelper";
 import { useSession } from "next-auth/react";
 import AddToFavourites from "../UI/AddToFavourites";
-import FetchNotification from "../UI/FetchNotification";
-import AddToFavouritesError from "../UI/AddToFavouritesError";
 
 function Card(props) {
-  const [image, setImage] = useState(props.cardImage[0]);
+  const [image, setImage] = useState(props.image[0]);
   const [ImageIndex, setImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [inCart, setInCart] = useState(props.elementInCart);
@@ -30,11 +28,6 @@ function Card(props) {
   const showAddToFavNotification = useSelector(
     (state) => state.appState.addToFavouriteNotification
   );
-
-  const fetchStatus = useSelector(
-    (state) => state.appState.fetchDataNotification
-  );
-  const fetchStatusText = useSelector((state) => state.appState.fetchText);
 
   const notificationId = useSelector(
     (state) => state.appState.itemNotification
@@ -86,12 +79,6 @@ function Card(props) {
     e.preventDefault();
 
     if (!session) {
-      // dispatch(
-      //   appStateActions.setFetchNotificationStatus({
-      //     status: "Error",
-      //     text: `Зарегистрируйтесь чтобы добавить товар в избранное`,
-      //   })
-      // );
       dispatch(
         appStateActions.setAddToFavouriteNotification({
           notification: false,
@@ -171,7 +158,7 @@ function Card(props) {
   };
 
   const setImageOnLeaveHandler = (e) => {
-    setImage(props.cardImage[0]);
+    setImage(props.image[0]);
     setImageIndex(0);
   };
 
@@ -186,7 +173,7 @@ function Card(props) {
     );
   });
 
-  const imagesDots = props.cardImage.map((el, index) => {
+  const imagesDots = props.image.map((el, index) => {
     return (
       <div
         className={
@@ -243,7 +230,6 @@ function Card(props) {
             <input
               type="text"
               size="2"
-              // placeholder="1"
               value={quantity}
               onChange={changeQuantityHandler}
             ></input>
@@ -277,15 +263,6 @@ function Card(props) {
                 В корзинe
               </Link>
             </div>
-          )}
-        </div>
-
-        <div className={styles.notificationContainer}>
-          {showAddToFavNotification && (
-            <AddToFavouritesError
-              notification={showAddToFavNotification}
-              text={notificationText}
-            ></AddToFavouritesError>
           )}
         </div>
 

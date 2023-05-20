@@ -1,6 +1,3 @@
-import { useDispatch } from "react-redux";
-import { itemsActions } from "../../store/itemSlice";
-
 export const addToFavourites = async (
   userEmail,
   id,
@@ -108,12 +105,10 @@ export const addComment = async (id, email, comment) => {
     const currentUserComment = commentsItem.result.filter((el) => {
       return el.email === email;
     });
-    console.log(currentUserComment);
     if (currentUserComment.length === 1) {
       throw new Error("Вы уже добавили отзыв на этот товар");
     }
     const commentAdded = await addCommentToDB(id, comment);
-    console.log(commentAdded);
     const updatedComments = await getCommentsItem(id);
     return updatedComments;
   } catch (error) {

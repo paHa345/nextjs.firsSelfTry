@@ -4,7 +4,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-function SearchComponent(props) {
+function SearchComponent() {
   const router = useRouter();
   const [searchText, setSearchText] = useState("Введите название");
   const changeSearchtextHandler = (e) => {

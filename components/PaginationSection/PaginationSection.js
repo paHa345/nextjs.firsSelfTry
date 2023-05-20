@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
 import styles from "./PaginationSection.module.css";
 
 function PaginationSection(props) {
   const router = useRouter();
-  const sort = useSelector((state) => state.item.sortBy);
 
   const numbers = [];
 
@@ -35,11 +33,6 @@ function PaginationSection(props) {
                   router.query.sortBy ? `&sortBy=${router.query.sortBy}` : ""
                 }`
           }`}
-          // href={`${process.env.NEXTAUTH_URL}/catalog/${
-          //   router.query.productType
-          // }?page=${index + 1}${
-          //   router.query.sortBy ? `&sortBy=${router.query.sortBy}` : ""
-          // }`}
           className={styles.pageNumber}
         >
           {el}

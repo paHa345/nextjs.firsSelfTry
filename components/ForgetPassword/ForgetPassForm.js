@@ -5,9 +5,8 @@ import FetchNotification from "../UI/FetchNotification";
 import ForgetPassButton from "./ForgetPassButton";
 import styles from "./ForgetPassForm.module.css";
 
-function ForgetPassForm(props) {
+function ForgetPassForm() {
   const [enteredEmail, setEnteredEmail] = useState("");
-  const [notificationText, setNotificationText] = useState("");
   const fetchStatus = useSelector(
     (state) => state.appState.fetchDataNotification
   );
@@ -35,7 +34,6 @@ function ForgetPassForm(props) {
 
   const resetPasshordHandler = async (e) => {
     e.preventDefault();
-    console.log(enteredEmail);
     dispatch(
       appStateActions.setFetchNotificationStatus({
         status: "inAction",
@@ -55,8 +53,6 @@ function ForgetPassForm(props) {
     const data = await req.json();
 
     if (!req.ok) {
-      console.log("Error");
-      console.log(data);
       dispatch(
         appStateActions.setFetchNotificationStatus({
           status: "Error",
@@ -66,7 +62,6 @@ function ForgetPassForm(props) {
 
       return;
     }
-    console.log(data);
     dispatch(
       appStateActions.setFetchNotificationStatus({
         status: "Success",

@@ -53,8 +53,6 @@ function AddCommentForm(props) {
   };
 
   const addCommentHandler = async (e) => {
-    // console.log(props);
-    // console.log(currentItem.id);
     const comment = {
       text: enteredText,
       date: new Date().toISOString(),
@@ -64,7 +62,6 @@ function AddCommentForm(props) {
 
     e.preventDefault();
     if (!canAdd) {
-      // alert("Невозможно добавить комментарий. Товара нет в списке купленных");
       dispatch(
         appStateActions.setFetchNotificationStatus({
           status: "Error",

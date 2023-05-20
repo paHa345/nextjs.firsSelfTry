@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "./FetchNotification.module.css";
 
@@ -20,7 +19,6 @@ function FetchNotification(props) {
 
   return (
     <div className={getStyle()}>
-      {/* <h1 className={styles.text}>{props.status}</h1> */}
       <h1 className={styles.text}>{props.text}</h1>
     </div>
   );

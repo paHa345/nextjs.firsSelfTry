@@ -14,19 +14,12 @@ function LoginForm(props) {
     setEnteredPassword(e.target.value);
   };
 
-  const submitLoginFormHandler = (e) => {
-    console.log("rere");
-  };
-
   const changeEmailHandler = (e) => {
     setEnteredEmail(e.target.value);
   };
 
   const loginHandler = async (e) => {
     e.preventDefault();
-    console.log("Login");
-    console.log(enteredEmail, enteredPassword);
-
     const result = await signIn("credentials", {
       redirect: false,
       email: enteredEmail,

@@ -1,23 +1,15 @@
 import { useRouter } from "next/router";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { useSelector } from "react-redux";
-import AddToFavourites from "../UI/AddToFavourites";
 import LoadSpinner from "../UI/LoadSpinner";
 import Card from "./Card";
 import styles from "./ProductCards.module.css";
 
 function ProductCards() {
-  const [favourites, setFavourites] = useState([]);
   const currentItems = useSelector((state) => state.item.currentItems);
-  const favouriteItemsIDs = useSelector(
-    (state) => state.item.favouriteItemsIDs
-  );
+
   let cartItems = useSelector((state) => state.cart.cartItems);
   const router = useRouter();
-  const showAddToFavNotification = useSelector(
-    (state) => state.appState.addToFavouriteNotification
-  );
-  const sort = useSelector((state) => state.item.sortBy);
 
   let itemsInPage = [];
 
@@ -52,30 +44,23 @@ function ProductCards() {
   return (
     <Fragment>
       <div className={styles.productCardContainer}>
-        {itemsInPage.map((el, index) => {
+        {itemsInPage.map((el) => {
           let inCart = false;
           if (cartIds.includes(el.id)) {
             inCart = true;
           }
 
-          const fav = favouriteItemsIDs.includes(el.id);
-
           return (
             <Card
               cardName={el.name}
-              cardImage={el.image}
+              image={el.image}
               key={el.id}
               id={el.id}
               price={el.price}
               elementInCart={inCart}
-              // elementInFavourites={fav}
             ></Card>
           );
         })}
-
-        {/* <div className={styles.notificationContainer}>
-          {showAddToFavNotification && <AddToFavourites></AddToFavourites>}
-        </div> */}
       </div>
     </Fragment>
   );

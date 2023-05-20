@@ -19,7 +19,6 @@ function ButtonTakeOrder() {
           text: "Добавьте продукты в корзину",
         })
       );
-      // alert("Добавьте продукты в корзину");
       return;
     }
     const data = JSON.parse(localStorage.getItem("cartItems")).map((el) => {
@@ -40,7 +39,6 @@ function ButtonTakeOrder() {
           text: "Добавьте продукты в корзину",
         })
       );
-      // alert("Добавьте продукты в корзину");
       return;
     }
 
@@ -51,32 +49,11 @@ function ButtonTakeOrder() {
           text: `Необходимо залогиниться`,
         })
       );
-      // alert("Необходимо залогиниться");
       return;
     }
 
     dispatch(orderActions.addOrder(data));
     router.push("/payment");
-
-    // const fetchOrder = async (e) => {
-    //   const req = await fetch(`/api/orders/${session.user.email}`, {
-    //     method: "POST",
-
-    //     headers: {
-    //       "Content-Type": "application/json;charset=utf-8",
-    //     },
-    //     body: JSON.stringify({
-    //       order: data,
-    //       email: session.user.email,
-    //       totalCost: 10000,
-    //       paymentStatus: false,
-    //     }),
-    //   });
-    //   const res = await req.json();
-    //   console.log(res);
-    // };
-
-    // await fetchOrder();
   };
   return (
     <div className={styles.cartOrderButton}>

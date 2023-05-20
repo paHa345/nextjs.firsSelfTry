@@ -4,13 +4,10 @@ import ButtonTakeOrder from "./ButtonTakeOrder";
 import CartElement from "./CartElement";
 import CartMain from "./CartMain";
 import styles from "./CartSection.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from "../../store/cartSlice";
+import { useSelector } from "react-redux";
 import FetchNotification from "../UI/FetchNotification";
 
-function BascetSection(props) {
+function BascetSection() {
   const [cart, setCart] = useState([]);
   const currentCart = useSelector((state) => state.cart.cartItems);
 
