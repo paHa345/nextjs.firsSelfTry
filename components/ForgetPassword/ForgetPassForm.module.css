@@ -1,9 +1,11 @@
 .loginContainer {
   /* width: 40rem; */
-  padding: 0 auto;
+  /* padding: 0 auto; */
   margin: 0 auto;
   padding-bottom: 5rem;
   padding-top: 3.2rem;
+  padding-bottom: 25rem;
+  padding-top: 12rem;
 }
 
 .nameContainer {
