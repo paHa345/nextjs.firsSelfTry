@@ -245,6 +245,7 @@ export const initItemsState = {
   orderedItems: [{ initial: true }],
   sortBy: "decrement",
   currentSearchItems: [],
+  filteredItems: [],
 };
 
 export const itemSlice = createSlice({
@@ -256,6 +257,9 @@ export const itemSlice = createSlice({
     },
     setCurrentTypeItems(state, action) {
       state.currentItems = action.payload;
+    },
+    setFilteredItems(state, action) {
+      state.filteredItems = action.payload;
     },
     setCurrentComments(state, action) {
       state.currentComments = action.payload;

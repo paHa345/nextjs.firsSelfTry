@@ -17,6 +17,14 @@
   /* flex-shrink: 0; */
   height: max-content;
 }
+.descriptionContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.xMark {
+  display: flex;
+}
 
 .cartElementDescription:link,
 .cartElementDescription:visited {

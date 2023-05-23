@@ -56,6 +56,7 @@ function LoginForm(props) {
           <div className={styles.loginFormElement}>
             <label htmlFor="password">Пароль</label>
             <input
+              type="password"
               id="password"
               value={enteredPassword}
               onChange={changePasswordHandler}

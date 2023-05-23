@@ -11,6 +11,7 @@ function ProductsSection(props) {
   const stickySection = useSelector((state) => state.appState.stickySection);
   const currentType = useSelector((state) => state.appState.currentType);
   const currentItems = useSelector((state) => state.item.currentItems);
+  const filteredItems = useSelector((state) => state.item.filteredItems);
   const [priceSort, setPriceSort] = useState("decrement");
 
   const sort = useSelector((state) => state.item.sortBy);
@@ -39,24 +40,27 @@ function ProductsSection(props) {
               </div>
               <h2 className={styles.bestProductH2}>{currentType}</h2>
             </div>
-            {router.query.productType && (
-              <div className={styles.sortButton}>
-                <Link
-                  href={`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/catalog/${
-                    router.query.productType
-                  }?page=${1}${sort ? `&sortBy=${sort}` : ""}`}
-                  onClick={sortingByPriceHandler}
-                >
-                  {priceSort === "increment"
-                    ? "По увеличению цены"
-                    : "По уменьшению цены"}
-                </Link>
+            {router.route !== "/" && (
+              <div className={styles.sortContainer}>
+                <div className={styles.filterText}>Фильтр</div>
+                <div className={styles.sortButton}>
+                  <Link
+                    href={`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/catalog/${
+                      router.query.productType
+                    }?page=${1}${sort ? `&sortBy=${sort}` : ""}`}
+                    onClick={sortingByPriceHandler}
+                  >
+                    {priceSort === "increment"
+                      ? "По увеличению цены"
+                      : "По уменьшению цены"}
+                  </Link>
+                </div>
               </div>
             )}
 
             <ProductCards></ProductCards>
 
-            {router.query.productType && (
+            {router.route !== "/" && (
               <PaginationSection
                 itemsQuantity={currentItems.length}
                 type={currentType}

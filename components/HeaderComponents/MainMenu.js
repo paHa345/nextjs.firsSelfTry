@@ -18,7 +18,10 @@ function MainMenu(props) {
   return (
     <ul className={styles.headerNavList}>
       <li className={styles.allProducts}>
-        <Link onClick={props.onShow} href="/" className={styles.headerNavLink}>
+        <Link
+          href={`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/catalog`}
+          className={styles.headerNavLink}
+        >
           {/* <FontAwesomeIcon
             className={`${styles.menuText} ${styles.menuIcons}`}
             icon={faBars}

@@ -50,6 +50,12 @@ function Card(props) {
 
   const addToCartHandler = async (e) => {
     e.preventDefault();
+    if (Number.isNaN(Number(quantity)) || quantity < 1) {
+      setQuantity(1);
+
+      return;
+    }
+
     async function fetchItem() {
       const req = await fetch(`/api/item/${props.id}`);
       const res = await req.json();
@@ -153,7 +159,7 @@ function Card(props) {
   };
 
   const onHoverHandler = (e) => {
-    setImage(props.cardImage[e.target.dataset.image]);
+    setImage(props.image[e.target.dataset.image]);
     setImageIndex(Number(e.target.dataset.image));
   };
 
@@ -162,7 +168,7 @@ function Card(props) {
     setImageIndex(0);
   };
 
-  const changeImage = props.cardImage?.map((el, index) => {
+  const changeImage = props.image?.map((el, index) => {
     return (
       <div
         key={`${props.id}_${index}`}
@@ -239,15 +245,19 @@ function Card(props) {
           </p>
         </div>
         <div className={styles.footerCardSection}>
-          {favouritesIDs.includes(props.id) && (
-            <Link href="/" onClick={removeFromFavouritesHandler}>
-              <FontAwesomeIcon icon={faCircleCheck} size="2x" />
-            </Link>
-          )}
-          {!favouritesIDs.includes(props.id) && (
-            <Link href="/" onClick={addToFavouritesHandler}>
-              <FontAwesomeIcon icon={faHeart} size="2x" />
-            </Link>
+          {session && (
+            <div>
+              {favouritesIDs.includes(props.id) && (
+                <Link href="/" onClick={removeFromFavouritesHandler}>
+                  <FontAwesomeIcon icon={faCircleCheck} size="2x" />
+                </Link>
+              )}
+              {!favouritesIDs.includes(props.id) && (
+                <Link href="/" onClick={addToFavouritesHandler}>
+                  <FontAwesomeIcon icon={faHeart} size="2x" />
+                </Link>
+              )}
+            </div>
           )}
 
           {!inCart && (

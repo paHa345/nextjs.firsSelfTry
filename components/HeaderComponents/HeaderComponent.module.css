@@ -28,8 +28,8 @@
 .prodC {
   position: relative;
   display: grid;
-  grid-template-columns: 10rem 40% 40%;
+  grid-template-columns: 10rem auto 30%;
   align-items: center;
   justify-content: center;
-  /* gap: 2rem; */
+  gap: 2rem;
 }

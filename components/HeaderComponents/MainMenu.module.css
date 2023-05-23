@@ -3,7 +3,7 @@
   flex-direction: row;
   list-style: none;
   gap: 3.2rem;
-  justify-content: space-evenly;
+  justify-content: flex-end;
 }
 
 .allProducts {
@@ -41,7 +41,7 @@
   border-radius: 50%;
 
   height: 2.3rem;
-  padding: 0 0.6rem;
+  padding: 1.3rem 0.7rem;
   bottom: 2rem;
   left: 2rem;
 }

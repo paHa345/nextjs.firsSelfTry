@@ -100,6 +100,7 @@ function RegistrationForm(props) {
 
             <input
               id="password"
+              type="password"
               value={enteredPassword}
               onChange={changePasswordHandler}
               required

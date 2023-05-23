@@ -47,7 +47,7 @@
 .registrationLink {
   padding-top: 3.2rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .registrationLink a:link,

@@ -5,10 +5,9 @@ import { authOptions } from "../auth/[...nextauth]";
 
 async function handler(req, res) {
   const itemsIds = req.query.items;
-  // console.log(itemsIds);
 
   const session = await unstable_getServerSession(req, res, authOptions);
-  console.log(itemsIds.split(","));
+  console.log(`Items ID ${itemsIds.split(",")}`);
 
   let client;
   let db;

@@ -1,22 +1,82 @@
 .productCardContainer {
   padding: 3.2rem 0;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 4fr;
+  justify-content: center;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.productCardContainerMain {
+  padding: 3.2rem 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.filterContainer {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 15px rgb(0 0 0 / 5%);
+  background: #fff;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  margin-top: 3.2rem;
+  font-size: 1.4rem;
+  line-height: 1.21428571;
+  position: relative;
+  height: 50rem;
+}
+
+.cardsContainer {
+  padding: 3.2rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 3.2rem;
 }
 
+.sortButton {
+  cursor: pointer;
+  color: #555;
+  background-color: #ffd8a8;
+  /* border: 2px solid black; */
+  padding: 1.2rem 2rem;
+  font-size: 2.4rem;
+  text-decoration: none;
+  /* border-radius: 11px; */
+  transition: all 0.3s;
+  margin-top: 5rem;
+  transition: all 0.3s;
+  border: 1px solid #666;
+  color: #666;
+  background: #fff;
+  padding: 10px 20px;
+}
+
+.sortButton:hover {
+  color: #fff5f5;
+  background-color: #e8590c;
+}
+
+.active {
+  color: #fff5f5;
+  background-color: #e8590c;
+}
 .notificationContainer {
   position: relative;
 }
 
-@media (max-width: 64em) {
+@media (max-width: 46em) {
   .productCardContainer {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 26em) {
-  .productCardContainer {
+  .cardsContainer {
     grid-template-columns: 1fr;
   }
 }

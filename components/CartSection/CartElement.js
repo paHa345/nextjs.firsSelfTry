@@ -27,13 +27,13 @@ function CartElement(props) {
             width={200}
             height={200}
           />
-          <div>
+          <div className={styles.descriptionContainer}>
             <Link className={styles.cartElementDescription} href="/">
               {props.name}
             </Link>
             <div className={styles.xMark}>
               <Link href="/" data-id={props.id} onClick={removeItemHandler}>
-                <FontAwesomeIcon icon={faXmarkCircle} size="1x" />
+                <FontAwesomeIcon icon={faXmarkCircle} size="3x" />
               </Link>
             </div>
           </div>

@@ -69,6 +69,7 @@ function RecoverPasswordForm(props) {
           <div className={styles.loginFormElement}>
             <label htmlFor="email">Введите новый пароль</label>
             <input
+              type="password"
               id="email"
               value={recoverPassword}
               onChange={changePasswordHandler}

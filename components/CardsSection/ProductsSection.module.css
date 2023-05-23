@@ -12,7 +12,7 @@
   font-size: 24rem;
   line-height: 1;
   position: absolute;
-  color: rgba(17, 156, 201, 0.11);
+  color: rgba(17, 155, 201, 0.15);
   opacity: 0.5;
   white-space: nowrap;
   width: 100%;
@@ -52,7 +52,17 @@
   letter-spacing: 0.03em;
   color: #185288;
 }
+.sortContainer {
+  display: flex;
+  justify-content: flex-start;
+}
 
+.filterText {
+  font-size: 3.2rem;
+  font-weight: 600;
+  margin-right: 10rem;
+  margin-left: 10rem;
+}
 .sortButton a:link,
 .sortButton a:visited {
   color: #555;
@@ -80,4 +90,10 @@
   position: relative;
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 46em) {
+  .filterText {
+    display: none;
+  }
 }

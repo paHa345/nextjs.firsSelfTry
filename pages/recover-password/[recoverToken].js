@@ -22,7 +22,6 @@ export default Recover;
 export async function getServerSideProps(context) {
   const token = jwt.decode(context.params.recoverToken);
   const data = Date.now();
-  const secret = "456";
 
   let tokenIsTrue;
   try {

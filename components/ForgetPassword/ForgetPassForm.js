@@ -34,6 +34,17 @@ function ForgetPassForm() {
 
   const resetPasshordHandler = async (e) => {
     e.preventDefault();
+    if (enteredEmail.trim() === "") {
+      dispatch(
+        appStateActions.setFetchNotificationStatus({
+          status: "Error",
+          text: "Введите корректный email",
+        })
+      );
+      setEnteredEmail("");
+
+      return;
+    }
     dispatch(
       appStateActions.setFetchNotificationStatus({
         status: "inAction",

@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import styles from "./PaginationSection.module.css";
 
 function PaginationSection(props) {
+  console.log(props);
+
   const router = useRouter();
 
   const numbers = [];
@@ -19,24 +21,47 @@ function PaginationSection(props) {
           Number(router.query.page) === index + 1 ? styles.activePageLink : ""
         }`}
       >
-        <Link
-          href={`${
-            props.search
-              ? `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/search/${
-                  router.query.searchText
-                }?page=${index + 1}${
-                  router.query.sortBy ? `&sortBy=${router.query.sortBy}` : ""
-                }`
-              : `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/catalog/${
-                  router.query.productType
-                }?page=${index + 1}${
-                  router.query.sortBy ? `&sortBy=${router.query.sortBy}` : ""
-                }`
-          }`}
-          className={styles.pageNumber}
-        >
-          {el}
-        </Link>
+        {router.query.productType && (
+          <Link
+            href={`${
+              props.search
+                ? `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/search/${
+                    router.query.searchText
+                  }?page=${index + 1}${
+                    router.query.sortBy ? `&sortBy=${router.query.sortBy}` : ""
+                  }`
+                : `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/catalog/${
+                    router.query.productType
+                  }?page=${index + 1}${
+                    router.query.sortBy ? `&sortBy=${router.query.sortBy}` : ""
+                  }`
+            }`}
+            className={styles.pageNumber}
+          >
+            {el}
+          </Link>
+        )}
+
+        {!router.query.productType && (
+          <Link
+            href={`${
+              props.search
+                ? `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/search/?page=${
+                    index + 1
+                  }${
+                    router.query.sortBy ? `&sortBy=${router.query.sortBy}` : ""
+                  }`
+                : `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/catalog/?page=${
+                    index + 1
+                  }${
+                    router.query.sortBy ? `&sortBy=${router.query.sortBy}` : ""
+                  }`
+            }`}
+            className={styles.pageNumber}
+          >
+            {el}
+          </Link>
+        )}
       </div>
     );
   });

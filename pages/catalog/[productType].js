@@ -1,19 +1,21 @@
-import { MongoClient } from "mongodb";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { Fragment, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import ProductsSection from "../../components/CardsSection/ProductsSection";
-import { getFavourites } from "../../components/UI/fetchHelper";
-import LoadSpinner from "../../components/UI/LoadSpinner";
-import { appStateActions } from "../../store/appStateSlice";
+import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
+import { appStateActions } from "../../store/appStateSlice";
 import { itemsActions } from "../../store/itemSlice";
+import { useEffect } from "react";
+import { MongoClient } from "mongodb";
+import { Fragment } from "react";
+import ProductsSection from "../../components/CardsSection/ProductsSection";
+import LoadSpinner from "../../components/UI/LoadSpinner";
 
 function ProductType(props) {
   const dispatch = useDispatch();
 
   const router = useRouter();
+  console.log(router);
+
   const { data: session, status } = useSession();
 
   const type = JSON.parse(props.items)[0].ruType;
@@ -28,20 +30,6 @@ function ProductType(props) {
       dispatch(itemsActions.sortCurrentItems(router.query.sortBy));
     }
   });
-
-  useEffect(() => {
-    if (session) {
-      getFavourites(session.user.email)
-        .then((data) => {
-          dispatch(itemsActions.setFavouriteIDs(data));
-          dispatch(itemsActions.setFavouriteItems(data));
-        })
-        .catch((error) => console.log(error.message));
-    }
-  }, [dispatch, session]);
-
-  useEffect;
-
   if (!props.items) {
     return (
       <Fragment>
@@ -49,7 +37,6 @@ function ProductType(props) {
       </Fragment>
     );
   }
-
   return (
     <Fragment>
       <ProductsSection></ProductsSection>
@@ -73,7 +60,7 @@ export async function getStaticProps(context) {
   let db;
   try {
     client = await MongoClient.connect(
-      "mongodb://uerqlzlole9xj0pi0wbk:TfXXkUycEhfDe2lkcePT@n1-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017,n2-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017/bnjpnqkq0agsple?replicaSet=rs0"
+      `mongodb://${process.env.mongodb_username}:${process.env.mongodb_password}@n1-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017,n2-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017/${process.env.mongodb_database}?replicaSet=rs0`
     );
     db = client.db();
   } catch (error) {

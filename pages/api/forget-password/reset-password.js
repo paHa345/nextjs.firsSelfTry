@@ -81,7 +81,7 @@ async function handler(req, res) {
       subject: `Message From paHa store Admin`,
       text: " | Sent from: " + req.body.email,
       html: `<div>Для восстановления пароля перейдите по ссылке</div>
-        <p>${process.env.NEXTAUTH_URL}/recover-password/${token}</p>
+        <p>${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/recover-password/${token}</p>
         <p>Sent from:
           ${req.body.email}</p>`,
     };
