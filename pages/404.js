@@ -2,9 +2,11 @@ import Link from "next/link";
 
 function NotFound() {
   return (
-    <div>
+    <div className="notFoundContainer">
       <Link href="/">Home Page</Link>
-      <h1>Pages Not Found!!!</h1>;
+      <div className="notFoundTextContainer">
+        <h1>Pages Not Found!!!</h1>;
+      </div>
     </div>
   );
 }

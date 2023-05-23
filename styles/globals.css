@@ -148,6 +148,16 @@ button:disabled {
   -webkit-animation: loading 2s infinite ease;
   animation: loading 2s infinite ease;
 }
+.notFoundContainer {
+  height: calc(100vh - 10rem - 40rem);
+  margin: 5rem;
+}
+
+.notFoundTextContainer {
+  display: flex;
+  padding-top: calc((100vh - 10rem - 40rem) / 2);
+  justify-content: center;
+}
 
 @keyframes loading {
   0% {
