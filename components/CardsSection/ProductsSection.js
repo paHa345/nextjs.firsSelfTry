@@ -7,16 +7,14 @@ import PaginationSection from "../PaginationSection/PaginationSection";
 import ProductCards from "./ProductCards";
 import styles from "./ProductsSection.module.css";
 
-function ProductsSection(props) {
+function ProductsSection() {
   const stickySection = useSelector((state) => state.appState.stickySection);
   const currentType = useSelector((state) => state.appState.currentType);
   const currentItems = useSelector((state) => state.item.currentItems);
-  const filteredItems = useSelector((state) => state.item.filteredItems);
   const [priceSort, setPriceSort] = useState("decrement");
 
   const sort = useSelector((state) => state.item.sortBy);
   const router = useRouter();
-
   const dispatch = useDispatch();
 
   const sortingByPriceHandler = (e) => {
@@ -40,7 +38,7 @@ function ProductsSection(props) {
               </div>
               <h2 className={styles.bestProductH2}>{currentType}</h2>
             </div>
-            {router.route !== "/" && (
+            {router.query.productType && (
               <div className={styles.sortContainer}>
                 <div className={styles.filterText}>Фильтр</div>
                 <div className={styles.sortButton}>
@@ -48,6 +46,23 @@ function ProductsSection(props) {
                     href={`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/catalog/${
                       router.query.productType
                     }?page=${1}${sort ? `&sortBy=${sort}` : ""}`}
+                    onClick={sortingByPriceHandler}
+                  >
+                    {priceSort === "increment"
+                      ? "По увеличению цены"
+                      : "По уменьшению цены"}
+                  </Link>
+                </div>
+              </div>
+            )}
+            {router.route === "/catalog" && (
+              <div className={styles.sortContainer}>
+                <div className={styles.filterText}>Фильтр</div>
+                <div className={styles.sortButton}>
+                  <Link
+                    href={`${
+                      process.env.NEXT_PUBLIC_NEXTAUTH_URL
+                    }/catalog?page=${1}${sort ? `&sortBy=${sort}` : ""}`}
                     onClick={sortingByPriceHandler}
                   >
                     {priceSort === "increment"

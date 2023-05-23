@@ -3,10 +3,7 @@ import { useRouter } from "next/router";
 import styles from "./PaginationSection.module.css";
 
 function PaginationSection(props) {
-  console.log(props);
-
   const router = useRouter();
-
   const numbers = [];
 
   for (let i = 1; i <= Math.ceil(props.itemsQuantity / 4); i++) {

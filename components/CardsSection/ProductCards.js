@@ -27,8 +27,6 @@ function ProductCards() {
   const router = useRouter();
 
   const filterButtons = productTypes.map((el) => {
-    console.log(currentType);
-
     const active = el.name === currentType ? `${styles.active}` : "";
     if (el.dataName === "all") {
       return (
@@ -69,8 +67,6 @@ function ProductCards() {
     dispatch(itemsActions.setFilteredItems(filteredItems));
   }, [currentFilteredProductType]);
 
-  console.log(filteredItems);
-
   const setItemsInPage = () => {
     if (router.query.page) {
       itemsInPage = filteredItems.slice(
@@ -99,7 +95,6 @@ function ProductCards() {
     );
   }
 
-  console.log(router.route);
   const productContainerStyle =
     router.route !== "/"
       ? `${styles.productCardContainer}`
