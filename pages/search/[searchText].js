@@ -63,30 +63,5 @@ function Search(props) {
 export default Search;
 
 export async function getServerSideProps(context) {
-  //   console.log(context.params);
-
-  //   let client;
-  //   let db;
-  //   try {
-  //     client = await MongoClient.connect(
-  //       "mongodb://uerqlzlole9xj0pi0wbk:TfXXkUycEhfDe2lkcePT@n1-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017,n2-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017/bnjpnqkq0agsple?replicaSet=rs0"
-  //     );
-  //     db = client.db();
-  //   } catch (error) {
-  //     res.status(500).json({
-  //       message: "Не удалось подключиться к базе данных",
-  //     });
-  //     return;
-  //   }
-
-  //   const result = await db
-  //     .collection("sportNutritionItems")
-  //     .find({ name: context.params.searchText })
-  //     .toArray();
-  //   console.log(result);
-
-  //   client.close();
-
-  //   return { props: { items: JSON.stringify(result) } };
   return { props: { search: context.params.searchText } };
 }

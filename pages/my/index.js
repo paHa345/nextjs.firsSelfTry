@@ -15,20 +15,6 @@ function My(props) {
   const { data: session } = useSession();
   const dispatch = useDispatch();
 
-  // const addTokenHandler = async (e) => {
-  //   e.preventDefault();
-
-  //   const token = await hash("paHa345", 12);
-  //   Cookies.set("paymentToken", token, {
-  //     expires: 1 / 24,
-  //   });
-  // };
-
-  // const removeTokenHandler = (e) => {
-  //   e.preventDefault();
-  //   Cookies.remove("paymentToken");
-  // };
-
   useEffect(() => {
     const storage = localStorage.getItem("cartItems");
     dispatch(cartActions.setCartFromLocalStorage(storage));
@@ -39,27 +25,8 @@ function My(props) {
     }
   }, [session, dispatch]);
 
-  // useEffect(() => {
-  //   async function fetchOrders() {
-  //     dispatch(cartActions.setOrders({ status: "Загрузка" }));
-  //     // alert("Загрузка");
-  //     const req = await fetch(`/api/orders/${session.user.email}`);
-  //     const res = await req.json();
-  //     return res;
-  //   }
-  //   fetchOrders().then((data) => {
-  //     dispatch(cartActions.setOrders(data.result));
-  //   });
-  // }, [session.user.email, dispatch]);
-
-  // if (!session) {
-  //   return <LoadSpinner></LoadSpinner>;
-  // }
-
   return (
     <Fragment>
-      {/* <button onClick={addTokenHandler}>Add Token</button>
-      <button onClick={removeTokenHandler}>Remove Token</button> */}
       <MySection name={name}></MySection>
     </Fragment>
   );
