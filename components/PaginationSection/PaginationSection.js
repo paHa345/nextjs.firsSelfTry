@@ -10,6 +10,9 @@ function PaginationSection(props) {
     numbers.push(i);
   }
 
+  console.log(router);
+  console.log(props);
+
   const pagesLinks = numbers.map((el, index) => {
     return (
       <div
@@ -39,7 +42,28 @@ function PaginationSection(props) {
           </Link>
         )}
 
-        {!router.query.productType && (
+        {router.query.searchText && (
+          <Link
+            href={`${
+              props.search
+                ? `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/search/${
+                    router.query.searchText
+                  }?page=${index + 1}${
+                    router.query.sortBy ? `&sortBy=${router.query.sortBy}` : ""
+                  }`
+                : `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/catalog/${
+                    router.query.productType
+                  }?page=${index + 1}${
+                    router.query.sortBy ? `&sortBy=${router.query.sortBy}` : ""
+                  }`
+            }`}
+            className={styles.pageNumber}
+          >
+            {el}
+          </Link>
+        )}
+
+        {!router.query.productType && !router.query.searchText && (
           <Link
             href={`${
               props.search
