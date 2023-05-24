@@ -81,39 +81,45 @@ function ForgetPassForm() {
     );
   };
   return (
-    <div className={styles.loginContainer}>
-      <div className={styles.nameContainer}>
-        <div className={styles.backgroundNameContainer}>
-          <div className={styles.backgroundName}>Восстановление пароля</div>
-        </div>
-        <h2 className={styles.bestProductH2}>Восстановление пароля</h2>
-      </div>
-      <div className={styles.notificationContainer}>
-        {fetchStatus && (
-          <FetchNotification
-            status={fetchStatus}
-            text={fetchStatusText}
-          ></FetchNotification>
-        )}
-      </div>
-
-      <form className={styles.form}>
-        <div className={styles.loginForm}>
-          <div className={styles.loginFormElement}>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              value={enteredEmail}
-              onChange={changeEmailHandler}
-              required
-              placeholder="Введите Email"
-            />
+    <section className={styles.bestProducts}>
+      <div className={styles.container}>
+        <div className={styles.loginContainer}>
+          <div className={styles.nameContainer}>
+            <div className={styles.backgroundNameContainer}>
+              <div className={styles.backgroundName}>Восстановление пароля</div>
+            </div>
+            <h2 className={styles.bestProductH2}>Восстановление пароля</h2>
           </div>
-        </div>
-      </form>
+          <div className={styles.notificationContainer}>
+            {fetchStatus && (
+              <FetchNotification
+                status={fetchStatus}
+                text={fetchStatusText}
+              ></FetchNotification>
+            )}
+          </div>
 
-      <ForgetPassButton onResetPass={resetPasshordHandler}></ForgetPassButton>
-    </div>
+          <form className={styles.form}>
+            <div className={styles.loginForm}>
+              <div className={styles.loginFormElement}>
+                <label htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  value={enteredEmail}
+                  onChange={changeEmailHandler}
+                  required
+                  placeholder="Введите Email"
+                />
+              </div>
+            </div>
+          </form>
+
+          <ForgetPassButton
+            onResetPass={resetPasshordHandler}
+          ></ForgetPassButton>
+        </div>
+      </div>
+    </section>
   );
 }
 
