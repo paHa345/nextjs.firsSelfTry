@@ -10,9 +10,6 @@ function PaginationSection(props) {
     numbers.push(i);
   }
 
-  console.log(router);
-  console.log(props);
-
   const pagesLinks = numbers.map((el, index) => {
     return (
       <div

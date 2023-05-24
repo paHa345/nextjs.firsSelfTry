@@ -33,6 +33,7 @@ function SearchComponent() {
             className={styles.searchInput}
             onClick={clickhandler}
             placeholder={searchText}
+            value={searchText}
           ></input>
         </div>
         <div className={styles.searchButton}>
